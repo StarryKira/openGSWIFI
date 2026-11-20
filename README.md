@@ -2,7 +2,7 @@
 
 开源的多协议校园网认证客户端。目标是用可维护、可离线测试的独立实现，覆盖 GSWIFI 路由器固件里出现的各种校园网认证方式；每种认证方式是一个单独的 crate。
 
-- 锐捷、赛尔、标准 802.1X 从 [mentorust](https://github.com/StarryKira/mentorust-for-OPENWRT) 移植，行为与 mentorust 一致；
+- 锐捷、赛尔、标准 802.1X 和 User-Agent 透明代理移植自 [fuqiuluo](https://github.com/fuqiuluo) 的 [mentorust](https://github.com/fuqiuluo/mentorust) 及其 OpenWrt 版本 [mentorust-for-OPENWRT](https://github.com/StarryKira/mentorust-for-OPENWRT)，行为与 mentorust 一致；
 - 其余协议按 `campus-auth-research` 研究文档（文中“doc NN”即第 NN 篇）和按提供商重组的 cleanroom 规格（“cleanroom/NN”）净室实现，用其中的黄金向量做单元测试。
 
 > **验证程度**：每个认证方式都标注 `documented` / `offline-tested` / `lab-tested` / `field-tested`（doc 09.9）。离线测试通过不代表能在真实校园网认证成功。低于 `lab-tested` 的方式需要在配置里写 `experimental = true` 才会启用。
@@ -175,4 +175,4 @@ docker run --rm --cap-add NET_ADMIN -v /tmp/nft:/w:ro openwrt \
 
 ## 许可
 
-MIT。锐捷/赛尔/EAP-MD5/代理代码来自 mentorust（MIT，保留原版权声明）。Dr.com 部分没有复制 AGPLv3 的 Dogcom 代码，按研究文档的报文布局独立实现。仓库不包含学校客户端文件、账号或厂商规则；锐捷校验的测试材料是研究包里的合成文件。
+MIT。锐捷/赛尔/EAP-MD5/代理代码来自 [fuqiuluo](https://github.com/fuqiuluo) 的 [mentorust](https://github.com/fuqiuluo/mentorust)（MIT），保留原版权声明，见 [LICENSE](LICENSE)。Dr.com 部分没有复制 AGPLv3 的 Dogcom 代码，按研究文档的报文布局独立实现。仓库不包含学校客户端文件、账号或厂商规则；锐捷校验的测试材料是研究包里的合成文件。

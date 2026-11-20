@@ -151,4 +151,8 @@ cat <<EOF
 \`\`\`sh
 sha256sum -c SHA256SUMS --ignore-missing
 \`\`\`
+
+## 致谢
+
+锐捷、赛尔、标准 802.1X 认证和 User-Agent 透明代理移植自 [fuqiuluo](https://github.com/fuqiuluo) 的 [mentorust](https://github.com/fuqiuluo/mentorust)（MIT）及其 OpenWrt 版本 [mentorust-for-OPENWRT](https://github.com/StarryKira/mentorust-for-OPENWRT)。
 EOF
