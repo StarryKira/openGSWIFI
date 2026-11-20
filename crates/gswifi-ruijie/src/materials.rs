@@ -7,10 +7,10 @@
 //! that directory. Every format reader checks its bounds: where the original
 //! read past a buffer, these return an error instead.
 
+use super::check::mix::{des_dec, DES_KEY_3F72};
+use encoding_rs::GBK;
 use std::fs;
 use std::path::Path;
-use encoding_rs::GBK;
-use super::check::mix::{des_dec, DES_KEY_3F72};
 
 /// Client files by the role the original loader gives them.
 #[derive(Clone, Debug, Default)]
@@ -226,7 +226,9 @@ pub fn assemble_raw(files: &ClientFiles, version: u32) -> Result<Option<Material
         (None, Some(Ok(code))) => (code, "数据文件"),
         _ => return Ok(None),
     };
-    let done = |check_type, b: &[u8]| Ok(Some(Materials { check_type, a: code.to_vec(), b: b.to_vec(), v2_code: code.to_vec(), source }));
+    let done = |check_type, b: &[u8]| {
+        Ok(Some(Materials { check_type, a: code.to_vec(), b: b.to_vec(), v2_code: code.to_vec(), source }))
+    };
     let (check_type, mut b, with_title) = match version {
         200..=299 => return done(2, &[]),
         0..=448 => match pe(&files.dll) {
@@ -344,7 +346,14 @@ fn sp(table: usize, i: u32) -> u32 {
 fn feistel(r: u32, k1: u32, k2: u32) -> u32 {
     let a = r ^ k1;
     let b = r.rotate_left(28) ^ k2;
-    sp(6, a >> 24) ^ sp(4, a >> 16) ^ sp(2, a >> 8) ^ sp(0, a) ^ sp(7, b >> 24) ^ sp(5, b >> 16) ^ sp(3, b >> 8) ^ sp(1, b)
+    sp(6, a >> 24)
+        ^ sp(4, a >> 16)
+        ^ sp(2, a >> 8)
+        ^ sp(0, a)
+        ^ sp(7, b >> 24)
+        ^ sp(5, b >> 16)
+        ^ sp(3, b >> 8)
+        ^ sp(1, b)
 }
 
 /// One 16-round pass with the subkeys `pass*32..pass*32+32`; the input is
@@ -401,10 +410,10 @@ pub fn block_transform(block: [u8; 8]) -> [u8; 8] {
 #[cfg(test)]
 pub(crate) mod tests {
     use super::*;
-    use std::path::PathBuf;
-    use crate::packets::{self, Checks, ExtFormat, ExtParams, NetInfo};
     use crate::check::mix;
+    use crate::packets::{self, Checks, ExtFormat, ExtParams, NetInfo};
     use crate::v2;
+    use std::path::PathBuf;
 
     /// Synthetic client files of the research pack (evidence/compat/fixtures).
     fn fixture(profile: &str) -> ClientFiles {
@@ -456,14 +465,25 @@ pub(crate) mod tests {
             dns: [198, 51, 100, 53],
             ipv6: [0; 16],
         };
-        let p = ExtParams { format: ExtFormat::Classic, mac: [2, 0, 0, 0, 0, 1], net: &net, dhcp_mode: 0, version: Some([4, 10]) };
+        let p = ExtParams {
+            format: ExtFormat::Classic,
+            mac: [2, 0, 0, 0, 0, 1],
+            net: &net,
+            dhcp_mode: 0,
+            version: Some([4, 10]),
+        };
         let digest = packets::md5_digest(7, b"synthetic", b"", &seed);
         let mut n = 0;
         for f in vectors(include_str!("check/testdata/material-integration.txt")) {
             let version: u32 = f[1].parse().unwrap();
             let m = assemble(&fixture(f[0]), version).unwrap();
             let case = format!("{} {}", f[0], version);
-            assert_eq!([m.a.len().to_string(), md5hex(&m.a), md5hex(&m.b), md5hex(&m.v2_code)].as_slice(), &f[2..6], "{}", case);
+            assert_eq!(
+                [m.a.len().to_string(), md5hex(&m.a), md5hex(&m.b), md5hex(&m.v2_code)].as_slice(),
+                &f[2..6],
+                "{}",
+                case
+            );
 
             let field17 = v2::v2_check(&seed, &m.v2_code);
             let field4d = (m.check_type != 2).then(|| mix::family_result(version, &m.a, &m.b, &seed));

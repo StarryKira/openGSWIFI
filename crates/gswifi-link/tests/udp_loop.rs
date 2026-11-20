@@ -8,13 +8,8 @@ use std::time::{Duration, Instant};
 use gswifi_core::*;
 use gswifi_link::{run, RunOptions};
 
-static INFO: DriverInfo = DriverInfo {
-    name: "loop",
-    title: "loop",
-    transport: Transport::Udp,
-    support: SupportLevel::Documented,
-    docs: &[],
-};
+static INFO: DriverInfo =
+    DriverInfo { name: "loop", title: "loop", transport: Transport::Udp, support: SupportLevel::Documented, docs: &[] };
 
 /// Sends "ping", expects the echo, then waits one timer tick and stops.
 struct Ping {
@@ -69,7 +64,10 @@ fn udp_round_trip_and_timer() {
         server.send_to(&buf[..n], from).unwrap();
     });
     let mut driver = Ping { server: addr, got: None, deadline: None };
-    let opts = RunOptions { interface: if cfg!(target_os = "linux") { "lo".into() } else { "lo0".into() }, ..Default::default() };
+    let opts = RunOptions {
+        interface: if cfg!(target_os = "linux") { "lo".into() } else { "lo0".into() },
+        ..Default::default()
+    };
     let stop = run(&mut driver, &opts).unwrap();
     echo.join().unwrap();
     assert_eq!(driver.got.as_deref(), Some(&b"ping"[..]));

@@ -43,6 +43,9 @@ crates/
   gswifi-proxy       透明代理，统一 HTTP User-Agent（防检测，来自 mentorust）
   gswifi             命令行程序
 vendor/pcap          mentorust 修改过的 libpcap 绑定（32 位 musl 的 pcap_pkthdr 布局）
+openwrt/             OpenWrt 包：gswifi（procd/UCI/fw4）与 luci-app-gswifi
+ci/  .github/        打包、安装测试与 GitHub Actions
+linux/               deb/rpm 用的 systemd 单元与示例配置
 ```
 
 Driver API 按 doc 09.3 设计：
@@ -124,9 +127,40 @@ gswifi protect uninstall                              # 撤销全部改动
 
 已知限制：防火墙开启软/硬件流量分载时，被分载的连接只有开头几个报文经过这些规则；路由器开 GRO 时合并报文在出口重新分段，各段 IPID 由内核依次加一，可能与下一个报文重叠；HTTPS/HTTP-2/QUIC 的内容是加密的，User-Agent 既看不到也改不了，TLS 握手特征仍来自各设备。这些在 doc 26.5、26.9 里都有说明。
 
+## OpenWrt
+
+两个包：`gswifi`（认证程序、procd 服务、UCI 配置 `/etc/config/gswifi`，按 CPU 家族分 x86_64 / aarch64 / armv7）和 `luci-app-gswifi`（网页界面：服务 → 校园网认证，所有架构通用）。在发布页下载与路由器架构对应的 gswifi 包和 luci-app-gswifi：
+
+```sh
+# OpenWrt 23.05 / 24.10
+opkg update
+opkg install /tmp/gswifi_<版本>_<家族>.ipk /tmp/luci-app-gswifi_<版本>_all.ipk
+# OpenWrt 25.12 及以后
+apk update
+apk add --allow-untrusted /tmp/gswifi_<版本>_<家族>.apk /tmp/luci-app-gswifi_<版本>_all.apk
+```
+
+每个网络是一个 procd 实例；密码只写进 `/var` 下权限 0600 的配置文件，不出现在进程列表和日志里；服务器明确拒绝后不会反复重试。防共享检测默认关闭，规则作为 firewall4 的顶层 include 安装，防火墙重启后仍然生效，卸载时连同内核参数一起撤销。NetKeeper/闪讯只提供拨号用户名计算器，没有接入 pppd。详见 [`openwrt/README.md`](openwrt/README.md)。
+
+网页界面在 OpenWrt 24.10 上用 luci-theme-bootstrap（亮/暗）、luci-theme-argon 3.1.4（亮/暗）和 luci-theme-aurora 1.4.0（亮/暗）检查过桌面和手机宽度（390 px）的显示。安装包在 OpenWrt 23.05、24.10（ipk）和 25.12（apk）的官方 rootfs 里做过安装测试；没有在真实路由器和真实校园网上验证。
+
+## 持续集成与发布
+
+每次推送到 `main`、每个 PR 和每个 `v*` 标签都会运行 `.github/workflows/ci.yml`：检查脚本与 LuCI、`cargo fmt`/clippy、单元测试，用 OpenWrt 23.05/24.10/25.12 自带的 `nft -c` 校验生成的全部 nftables 规则，然后用 cross 构建 x86_64、aarch64、armv7 三种全静态（musl + 静态 libpcap）可执行文件，打成 ipk/apk（在官方 OpenWrt rootfs 里安装测试）和 deb/rpm（在 Debian、Ubuntu、Fedora、Rocky 里安装测试）。mipsel（MT7621）是实验性构建，失败不影响其余任务。每个阶段都能在本机用 Docker 复现，见 [`ci/README.md`](ci/README.md)。
+
+构建产物在 Actions 运行页面的 Artifacts 里：`build-<架构>`（可执行文件和 tar.gz）、`packages-ipk`、`packages-apk`、`packages-linux`；可执行文件的大小写在对应 build 任务的摘要里。
+
+发布新版本：
+
+1. 修改 `Cargo.toml` 里 `[workspace.package]` 的 `version`，运行一次 `cargo build` 让 `Cargo.lock` 跟上，提交并推送到 `main`，等 CI 通过；
+2. 打标签并推送：`git tag v0.1.0 && git push origin v0.1.0`。标签必须是 `v` 加 Cargo 版本号，否则 CI 在构建之前就会失败。
+
+标签的 CI 全部通过后会自动创建 GitHub Release，附带三种架构的 tar.gz、ipk、apk、deb、rpm、`SHA256SUMS` 和安装说明（哪个 OpenWrt 版本和架构用哪个包）。带连字符的版本（如 `v0.2.0-rc1`）会发布为预发布版本。
+
 ## 开发
 
 ```sh
+cargo fmt --check                    # rustfmt.toml：120 列
 cargo test --workspace
 cargo clippy --workspace
 cargo check --target x86_64-unknown-linux-musl -p gswifi   # OpenWrt 目标的类型检查

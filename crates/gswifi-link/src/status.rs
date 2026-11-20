@@ -369,7 +369,8 @@ pub fn log(level: log::Level, args: &Arguments) {
     update(|s| {
         let text = clip(&args.to_string());
         let entry = Line { level: level.as_str(), text, at: Stamp::now() };
-        if let Some(message) = SERVER_MARKERS.iter().find_map(|m| entry.text.split_once(m).map(|(_, rest)| rest.trim())) {
+        if let Some(message) = SERVER_MARKERS.iter().find_map(|m| entry.text.split_once(m).map(|(_, rest)| rest.trim()))
+        {
             if !message.is_empty() {
                 s.server_message = Some(Line { text: message.to_string(), ..entry.clone() });
             }

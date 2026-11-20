@@ -102,5 +102,10 @@
 - 只有 `gswifi-link` 的 UDP 事件循环做过回环集成测试；pcap 收发 802.1X 没有在真实网卡上测试（mentorust 用的是同一套 pcap 参数）。
 - 用静态编译的 `gswifi` 二进制在 OpenWrt 24.10 容器里跑过 `protect install/status/uninstall` 全流程，查出并修掉两个只有真机才暴露的问题：(1) 24.10 的 dnsmasq 不认旧写法 `filter-aaaa`，上游 2.87 起是 `filter-AAAA`（更老的、带 OpenWrt 私有补丁的 dnsmasq 会在 `--test` 时拒绝，片段不会生效）；(2) fw4 把 `/etc/nftables.d/*.nft` 包含在 `table inet fw4 { }` **内部**，顶层 `table` 声明放进去会让防火墙下次重启时整体加载失败，所以规则文件默认改放 `/etc/gswifi/protect.nft`，由 OpenWrt 包注册为 `ruleset-post` 位置的 include。`apply` 也改成两阶段：全部校验通过才提交，任何一步不过就把文件恢复原状。
 - `gswifi-protect` 生成的规则在 OpenWrt 24.10 容器（nft 1.1.1、内核 7.2）里验证过：16 种变体全部通过 `nft -c`，`enforce` 能加载、重复加载幂等（计数器不翻倍）、切 `observe` 后没有 nat 链、`uninstall` 后表被删干净。没有在真实路由器和校园网上跑过。
-- OpenWrt 打包（procd 服务、UCI、LuCI）尚未从 mentorust 移植；需要静态 libpcap，可沿用 mentorust 的 `Cross.toml` 和 `ci/build-libpcap.sh`。
-- MIPS 目标未验证（doc 09.2 提醒 Rust 在 MIPS musl 上的工具链和体积需要单独确认）。
+- OpenWrt 包和 LuCI 已完成，在 23.05/24.10/25.12 官方 rootfs 容器里装过、测过；procd 实际运行只在 aarch64 24.10 容器里测过（x86 容器没有 procd）。两个 SDK Makefile（`openwrt/*/Makefile`）没有在 OpenWrt SDK 里编译过，发布包不走它们。
+- 没有在真实路由器硬件上跑过。armv7 包只验证了"装到别的 CPU 家族会被拒绝"，没有在 armv7 上实际运行。
+- mipsel（MT7621）：CI 里是实验性任务，能编出 3.0 MB 静态二进制并在 qemu 里运行；没有 mipsel 的 ipk，没有在真 MT7621 上跑过。用的 cross 镜像是 musl 1.1.24（32 位 `time_t`）。
+- 配置错误目前和"网卡不存在"共用退出码 1，systemd 单元会每 30 秒重试一次错误配置（procd 最多重试 5 次）。计划给配置错误单独的退出码（如 78），本轮没有做。
+- NetKeeper 拨号用户名没有接入 netifd/pppd，网页上只有计算器。
+- 23.05 的 ucode 对 null 调用 `obj?.method()` 会报错，`openwrt/` 里已用辅助函数绕开；以后写 ucode 要注意。
+- CI 只在本机用 Docker 复现过；矩阵连线、artifact 传递、Release 发布和权限只有推到 GitHub 后才能验证。

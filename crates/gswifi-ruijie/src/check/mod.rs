@@ -24,8 +24,5 @@ pub(crate) fn hex_lower(bytes: &[u8]) -> Vec<u8> {
 
 #[cfg(test)]
 pub(crate) fn unhex(s: &str) -> Vec<u8> {
-    (0..s.len())
-        .step_by(2)
-        .map(|i| u8::from_str_radix(&s[i..i + 2], 16).expect("hex digit"))
-        .collect()
+    (0..s.len()).step_by(2).map(|i| u8::from_str_radix(&s[i..i + 2], 16).expect("hex digit")).collect()
 }

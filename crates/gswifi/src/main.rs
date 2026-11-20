@@ -1,5 +1,6 @@
 //! `gswifi`: the Open GSWIFI command line client.
 
+mod check;
 mod config;
 mod protect;
 mod registry;
@@ -65,6 +66,9 @@ enum Command {
         /// 把每个网络的会话状态写成 JSON 文件放进这个目录（<目录>/<name>.json，供界面读取）
         #[arg(long)]
         status_dir: Option<PathBuf>,
+        /// 只检查配置文件：以 JSON 输出每个网络读到的设置（不含密码），不认证
+        #[arg(long)]
+        check: bool,
     },
     /// 列出支持的认证方式及其验证程度
     Drivers {
@@ -143,7 +147,18 @@ fn main() {
     init_logger();
     let cli = Cli::parse();
     match cli.command {
-        Command::Auth { driver, interface, username, password, options, dhcp_script, experimental, trace, exit_on_reject, status_dir } => {
+        Command::Auth {
+            driver,
+            interface,
+            username,
+            password,
+            options,
+            dhcp_script,
+            experimental,
+            trace,
+            exit_on_reject,
+            status_dir,
+        } => {
             let password = match password.or_else(|| std::env::var("GSWIFI_PASSWORD").ok()) {
                 Some(p) => p,
                 None => {
@@ -177,7 +192,7 @@ fn main() {
             gswifi_link::install_signal_handlers();
             exit(run_network(network, status_dir.as_deref()).exit_code());
         }
-        Command::Run { config, status_dir } => {
+        Command::Run { config, status_dir, check } => {
             let text = match std::fs::read_to_string(&config) {
                 Ok(t) => t,
                 Err(e) => {
@@ -185,6 +200,11 @@ fn main() {
                     exit(1);
                 }
             };
+            if check {
+                let (json, ok) = check::report(&text);
+                println!("{}", json);
+                exit(if ok { 0 } else { 1 });
+            }
             let networks = match config::parse(&text) {
                 Ok(n) => n,
                 Err(e) => {
@@ -200,7 +220,14 @@ fn main() {
             println!("{:<12} {:<16} {:<8} 文档", "名称", "验证程度", "传输");
             for i in registry::all() {
                 let docs: Vec<String> = i.docs.iter().map(|d| d.to_string()).collect();
-                println!("{:<12} {:<16} {:<8} {}  {}", i.name, i.support.as_str(), format!("{:?}", i.transport), docs.join(","), i.title);
+                println!(
+                    "{:<12} {:<16} {:<8} {}  {}",
+                    i.name,
+                    i.support.as_str(),
+                    format!("{:?}", i.transport),
+                    docs.join(","),
+                    i.title
+                );
             }
         }
         Command::Protect { action } => exit(protect::run(action)),
@@ -209,7 +236,8 @@ fn main() {
             let now = time.unwrap_or_else(|| {
                 std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map(|d| d.as_secs()).unwrap_or(0)
             });
-            let opts = gswifi_netkeeper::Options { nk_version: Some(nk_version), material, time_offset, ..Default::default() };
+            let opts =
+                gswifi_netkeeper::Options { nk_version: Some(nk_version), material, time_offset, ..Default::default() };
             match gswifi_netkeeper::derive(&opts, &username, now) {
                 Ok(d) => {
                     match format.as_str() {
@@ -228,7 +256,11 @@ fn main() {
                         ),
                         _ => println!("{}", gswifi_netkeeper::escape(&d.username)),
                     }
-                    eprintln!("有效到 Unix 时间 {}（还剩 {} 秒）", d.valid_until, d.valid_until.saturating_sub(now.saturating_add_signed(time_offset)));
+                    eprintln!(
+                        "有效到 Unix 时间 {}（还剩 {} 秒）",
+                        d.valid_until,
+                        d.valid_until.saturating_sub(now.saturating_add_signed(time_offset))
+                    );
                 }
                 Err(e) => {
                     error!("{}", e);
@@ -285,12 +317,11 @@ fn drivers_json() -> String {
     }))
 }
 
-/// One thread per network; exits with the first non-zero code once all
+/// One thread per network, named after it so that every log line says
+/// which network it belongs to (also with a single network, as the OpenWrt
+/// service runs them); exits with the first non-zero code once all
 /// sessions ended.
 fn run_all(networks: Vec<Network>, status_dir: Option<&Path>) -> i32 {
-    if networks.len() == 1 {
-        return run_network(networks.into_iter().next().unwrap(), status_dir).exit_code();
-    }
     let handles: Vec<_> = networks
         .into_iter()
         .map(|n| {
@@ -357,7 +388,12 @@ fn run_once(n: &Network) -> (Stop, Option<gswifi_core::Env>) {
     };
     status::describe(info, &env);
     info!("网卡 {}: MAC {}，IPv4 {}", env.interface, gswifi_core::mac_str(&env.mac), env.net.ipv4());
-    let run = RunOptions { interface: env.interface.clone(), mac: env.mac, dhcp_script: n.dhcp_script.clone(), trace: n.trace };
+    let run = RunOptions {
+        interface: env.interface.clone(),
+        mac: env.mac,
+        dhcp_script: n.dhcp_script.clone(),
+        trace: n.trace,
+    };
     let mut driver = match registry::build(&n.driver, env.clone(), n.credentials.clone(), n.options.clone()) {
         Ok(d) => d,
         Err(e) => {

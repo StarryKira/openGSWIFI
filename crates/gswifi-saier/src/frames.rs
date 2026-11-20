@@ -2,7 +2,9 @@
 //! to the standard PAE group address; control frames carry 42 bytes of 0xa5.
 
 use gswifi_core::NetInfo;
-use gswifi_eapol::frame::{eapol_header, md5_response, CODE_RESPONSE, EAP_TYPE_IDENTITY, MAC_STANDARD, TYPE_EAP_PACKET};
+use gswifi_eapol::frame::{
+    eapol_header, md5_response, CODE_RESPONSE, EAP_TYPE_IDENTITY, MAC_STANDARD, TYPE_EAP_PACKET,
+};
 
 /// Inserted between password and challenge in the MD5 response.
 pub const SALT: &[u8] = b"xxghlmxhzb";

@@ -123,11 +123,24 @@ pub fn md5_digest(id: u8, password: &[u8], salt: &[u8], challenge: &[u8]) -> [u8
 /// An EAP packet received from the authenticator.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Received<'a> {
-    Request { src: [u8; 6], id: u8, kind: u8, data: &'a [u8] },
-    Success { src: [u8; 6], id: u8 },
-    Failure { src: [u8; 6], id: u8 },
+    Request {
+        src: [u8; 6],
+        id: u8,
+        kind: u8,
+        data: &'a [u8],
+    },
+    Success {
+        src: [u8; 6],
+        id: u8,
+    },
+    Failure {
+        src: [u8; 6],
+        id: u8,
+    },
     /// Another EAPOL type (vendor keepalive, key frames) or EAP code.
-    Other { typ: u8 },
+    Other {
+        typ: u8,
+    },
 }
 
 /// Parses an Ethernet frame. `None` if it is not EAPOL at all. The request
@@ -172,7 +185,10 @@ mod tests {
 
     #[test]
     fn standard_frames() {
-        assert_eq!(hex::encode(control_frame(&MAC_STANDARD, &LOCAL, TYPE_EAPOL_START)), "0180c2000003020000000001888e01010000");
+        assert_eq!(
+            hex::encode(control_frame(&MAC_STANDARD, &LOCAL, TYPE_EAPOL_START)),
+            "0180c2000003020000000001888e01010000"
+        );
         assert_eq!(
             hex::encode(identity_response(&SERVER, &LOCAL, 1, b"user")),
             "020000000002020000000001888e01000009020100090175736572"

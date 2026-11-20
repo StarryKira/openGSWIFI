@@ -1,8 +1,8 @@
 //! Ruijie EAPOL heartbeat (research doc 17): key and interval from the
 //! Success frame, 45 byte type 0xbf frames with a running sequence number.
 
-use crate::crypt::encrypt_rtv;
 use super::{eapol_header, TYPE_EAPOL_HEARTBEAT};
+use crate::crypt::encrypt_rtv;
 
 /// Sequence number of the first heartbeat after an MD5 response.
 pub const FIRST_SEQUENCE: u32 = 0x102b;
@@ -43,11 +43,7 @@ pub fn parse_success(frame: &[u8], configured_interval: u32) -> Option<SuccessIn
     let key_at = m + 157;
     let tail = frame.get(m + 156..key_at + 8)?;
     let key = decode_u32(&tail[1..5]);
-    let interval = if configured_interval != 0 {
-        configured_interval
-    } else {
-        decode_u32(&tail[5..9])
-    };
+    let interval = if configured_interval != 0 { configured_interval } else { decode_u32(&tail[5..9]) };
     let eapol_len = u16::from_be_bytes([frame[16], frame[17]]);
     let flag = if eapol_len < 13 { 255 } else { tail[0] };
     Some(SuccessInfo { key, interval, flag })

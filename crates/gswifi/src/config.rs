@@ -113,7 +113,13 @@ impl Network {
             (None, None) => return Err("缺少 password 或 password_file".into()),
         };
         let network = Network {
-            name: string(&table, "name")?.unwrap_or_else(|| if interface.is_empty() { driver.clone() } else { interface.clone() }),
+            name: string(&table, "name")?.unwrap_or_else(|| {
+                if interface.is_empty() {
+                    driver.clone()
+                } else {
+                    interface.clone()
+                }
+            }),
             credentials: Credentials { username, password: Secret::new(password) },
             dhcp_script: string(&table, "dhcp_script")?.filter(|s| !s.trim().is_empty()),
             experimental: boolean(&table, "experimental")?,

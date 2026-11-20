@@ -125,10 +125,9 @@ jobs:
           lookup-only: ${{ github.ref_type == 'tag' }}
           save-if: ${{ github.ref == 'refs/heads/main' }}
 
-      # every_variant_is_valid_nftables runs the nft of the machine if there
-      # is one, and "nft -c" only works for root: it gets its own job (nft),
-      # where it runs as root and against the nft of every OpenWrt release.
-      - run: cargo test --workspace --locked -- --skip every_variant_is_valid_nftables
+      # The nft_syntax test skips validation when nft lacks CAP_NET_ADMIN
+      # (as on the runner); the nft job validates every ruleset as root.
+      - run: cargo test --workspace --locked
 
   nft:
     name: nftables rulesets

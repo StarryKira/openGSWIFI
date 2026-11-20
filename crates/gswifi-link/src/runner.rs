@@ -70,7 +70,8 @@ pub fn run(driver: &mut dyn Driver, opts: &RunOptions) -> Result<Stop, String> {
         warn!("{} 的支持等级为 {}，尚未在真实校园网验证", info.name, info.support);
     }
 
-    let mut link = Link { opts, ttl: req.udp_ttl, cap: None, udp: BTreeMap::new(), net: read_net_info(&opts.interface) };
+    let mut link =
+        Link { opts, ttl: req.udp_ttl, cap: None, udp: BTreeMap::new(), net: read_net_info(&opts.interface) };
     if req.needs_ipv4 && !link.net.has_ipv4() {
         info!("等待网卡 {} 获取 IPv4 地址...", opts.interface);
         crate::status::state(AuthState::WaitingIp, &link.net);
@@ -335,10 +336,8 @@ fn bind_to_device(_socket: &UdpSocket, _interface: &str) {}
 /// broadcast, not sent by us (mentorust `open_pcap`).
 fn open_capture(interface: &str, mac: &[u8; 6], ethertype: u16) -> Result<Capture<Active>, String> {
     let devices = Device::list().map_err(|e| format!("无法列出网卡: {:?}", e))?;
-    let device = devices
-        .into_iter()
-        .find(|d| d.name == interface)
-        .ok_or_else(|| format!("libpcap 找不到网卡 {}", interface))?;
+    let device =
+        devices.into_iter().find(|d| d.name == interface).ok_or_else(|| format!("libpcap 找不到网卡 {}", interface))?;
     let mut cap = Capture::from_device(device)
         .and_then(|c| {
             c.immediate_mode(true)

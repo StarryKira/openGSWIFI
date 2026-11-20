@@ -6,9 +6,9 @@
 
 mod dhcp;
 pub mod http;
+pub mod iface;
 pub mod json;
 pub mod protect;
-pub mod iface;
 mod runner;
 pub mod status;
 

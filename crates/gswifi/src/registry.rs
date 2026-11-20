@@ -8,7 +8,21 @@ use serde::de::DeserializeOwned;
 
 /// Static descriptions of all drivers, for `gswifi drivers`.
 pub fn all() -> Vec<&'static DriverInfo> {
-    vec![&gswifi_ruijie::INFO, &gswifi_saier::INFO, &gswifi_eap_md5::INFO, &gswifi_inode::INFO, &gswifi_anlang::INFO, &gswifi_drcom::INFO, &gswifi_h3c_portal::INFO, &gswifi_netkeeper::INFO, &gswifi_portal::INFO_HUBEI_OLD_MAC, &gswifi_portal::INFO_HUBEI_NEW_MAC, &gswifi_portal::INFO_HUBEI_ANDROID, &gswifi_portal::INFO_YUNNAN_WEB, &gswifi_portal::INFO_YUNNAN_PPPOE]
+    vec![
+        &gswifi_ruijie::INFO,
+        &gswifi_saier::INFO,
+        &gswifi_eap_md5::INFO,
+        &gswifi_inode::INFO,
+        &gswifi_anlang::INFO,
+        &gswifi_drcom::INFO,
+        &gswifi_h3c_portal::INFO,
+        &gswifi_netkeeper::INFO,
+        &gswifi_portal::INFO_HUBEI_OLD_MAC,
+        &gswifi_portal::INFO_HUBEI_NEW_MAC,
+        &gswifi_portal::INFO_HUBEI_ANDROID,
+        &gswifi_portal::INFO_YUNNAN_WEB,
+        &gswifi_portal::INFO_YUNNAN_PPPOE,
+    ]
 }
 
 pub fn info(name: &str) -> Option<&'static DriverInfo> {
@@ -34,7 +48,8 @@ const NETKEEPER_ONLY_DERIVES: &str = "netkeeper 只派生 PPPoE 拨号账号，�
 /// Deserializes driver options from the remaining keys of a network
 /// section, warning about keys no field uses (typos).
 fn options<T: DeserializeOwned + Debug>(driver: &str, table: toml::Table) -> Result<T, String> {
-    let parsed: T = toml::Value::Table(table.clone()).try_into().map_err(|e| format!("{} 的配置有误: {}", driver, e))?;
+    let parsed: T =
+        toml::Value::Table(table.clone()).try_into().map_err(|e| format!("{} 的配置有误: {}", driver, e))?;
     for key in unknown_keys::<T>(&table, &parsed) {
         warn!("{} 不认识配置项 {}，已忽略", driver, key);
     }
@@ -77,11 +92,21 @@ pub fn build(driver: &str, env: Env, credentials: Credentials, table: toml::Tabl
         "h3c-portal" => Box::new(gswifi_h3c_portal::H3cPortalDriver::new(env, credentials, options(driver, table)?)?),
         "anlang" => Box::new(gswifi_anlang::AnlangDriver::new(env, credentials, options(driver, table)?)?),
         "drcom" => Box::new(gswifi_drcom::DrcomDriver::new(env, credentials, options(driver, table)?)?),
-        "portal-hubei-old-mac" => Box::new(gswifi_portal::HubeiOldMacDriver::new(env, credentials, options(driver, table)?)?),
-        "portal-hubei-new-mac" => Box::new(gswifi_portal::HubeiNewMacDriver::new(env, credentials, options(driver, table)?)?),
-        "portal-hubei-android" => Box::new(gswifi_portal::HubeiAndroidDriver::new(env, credentials, options(driver, table)?)?),
-        "portal-yunnan-web" => Box::new(gswifi_portal::YunnanWebDriver::new(env, credentials, options(driver, table)?)?),
-        "portal-yunnan-pppoe" => Box::new(gswifi_portal::YunnanPppoeDriver::new(env, credentials, options(driver, table)?)?),
+        "portal-hubei-old-mac" => {
+            Box::new(gswifi_portal::HubeiOldMacDriver::new(env, credentials, options(driver, table)?)?)
+        }
+        "portal-hubei-new-mac" => {
+            Box::new(gswifi_portal::HubeiNewMacDriver::new(env, credentials, options(driver, table)?)?)
+        }
+        "portal-hubei-android" => {
+            Box::new(gswifi_portal::HubeiAndroidDriver::new(env, credentials, options(driver, table)?)?)
+        }
+        "portal-yunnan-web" => {
+            Box::new(gswifi_portal::YunnanWebDriver::new(env, credentials, options(driver, table)?)?)
+        }
+        "portal-yunnan-pppoe" => {
+            Box::new(gswifi_portal::YunnanPppoeDriver::new(env, credentials, options(driver, table)?)?)
+        }
         "netkeeper" => return Err(NETKEEPER_ONLY_DERIVES.into()),
         _ => {
             let names: Vec<_> = all().iter().map(|i| i.name).collect();
@@ -135,11 +160,11 @@ mod tests {
         let o: gswifi_ruijie::Options = options("ruijie", table).unwrap();
         assert_eq!((o.ext_format.as_str(), o.start_mode, o.eapol.timeout), ("classic", Some(1), 3));
         // Typos are found although the shared keys are flattened.
-        let table: toml::Table = toml::from_str("ext_fromat = 'classic'\ntimeout = 3\nstart_mode = 255\nudp_heartbeat = false").unwrap();
+        let table: toml::Table =
+            toml::from_str("ext_fromat = 'classic'\ntimeout = 3\nstart_mode = 255\nudp_heartbeat = false").unwrap();
         let o: gswifi_ruijie::Options = toml::Value::Table(table.clone()).try_into().unwrap();
         assert_eq!(unknown_keys(&table, &o), vec!["ext_fromat".to_string()]);
         let bad: toml::Table = toml::from_str("start_mode = 'x'").unwrap();
         assert!(options::<gswifi_ruijie::Options>("ruijie", bad).is_err());
     }
 }
-

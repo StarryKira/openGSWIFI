@@ -74,9 +74,10 @@ return view.extend({
 
 		/* ---- NetKeeper ---- */
 
-		n.nkVersion = E('input', { 'type': 'number', 'min': '1', 'max': '14', 'value': '4', 'style': 'width:5em' });
+		/* type=text: not every theme draws a box around number inputs */
+		n.nkVersion = E('input', { 'type': 'text', 'inputmode': 'numeric', 'value': '4', 'style': 'width:5em' });
 		n.nkUser = E('input', { 'type': 'text', 'placeholder': _('宽带账号'), 'style': 'width:16em' });
-		n.nkOffset = E('input', { 'type': 'number', 'value': '0', 'style': 'width:6em' });
+		n.nkOffset = E('input', { 'type': 'text', 'inputmode': 'numeric', 'value': '0', 'style': 'width:6em' });
 		n.nkOut = E('div', {});
 
 		var netkeeper = api.section(_('NetKeeper / 闪讯 拨号账号'), [
@@ -159,9 +160,9 @@ return view.extend({
 
 	handleNetkeeper: function() {
 		var n = this.n, self = this,
-		    version = Number(n.nkVersion.value),
+		    version = parseInt(n.nkVersion.value, 10),
 		    user = n.nkUser.value,
-		    offset = Number(n.nkOffset.value) || 0;
+		    offset = parseInt(n.nkOffset.value, 10) || 0;
 
 		if (this.timer) {
 			window.clearInterval(this.timer);
@@ -170,6 +171,11 @@ return view.extend({
 
 		if (!user) {
 			dom.content(n.nkOut, E('div', { 'class': 'alert-message warning' }, _('请填写账号。')));
+			return Promise.resolve();
+		}
+
+		if (!(version >= 1 && version <= 255)) {
+			dom.content(n.nkOut, E('div', { 'class': 'alert-message warning' }, _('nk_version 应为数字，例如 4。')));
 			return Promise.resolve();
 		}
 

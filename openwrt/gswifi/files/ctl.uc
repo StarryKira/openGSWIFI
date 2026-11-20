@@ -190,7 +190,7 @@ function cmd_restart(id) {
 	// Only the sessions are restarted; the protect rules stay loaded.
 	// `stop <id>` returns once that session has logged off and exited, so
 	// the new one does not start while the old logoff is still going out.
-	let ids = (id != null) ? [ id ] : keys(connect()?.call('service', 'list', { name: 'gswifi' })?.gswifi?.instances ?? {});
+	let ids = (id != null) ? [ id ] : keys(util.ubus_call(connect(), 'service', 'list', { name: 'gswifi' })?.gswifi?.instances ?? {});
 
 	for (let name in ids)
 		if (name != 'proxy' && config.valid_id(name))
@@ -276,8 +276,29 @@ function cmd_log(lines) {
 	return 0;
 }
 
-function mask(text) {
-	return replace(text, /(\.password=)[^\n]*/g, "$1'********'");
+// /etc/config/gswifi in `uci show` form, built from the cursor so that a
+// password with a line break cannot slip past the masking.
+function config_dump() {
+	let cur = cursor();
+	let out = '';
+
+	cur.load('gswifi');
+
+	for (let name, s in cur.get_all('gswifi') ?? {}) {
+		out += `gswifi.${name}=${s['.type']}\n`;
+
+		for (let k, v in s) {
+			if (substr(k, 0, 1) == '.')
+				continue;
+
+			if (k == 'password')
+				v = '********';
+
+			out += `gswifi.${name}.${k}=` + join(' ', map(type(v) == 'array' ? v : [ v ], x => "'" + replace(`${x}`, /'/g, "'\\''") + "'")) + '\n';
+		}
+	}
+
+	return out;
 }
 
 function cmd_diag() {
@@ -294,7 +315,7 @@ function cmd_diag() {
 	print(`gswifi: ${trim(util.capture([ config.BIN, '--version' ]).out) || '未安装'}\n`);
 
 	section('配置（密码已隐藏）');
-	print(mask(util.capture([ '/sbin/uci', '-q', 'show', 'gswifi' ]).out));
+	print(config_dump());
 
 	section('会话状态');
 	out_json(status.snapshot());

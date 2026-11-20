@@ -173,7 +173,9 @@ pub fn derive(options: &Options, username: &str, unix_time: u64) -> Result<Deriv
     }
     let version = options.nk_version.ok_or_else(|| Error::Invalid("需要 nk_version（1~15）".into()))?;
     let profile = profile(version).ok_or_else(|| Error::Invalid(format!("未知的 nk_version {}", version)))?;
-    let t = unix_time.checked_add_signed(options.time_offset).ok_or_else(|| Error::Invalid("time_offset 超出范围".into()))?;
+    let t = unix_time
+        .checked_add_signed(options.time_offset)
+        .ok_or_else(|| Error::Invalid("time_offset 超出范围".into()))?;
     let material = options.material.as_deref().filter(|m| !m.is_empty());
     match (profile.method, material) {
         (Method::Classic { material: builtin }, custom) => {
@@ -184,7 +186,9 @@ pub fn derive(options: &Options, username: &str, unix_time: u64) -> Result<Deriv
             Ok(Derived { username: get_pin(username, custom, t), valid_until: (t / 5 + 1) * 5 })
         }
         (Method::Hainan, _) => Ok(Derived { username: hainan_pin(username, t).into_bytes(), valid_until: t + 1 }),
-        (Method::Unsupported { reason }, _) => Err(Error::Unsupported(format!("nk_version {}（{}）：{}", version, profile.name, reason))),
+        (Method::Unsupported { reason }, _) => {
+            Err(Error::Unsupported(format!("nk_version {}（{}）：{}", version, profile.name, reason)))
+        }
     }
 }
 
@@ -219,7 +223,10 @@ mod tests {
         assert_eq!(d.valid_until, 305419900);
         // A configured material wins.
         let custom = Options { material: Some("xianxinli1radius".into()), ..opts(4) };
-        assert_eq!(derive(&custom, "a@b@c", 305419896).unwrap().username, get_pin("a@b@c", "xianxinli1radius", 305419896));
+        assert_eq!(
+            derive(&custom, "a@b@c", 305419896).unwrap().username,
+            get_pin("a@b@c", "xianxinli1radius", 305419896)
+        );
         // Time offset is applied.
         let shifted = Options { time_offset: 5, ..opts(4) };
         assert_eq!(derive(&shifted, "u", 1000).unwrap().username, get_pin("u", "singlenet01", 1005));
@@ -260,7 +267,8 @@ mod tests {
 
     #[test]
     fn options_parse() {
-        let o: Options = serde_json::from_str(r#"{"nk_version": 14, "dial_type": "netkeeper", "time_offset": -3}"#).unwrap();
+        let o: Options =
+            serde_json::from_str(r#"{"nk_version": 14, "dial_type": "netkeeper", "time_offset": -3}"#).unwrap();
         assert_eq!((o.nk_version, o.dial_type, o.time_offset), (Some(14), DialType::Netkeeper, -3));
     }
 }

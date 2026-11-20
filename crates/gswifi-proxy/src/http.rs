@@ -15,10 +15,8 @@ const MAX_HEAD: usize = 64 * 1024;
 /// Longest chunk-size or trailer line.
 const MAX_LINE: usize = 4 * 1024;
 
-const METHODS: &[&[u8]] = &[
-    b"GET ", b"POST ", b"HEAD ", b"PUT ", b"DELETE ", b"OPTIONS ", b"PATCH ", b"TRACE ",
-    b"CONNECT ",
-];
+const METHODS: &[&[u8]] =
+    &[b"GET ", b"POST ", b"HEAD ", b"PUT ", b"DELETE ", b"OPTIONS ", b"PATCH ", b"TRACE ", b"CONNECT "];
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum Chunk {
@@ -183,7 +181,8 @@ impl Rewriter {
                     let take = (n.min(input.len() as u64)) as usize;
                     out.extend_from_slice(&input[..take]);
                     input = &input[take..];
-                    self.state = State::Chunked(if n == take as u64 { Chunk::DataEnd } else { Chunk::Data(n - take as u64) });
+                    self.state =
+                        State::Chunked(if n == take as u64 { Chunk::DataEnd } else { Chunk::Data(n - take as u64) });
                 }
                 State::Chunked(c) => {
                     // Line-oriented: size line, the CRLF after data, trailers.

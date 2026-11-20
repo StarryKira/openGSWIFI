@@ -139,7 +139,8 @@ mod tests {
         let mut n = 0;
         for line in include_str!("../testdata/firmware-probe.txt").lines() {
             let quoted: Vec<&str> = line.split('\'').collect();
-            let t = u64::from_str_radix(line.split_whitespace().nth(1).unwrap().trim_start_matches("t=0x"), 16).unwrap();
+            let t =
+                u64::from_str_radix(line.split_whitespace().nth(1).unwrap().trim_start_matches("t=0x"), 16).unwrap();
             let want = hex::decode(line.split_whitespace().last().unwrap()).unwrap();
             let got = if line.starts_with("getpin_t") {
                 get_pin(quoted[1], quoted[3], t)

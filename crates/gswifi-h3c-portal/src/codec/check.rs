@@ -18,9 +18,8 @@ use des::TdesEde3;
 use gswifi_inode::{GsData, InodeError};
 
 /// AES-128 key, VA 0x42d540.
-pub const AES_KEY: [u8; 16] = [
-    0xec, 0xd4, 0x4f, 0x7b, 0xc6, 0xdd, 0x7d, 0xde, 0x2b, 0x7b, 0x51, 0xab, 0x4a, 0x6f, 0x5a, 0x22,
-];
+pub const AES_KEY: [u8; 16] =
+    [0xec, 0xd4, 0x4f, 0x7b, 0xc6, 0xdd, 0x7d, 0xde, 0x2b, 0x7b, 0x51, 0xab, 0x4a, 0x6f, 0x5a, 0x22];
 /// AES-CBC IV, VA 0x42d550 (ASCII `a@4de%#1asdfsd24`).
 pub const AES_IV: [u8; 16] = *b"a@4de%#1asdfsd24";
 /// 3DES (EDE, three keys) key, VA 0x42d560.
@@ -29,9 +28,8 @@ pub const DES3_KEY: [u8; 24] = [
     0x20, 0xd3, 0x72, 0x04, 0xbf,
 ];
 /// TEA variant key, VA 0x42d578, read as little-endian words.
-pub const TEA_KEY: [u8; 16] = [
-    0x24, 0x78, 0x65, 0x56, 0x32, 0x56, 0x74, 0x56, 0x79, 0x98, 0x80, 0x97, 0x78, 0x78, 0x76, 0x65,
-];
+pub const TEA_KEY: [u8; 16] =
+    [0x24, 0x78, 0x65, 0x56, 0x32, 0x56, 0x74, 0x56, 0x79, 0x98, 0x80, 0x97, 0x78, 0x78, 0x76, 0x65];
 
 /// Why no attribute 131 could be computed. The original then omits 131
 /// (it returns −1 without writing a result).
@@ -73,7 +71,9 @@ pub fn tea_decode(data: &[u8; 32]) -> [u8; 32] {
         let mut y = u32::from_le_bytes([src[4], src[5], src[6], src[7]]);
         let mut sum = 0xe377_9b90u32;
         for _ in 0..16 {
-            y = y.wrapping_sub((sum ^ x).wrapping_add(((x << 4) ^ (x >> 5)).wrapping_add(key[((sum >> 11) & 3) as usize])));
+            y = y.wrapping_sub(
+                (sum ^ x).wrapping_add(((x << 4) ^ (x >> 5)).wrapping_add(key[((sum >> 11) & 3) as usize])),
+            );
             sum = sum.wrapping_sub(0x9e37_79b9);
             x = x.wrapping_sub((sum ^ y).wrapping_add(((y << 4) ^ (y >> 5)).wrapping_add(key[(sum & 3) as usize])));
         }

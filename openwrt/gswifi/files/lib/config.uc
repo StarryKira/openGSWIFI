@@ -13,6 +13,7 @@
 import * as fs from 'fs';
 import { cursor } from 'uci';
 import * as toml from 'gswifi.toml';
+import { ubus_call } from 'gswifi.util';
 
 export const BIN = '/usr/bin/gswifi';
 export const RUN_DIR = '/var/run/gswifi';
@@ -296,7 +297,7 @@ export function resolve_device(conn, cur, iface, transport) {
 	if (!valid_iface(iface))
 		return null;
 
-	let st = conn?.call(`network.interface.${iface}`, 'status');
+	let st = ubus_call(conn, `network.interface.${iface}`, 'status');
 	let proto = st?.proto ?? cur.get('network', iface, 'proto');
 	let dev;
 
@@ -464,10 +465,17 @@ export function network_toml(net, device, info) {
 			continue;
 
 		let enc = encode(schema[k], raw);
+		let shown = (type(raw) == 'array') ? join(' ', raw) : raw;
 
-		if (enc == null)
-			push(problems, `配置项 ${k} 的值 ${type(raw) == 'array' ? join(' ', raw) : raw} 无效，已忽略`);
-		else
+		if (enc == null && defaults[k] != null && raw !== defaults[k]) {
+			enc = encode(schema[k], defaults[k]);
+			push(problems, `配置项 ${k} 的值 ${shown} 无效，改用默认值 ${defaults[k]}`);
+		}
+		else if (enc == null) {
+			push(problems, `配置项 ${k} 的值 ${shown} 无效，已忽略`);
+		}
+
+		if (enc != null)
 			put(schema[k].table, k, enc);
 	}
 
@@ -577,9 +585,24 @@ export function write_private(path, content) {
 	return true;
 };
 
-export function ensure_dirs() {
-	for (let dir in [ RUN_DIR, ETC_DIR, STATUS_DIR ]) {
-		fs.mkdir(dir, 0o700);
-		fs.chmod(dir, 0o700);
+// `mkdir -p`; the parents get the usual 0755, only `dir` itself `mode`.
+function mkdir_p(dir, mode) {
+	let path = '';
+
+	for (let part in split(dir, '/')) {
+		if (part == '')
+			continue;
+
+		path += '/' + part;
+
+		if (fs.stat(path)?.type != 'directory')
+			fs.mkdir(path, (path == dir) ? mode : 0o755);
 	}
+
+	fs.chmod(dir, mode);
+}
+
+export function ensure_dirs() {
+	for (let dir in [ RUN_DIR, ETC_DIR, STATUS_DIR ])
+		mkdir_p(dir, 0o700);
 };

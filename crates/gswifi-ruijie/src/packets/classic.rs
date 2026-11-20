@@ -1,9 +1,9 @@
 //! MentoHUST style Ruijie extension (research doc 18): an encoded 23 byte IPv4
 //! header followed by a fixed 448 byte attribute template.
 
-use std::time::{SystemTime, UNIX_EPOCH};
-use crate::crypt::{check_sum, encrypt_rtv};
 use super::{Checks, ExtParams, NetInfo};
+use crate::crypt::{check_sum, encrypt_rtv};
+use std::time::{SystemTime, UNIX_EPOCH};
 
 /// Default extension body after the IPv4 header (doc 18.3, `template-rj-448.bin`).
 const TEMPLATE: &[u8; 448] = include_bytes!("data/template-rj-448.bin");

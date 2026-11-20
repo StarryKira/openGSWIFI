@@ -84,10 +84,7 @@ impl GsData {
 
     /// Payload of the first record with `identifier`.
     pub fn record(&self, identifier: u32) -> Option<&[u8]> {
-        self.data
-            .chunks_exact(RECORD_SIZE)
-            .find(|r| r[..4] == identifier.to_be_bytes())
-            .map(|r| &r[4..])
+        self.data.chunks_exact(RECORD_SIZE).find(|r| r[..4] == identifier.to_be_bytes()).map(|r| &r[4..])
     }
 
     /// `payload[offset..offset + length]` of the first record with
@@ -110,10 +107,7 @@ mod tests {
     #[test]
     fn rc4_known_answer() {
         // RFC 6229 style test: key "Key", plaintext "Plaintext".
-        assert_eq!(
-            rc4(b"Key", b"Plaintext").unwrap(),
-            [0xbb, 0xf3, 0x16, 0xe8, 0xd9, 0x40, 0xaf, 0x0a, 0xd3]
-        );
+        assert_eq!(rc4(b"Key", b"Plaintext").unwrap(), [0xbb, 0xf3, 0x16, 0xe8, 0xd9, 0x40, 0xaf, 0x0a, 0xd3]);
         assert!(rc4(b"", b"x").is_err());
     }
 

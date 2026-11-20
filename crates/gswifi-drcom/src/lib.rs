@@ -205,12 +205,7 @@ impl Default for Options {
 
 /// Parses hex such as `"2700"`, `"27 00"`, `"27:00"` or `"0x2700"`.
 pub(crate) fn parse_hex(s: &str) -> Result<Vec<u8>, String> {
-    let clean: String = s
-        .trim()
-        .trim_start_matches("0x")
-        .chars()
-        .filter(|c| !matches!(c, ' ' | ':' | '-'))
-        .collect();
+    let clean: String = s.trim().trim_start_matches("0x").chars().filter(|c| !matches!(c, ' ' | ':' | '-')).collect();
     if clean.len() % 2 != 0 || !clean.chars().all(|c| c.is_ascii_hexdigit()) {
         return Err(format!("“{s}” 不是有效的十六进制字节串"));
     }

@@ -68,7 +68,10 @@ fn original_function_vectors() {
                 if c["passed_prefix_only"].as_bool() == Some(true) {
                     // Original output beyond 16 bytes is uninitialised heap memory.
                     assert!(password_xor(&CHALLENGE, &pw).is_err());
-                    assert_eq!(hex::encode(password_xor(&CHALLENGE, &pw[..16]).unwrap()), s(c, "initialized_prefix_hex"));
+                    assert_eq!(
+                        hex::encode(password_xor(&CHALLENGE, &pw[..16]).unwrap()),
+                        s(c, "initialized_prefix_hex")
+                    );
                     checked += 1;
                     continue;
                 }

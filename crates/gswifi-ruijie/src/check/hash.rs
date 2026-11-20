@@ -41,8 +41,14 @@ const fn le64_table<const N: usize>(bytes: &[u8]) -> [u64; N] {
     while i < N {
         let p = i * 8;
         out[i] = u64::from_le_bytes([
-            bytes[p], bytes[p + 1], bytes[p + 2], bytes[p + 3],
-            bytes[p + 4], bytes[p + 5], bytes[p + 6], bytes[p + 7],
+            bytes[p],
+            bytes[p + 1],
+            bytes[p + 2],
+            bytes[p + 3],
+            bytes[p + 4],
+            bytes[p + 5],
+            bytes[p + 6],
+            bytes[p + 7],
         ]);
         i += 1;
     }
@@ -61,22 +67,14 @@ const MD5C_IV: [u32; 4] = [0x5013_7246, 0x8acf_9dbe, 0xc9ef_aced, 0x2564_7013];
 /// 13, 21, 32, 52, 61, 63; step 43 additionally gets an input-dependent term
 /// (see [`md5c_block`]).
 const MD5C_K: [u32; 64] = [
-    0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
-    0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
-    0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
-    0x6b901122, 0xfd987163, 0xa679438e, 0x49b40821,
-    0xf61e2562, 0xc040b340, 0x265e5a51, 0xe9b6c7aa,
-    0xd62f105d, 0x02442453, 0xd8a1e681, 0xe7d3fbc8,
-    0x21e1cde6, 0xc33707d6, 0xf4d50d87, 0x455a14ed,
-    0xa9e3e905, 0xfcefa3f8, 0x676f02d9, 0x8d2a4c8a,
-    0xfffa3492, 0x8771f681, 0x6d9d6122, 0xfde5380c,
-    0xa4beea44, 0x4bdecfa9, 0xf6bb4b60, 0xbebfbc70,
-    0x289b7ec6, 0xeaa127fa, 0xd4ef3085, 0x04881d05,
-    0xd9d4d039, 0xe6db99e5, 0x1fa27cf8, 0xc4ac5665,
-    0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039,
-    0x655659c3, 0x8f0ccc92, 0xffeff47d, 0x85845dd1,
-    0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
-    0xf7537e82, 0xbd3af335, 0x2ad7d2bb, 0xeb866391,
+    0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee, 0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501, 0x698098d8,
+    0x8b44f7af, 0xffff5bb1, 0x895cd7be, 0x6b901122, 0xfd987163, 0xa679438e, 0x49b40821, 0xf61e2562, 0xc040b340,
+    0x265e5a51, 0xe9b6c7aa, 0xd62f105d, 0x02442453, 0xd8a1e681, 0xe7d3fbc8, 0x21e1cde6, 0xc33707d6, 0xf4d50d87,
+    0x455a14ed, 0xa9e3e905, 0xfcefa3f8, 0x676f02d9, 0x8d2a4c8a, 0xfffa3492, 0x8771f681, 0x6d9d6122, 0xfde5380c,
+    0xa4beea44, 0x4bdecfa9, 0xf6bb4b60, 0xbebfbc70, 0x289b7ec6, 0xeaa127fa, 0xd4ef3085, 0x04881d05, 0xd9d4d039,
+    0xe6db99e5, 0x1fa27cf8, 0xc4ac5665, 0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039, 0x655659c3, 0x8f0ccc92,
+    0xffeff47d, 0x85845dd1, 0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1, 0xf7537e82, 0xbd3af335, 0x2ad7d2bb,
+    0xeb866391,
 ];
 
 /// Rotation amounts per round (doc 15.2: round 3 uses 5/11/16/23; the
@@ -103,9 +101,7 @@ fn md5c_block(state: &mut [u32; 4], block: &[u8]) {
             k = k.wrapping_add((x[2] >> 8) & 0xff);
         }
         let v = a.wrapping_add(f).wrapping_add(x[g]).wrapping_add(k);
-        let nb = b
-            .wrapping_add(v.rotate_left(MD5C_S[round][i % 4]))
-            .wrapping_add(MD5C_POST[round]);
+        let nb = b.wrapping_add(v.rotate_left(MD5C_S[round][i % 4])).wrapping_add(MD5C_POST[round]);
         a = d;
         d = c;
         c = b;
@@ -160,12 +156,7 @@ fn sha1c_block(h: &mut [u32; 5], block: &[u8]) {
             40..=60 => ((b & c) | (b & d) | (c & d), 0u32.wrapping_sub(0x3403_2e48)),
             _ => (b ^ c ^ d, 0u32.wrapping_sub(0x5cd3_9e93)),
         };
-        let t = a
-            .rotate_left(5)
-            .wrapping_add(f)
-            .wrapping_add(e)
-            .wrapping_add(k)
-            .wrapping_add(*wi);
+        let t = a.rotate_left(5).wrapping_add(f).wrapping_add(e).wrapping_add(k).wrapping_add(*wi);
         e = d;
         d = c;
         c = b.rotate_left(30);
@@ -222,9 +213,7 @@ const RMD_IV: [u32; 4] = [0x1025_7436, 0xa8bd_9cfe, 0x9efc_ad8b, 0x1237_5460];
 
 /// Per-round additive constants R1..R8 (doc 19.5: R1/R8 `+2`, R2 325b99a1,
 /// R3 1baed69c, R4 bcdcb1f9, R5 5a82798a, R6 41d42d5d, R7 30ed3f68).
-const RMD_K: [u32; 8] = [
-    2, 0x325b_99a1, 0x1bae_d69c, 0xbcdc_b1f9, 0x5a82_798a, 0x41d4_2d5d, 0x30ed_3f68, 2,
-];
+const RMD_K: [u32; 8] = [2, 0x325b_99a1, 0x1bae_d69c, 0xbcdc_b1f9, 0x5a82_798a, 0x41d4_2d5d, 0x30ed_3f68, 2];
 
 /// Steps (0..63 left line, 64..127 right line, in ripemd-rounds.json order)
 /// whose constant is not the round constant. 20 come from the explicit
@@ -301,10 +290,7 @@ fn ripemd128c_block(h: &mut [u32; 4], block: &[u8]) {
         let b = base + (a - base + 1) % 4;
         let c = base + (a - base + 2) % 4;
         let d = base + (a - base + 3) % 4;
-        let k = RMD_K_OVERRIDE
-            .iter()
-            .find(|(s, _)| *s == step)
-            .map_or(RMD_K[round], |&(_, k)| k);
+        let k = RMD_K_OVERRIDE.iter().find(|(s, _)| *s == step).map_or(RMD_K[round], |&(_, k)| k);
         wv[a] = wv[a]
             .wrapping_add(rmd_f(round, wv[b], wv[c], wv[d]))
             .wrapping_add(w[RMD_R[round][j]])

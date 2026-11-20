@@ -103,7 +103,8 @@ fn dry_run_checks_but_changes_nothing() {
 #[test]
 fn a_rejected_dns_fragment_commits_nothing() {
     let s = Sandbox::new("dns", "exit 0", "echo 'bad option' >&2; exit 1");
-    let dns = DnsConfig { filter_aaaa: true, blocked_domains: vec!["telemetry.example".into()], ..DnsConfig::default() };
+    let dns =
+        DnsConfig { filter_aaaa: true, blocked_domains: vec!["telemetry.example".into()], ..DnsConfig::default() };
     let err = protect::apply(&plan(Mode::Enforce, dns), &s.paths(), false).unwrap_err();
     assert!(err.contains("dnsmasq"), "{}", err);
     assert!(!s.dns_fragment().exists(), "the bad fragment was left behind");
@@ -123,7 +124,13 @@ fn a_failed_check_restores_the_previous_files() {
     // Same sandbox paths, but now dnsmasq rejects the new fragment.
     fs::write(s.dir.join("bin/dnsmasq"), "#!/bin/sh\nexit 1\n").unwrap();
     let changed = DnsConfig { blocked_domains: vec!["new.example".into()], ..dns };
-    let other = Config { mode: Mode::Enforce, wan: vec!["wan9".into()], lan: vec!["br-lan".into()], dns: changed, ..Config::default() };
+    let other = Config {
+        mode: Mode::Enforce,
+        wan: vec!["wan9".into()],
+        lan: vec!["br-lan".into()],
+        dns: changed,
+        ..Config::default()
+    };
     let other = gswifi_protect::compile(&other, &Capabilities { kernel: (6, 6), ipv6: true }, 1, false).unwrap();
     assert!(protect::apply(&other, &s.paths(), false).is_err());
     assert_eq!(fs::read_to_string(s.paths().nft_file).unwrap(), rules);

@@ -1,6 +1,6 @@
-use bytes::{BufMut, Bytes, BytesMut};
-use crate::crypt::{check_sum, encrypt_rtv};
 use super::Checks;
+use crate::crypt::{check_sum, encrypt_rtv};
+use bytes::{BufMut, Bytes, BytesMut};
 
 /// Value of attribute 0x17 mentorust has always sent.
 const DEFAULT_FIELD17: &[u8; 32] = b"2D3657A572A25B7D19680388498639f4";
@@ -9,12 +9,7 @@ const DEFAULT_FIELD4D: &[u8; 128] = b"b464896d8135ee1da7dd2926bcbb65ae4eb77df681
 
 /// Vendor extension of a recent Ruijie client. Each helper below ends with the
 /// first two bytes (`1a`, length) of the following attribute.
-pub fn build_modern(
-    local_mac: &[u8; 6],
-    ipv4: &[u8; 4],
-    ipv6: &[u8; 16],
-    checks: Checks,
-) -> Vec<u8> {
+pub fn build_modern(local_mac: &[u8; 6], ipv4: &[u8; 4], ipv6: &[u8; 16], checks: Checks) -> Vec<u8> {
     let mut pkt = BytesMut::new();
 
     pkt.extend_from_slice(rtv_net_config(ipv4).as_slice());
@@ -66,9 +61,7 @@ const RTV_ID_OS_BITS: u8 = 0x70;
 const RTV_ID_DNS: u8 = 0x76;
 const RTV_ID_UNK_1: u8 = 0x79;
 
-pub fn rtv_net_config(
-    ipv4: &[u8],
-) -> Vec<u8> {
+pub fn rtv_net_config(ipv4: &[u8]) -> Vec<u8> {
     let mut net_data = BytesMut::new();
     net_data.put_u32(RTV_FLAG);
     net_data.put_u8(1);
@@ -120,8 +113,7 @@ pub fn rtv_dhcp_flag() -> Bytes {
     pkt.put_u32(RTV_FLAG);
     pkt.put_u8(RTV_ID_DHCP_FLAG);
     pkt.put_u8(0x06); // len
-    let enable_dhcp = std::env::var("EAPOL_ENABLE_DHCP")
-        .is_ok_and(|v| v == "1");
+    let enable_dhcp = std::env::var("EAPOL_ENABLE_DHCP").is_ok_and(|v| v == "1");
     pkt.put_u32(if enable_dhcp { 1 } else { 0 });
     pkt.put_u16(0x1a_0e);
     pkt.freeze()
@@ -172,21 +164,15 @@ pub fn rtv_ll_ipv6() -> Bytes {
     pkt.freeze()
 }
 
-pub fn rtv_ll_ipv6_t(
-    ipv6: &[u8],
-) -> Bytes {
+pub fn rtv_ll_ipv6_t(ipv6: &[u8]) -> Bytes {
     let mut pkt = BytesMut::new();
     pkt.put_u32(RTV_FLAG);
     pkt.put_u8(RTV_ID_LL_IPV6_T);
     pkt.put_u8(0x12);
     assert_eq!(ipv6.len(), 16);
     if ipv6[0] == 0x00 {
-        const DEFAULT_IPV6: [u8; 16] = [
-            0xfe, 0x80, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00,
-            0xfc, 0xf5, 0x9b, 0xc0,
-            0xcf, 0x51, 0xaa, 0x74,
-        ];
+        const DEFAULT_IPV6: [u8; 16] =
+            [0xfe, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xf5, 0x9b, 0xc0, 0xcf, 0x51, 0xaa, 0x74];
         pkt.put_slice(&DEFAULT_IPV6);
     } else {
         pkt.put_slice(ipv6);
@@ -220,11 +206,10 @@ pub fn rtv_service() -> Bytes {
     let mut pkt = BytesMut::new();
     pkt.put_u32(RTV_FLAG);
     pkt.put_u8(RTV_ID_SERVICE);
-    let service = std::env::var("EAPOL_SERVICE")
-        .unwrap_or("".to_string());
+    let service = std::env::var("EAPOL_SERVICE").unwrap_or("".to_string());
     pkt.put_u8(0x22);
     if service.is_empty() {
-        pkt.put_slice(&[0xbb, 0xa5, 0xc1, 0xaa ,0xcd, 0xf8]);
+        pkt.put_slice(&[0xbb, 0xa5, 0xc1, 0xaa, 0xcd, 0xf8]);
         pkt.put_slice(&[0u8; 32 - 6]);
     } else {
         // Longer values used to underflow and panic; the field is 32 bytes.
@@ -241,8 +226,7 @@ pub fn rtv_hdd_ser() -> Bytes {
     pkt.put_u32(RTV_FLAG);
     pkt.put_u8(RTV_ID_HDD_SER);
     pkt.put_u8(0x42);
-    let ser = std::env::var("EAPOL_HDD_SER")
-        .unwrap_or("Static:AB45A862".to_string());
+    let ser = std::env::var("EAPOL_HDD_SER").unwrap_or("Static:AB45A862".to_string());
     let ser = &ser.as_bytes()[..ser.len().min(64)];
     pkt.put_slice(ser);
     pkt.put_slice(vec![0u8; 64 - ser.len()].as_slice());

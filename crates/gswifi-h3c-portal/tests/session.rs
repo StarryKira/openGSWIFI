@@ -39,7 +39,11 @@ fn options() -> Options {
 }
 
 fn env() -> Env {
-    Env { interface: "eth0".into(), mac: [2, 0, 0, 0, 0, 1], net: NetInfo { ip: IP, dns: [198, 51, 100, 53], ..NetInfo::default() } }
+    Env {
+        interface: "eth0".into(),
+        mac: [2, 0, 0, 0, 0, 1],
+        net: NetInfo { ip: IP, dns: [198, 51, 100, 53], ..NetInfo::default() },
+    }
 }
 
 fn driver(opts: Options) -> H3cPortalDriver {
@@ -340,7 +344,9 @@ fn portal_ip_defaults_to_dns() {
     }
     let mut e = env();
     e.net.dns = [0; 4];
-    let mut d = H3cPortalDriver::new(e, Credentials::new("u", "p"), Options { portal_ip: Ipv4Addr::UNSPECIFIED, ..options() }).unwrap();
+    let mut d =
+        H3cPortalDriver::new(e, Credentials::new("u", "p"), Options { portal_ip: Ipv4Addr::UNSPECIFIED, ..options() })
+            .unwrap();
     assert!(matches!(&d.start(Instant::now())[..], [Action::Stop(Stop::Fatal(_))]));
 }
 
@@ -359,7 +365,11 @@ fn verify_authenticator_option() {
 fn constructor_validation() {
     let c = || Credentials::new("synthetic", "synthetic");
     let no_version = Options {
-        inode: InodeOptions { vif: Some("/nonexistent/iNode.vif".into()), data_file: Some(testdata("inode-gs.dat")), ..InodeOptions::default() },
+        inode: InodeOptions {
+            vif: Some("/nonexistent/iNode.vif".into()),
+            data_file: Some(testdata("inode-gs.dat")),
+            ..InodeOptions::default()
+        },
         ..options()
     };
     assert!(H3cPortalDriver::new(env(), c(), no_version).is_err());
@@ -373,7 +383,9 @@ fn constructor_validation() {
 
 #[test]
 fn options_deserialize_with_defaults() {
-    let o: Options = serde_json::from_str(r#"{"portal_ip":"192.0.2.20","plain_password":true,"inode":{"version":"V5.20-0001C"}}"#).unwrap();
+    let o: Options =
+        serde_json::from_str(r#"{"portal_ip":"192.0.2.20","plain_password":true,"inode":{"version":"V5.20-0001C"}}"#)
+            .unwrap();
     assert_eq!(o.portal_ip, SERVER_IP);
     assert!(o.plain_password);
     assert_eq!(o.server_port, 50200);

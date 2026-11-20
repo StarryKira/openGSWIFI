@@ -104,7 +104,7 @@ var CSS = [
 	'@supports (color:color-mix(in srgb,red 50%,blue)){',
 	'.gsw{--gsw-line:color-mix(in srgb,currentColor 18%,transparent);--gsw-soft:color-mix(in srgb,currentColor 6%,transparent)}',
 	'.gsw-tone{color:color-mix(in srgb,var(--gsw-tone) 50%,currentColor)}',
-	'.gsw-badge .gsw-tone{color:color-mix(in srgb,var(--gsw-tone) 42%,currentColor)}',
+	'.gsw-badge .gsw-tone{color:color-mix(in srgb,var(--gsw-tone) 34%,currentColor)}',
 	'}',
 
 	/* status header of a network */
@@ -136,6 +136,7 @@ var CSS = [
 	/* label / value pairs */
 	'.gsw-kvs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 28px;margin-top:12px}',
 	'.gsw-kv-wide{grid-column:1/-1}',
+	'.gsw-kv-wide .gsw-v{flex:1 1 auto;text-align:left}',
 	'.gsw-kv{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px dashed var(--gsw-line);min-width:0}',
 	'.gsw-k{flex:none;opacity:.8}',
 	'.gsw-v{min-width:0;text-align:right;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}',

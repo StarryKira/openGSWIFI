@@ -184,9 +184,8 @@ impl H3cPortalDriver {
         }
         let material = InodeMaterial::load(&options.inode).map_err(|e| e.to_string())?;
         let nonce = material.nonce_for(&env.mac, user);
-        let mixed = material
-            .mixed(nonce)
-            .ok_or("H3C Portal 登录需要 iNode 版本：请提供 iNode.vif 或设置 inode.version")?;
+        let mixed =
+            material.mixed(nonce).ok_or("H3C Portal 登录需要 iNode 版本：请提供 iNode.vif 或设置 inode.version")?;
         let gs_data = load_gs_data(&options.inode).map_err(|e| e.to_string())?;
         let serial = options.serial.map(u16::to_be_bytes).unwrap_or_else(|| default_serial(&env.mac));
         let ports = options.local_ports.unwrap_or_else(|| serial_ports(serial));
@@ -392,20 +391,27 @@ impl H3cPortalDriver {
                 }
                 self.enter_identity(now, out);
             }
-            Message::Challenge { challenge } if matches!(phase, Phase::Discovery | Phase::Identity | Phase::Challenge) => {
+            Message::Challenge { challenge }
+                if matches!(phase, Phase::Discovery | Phase::Identity | Phase::Challenge) =>
+            {
                 if let Some(t) = &text {
                     info!("服务器提示：{}", t);
                 }
                 self.enter_challenge(challenge, now, out);
             }
-            Message::Success { session, auth_blob } if matches!(phase, Phase::Identity | Phase::Challenge | Phase::Online) => {
+            Message::Success { session, auth_blob }
+                if matches!(phase, Phase::Identity | Phase::Challenge | Phase::Online) =>
+            {
                 if let Some(t) = &text {
                     info!("服务器提示：{}", t);
                 }
                 self.go_online(session, auth_blob, now, out);
             }
             Message::Failure if phase == Phase::Online => {
-                warn!("服务器结束了在线会话{}，重新认证", text.as_deref().map(|t| format!("({})", t)).unwrap_or_default());
+                warn!(
+                    "服务器结束了在线会话{}，重新认证",
+                    text.as_deref().map(|t| format!("({})", t)).unwrap_or_default()
+                );
                 self.begin_discovery(now, out);
             }
             Message::Failure if matches!(phase, Phase::Identity | Phase::Challenge) => {
@@ -572,7 +578,8 @@ impl Driver for H3cPortalDriver {
             return out;
         }
         if matches!(self.phase, Phase::Identity | Phase::Challenge | Phase::Online) {
-            let session = self.session.as_deref().map(|s| codec::logoff_session_value(s, self.opts.logoff_session_quirk));
+            let session =
+                self.session.as_deref().map(|s| codec::logoff_session_value(s, self.opts.logoff_session_quirk));
             if let Some(p) = self.build(codec::logoff(self.net.ip, self.serial, session.as_deref()), &mut out) {
                 info!("发送下线请求...");
                 self.send(&mut out, 0, p);

@@ -105,10 +105,7 @@ mod tests {
         let seed: [u8; 16] = std::array::from_fn(|i| if i == 0 { 3 } else { i as u8 });
         let prop = |pw: &[u8]| hex::encode(password_property(b"synthetic", pw, &seed));
         assert_eq!(prop(b"synthetic"), "26e1ee3b2bf6442edde87889af681850");
-        assert_eq!(
-            prop(b"0123456789abcdefXYZ"),
-            "65a9b27c77a6067086d119ebcc0c7d365b72be63536ebb7dc2e60aab5738b8cf"
-        );
+        assert_eq!(prop(b"0123456789abcdefXYZ"), "65a9b27c77a6067086d119ebcc0c7d365b72be63536ebb7dc2e60aab5738b8cf");
         assert_eq!(prop(b""), "");
         assert!(password_attribute(b"synthetic", b"synthetic", &seed).is_some());
         assert!(password_attribute(b"synthetic", b"0123456789abcdefXYZ", &seed).is_none());
@@ -128,9 +125,14 @@ mod tests {
     fn template_layout() {
         assert_eq!(AREA_LEN, 459);
         let at = |off: usize| TEMPLATE[off - HEAD_LEN - 2];
-        assert_eq!([at(OFF_MAC), at(OFF_DHCP_STAGE), at(OFF_PASSWORD), at(OFF_FIELD4D), at(OFF_FIELD60), at(OFF_0X70)],
-            [0x2d, 0x63, 0x2f, 0x4d, 0x60, 0x70]);
-        assert_eq!(TEMPLATE[OFF_FIELD4D - HEAD_LEN..OFF_FIELD4D - HEAD_LEN + 128], TEMPLATE[OFF_FIELD60 - HEAD_LEN..OFF_FIELD60 - HEAD_LEN + 128]);
+        assert_eq!(
+            [at(OFF_MAC), at(OFF_DHCP_STAGE), at(OFF_PASSWORD), at(OFF_FIELD4D), at(OFF_FIELD60), at(OFF_0X70)],
+            [0x2d, 0x63, 0x2f, 0x4d, 0x60, 0x70]
+        );
+        assert_eq!(
+            TEMPLATE[OFF_FIELD4D - HEAD_LEN..OFF_FIELD4D - HEAD_LEN + 128],
+            TEMPLATE[OFF_FIELD60 - HEAD_LEN..OFF_FIELD60 - HEAD_LEN + 128]
+        );
         assert_eq!((TEMPLATE[OFF_0X70 - HEAD_LEN], TEMPLATE[401]), (0x40, 0xff));
     }
 }

@@ -181,9 +181,7 @@ impl Default for Config {
 
 /// An interface name safe to put in a quoted nftables string.
 fn valid_interface(name: &str) -> bool {
-    !name.is_empty()
-        && name.len() <= 15
-        && name.chars().all(|c| c.is_ascii_alphanumeric() || "._-@".contains(c))
+    !name.is_empty() && name.len() <= 15 && name.chars().all(|c| c.is_ascii_alphanumeric() || "._-@".contains(c))
 }
 
 /// A domain safe to put in a dnsmasq fragment.
@@ -191,7 +189,9 @@ pub(crate) fn valid_domain(name: &str) -> bool {
     !name.is_empty()
         && name.len() <= 253
         && !name.starts_with('.')
-        && name.split('.').all(|l| !l.is_empty() && l.len() <= 63 && l.chars().all(|c| c.is_ascii_alphanumeric() || c == '-' || c == '_'))
+        && name.split('.').all(|l| {
+            !l.is_empty() && l.len() <= 63 && l.chars().all(|c| c.is_ascii_alphanumeric() || c == '-' || c == '_')
+        })
 }
 
 impl Config {

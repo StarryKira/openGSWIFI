@@ -166,7 +166,7 @@ export function snapshot() {
 	let drivers = config.load_drivers();
 	let now = time();
 	let up = util.uptime();
-	let service = conn?.call('service', 'list', { name: 'gswifi' })?.gswifi;
+	let service = util.ubus_call(conn, 'service', 'list', { name: 'gswifi' })?.gswifi;
 	let instances = service?.instances ?? {};
 	let networks = [];
 

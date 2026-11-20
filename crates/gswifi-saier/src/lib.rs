@@ -8,7 +8,9 @@
 pub mod frames;
 
 use gswifi_core::{Credentials, DriverInfo, Env, SupportLevel, Transport};
-use gswifi_eapol::frame::{EAP_TYPE_IDENTITY, EAP_TYPE_MD5_CHALLENGE, EAP_TYPE_NOTIFICATION, TYPE_EAPOL_LOGOFF, TYPE_EAPOL_START};
+use gswifi_eapol::frame::{
+    EAP_TYPE_IDENTITY, EAP_TYPE_MD5_CHALLENGE, EAP_TYPE_NOTIFICATION, TYPE_EAPOL_LOGOFF, TYPE_EAPOL_START,
+};
 use gswifi_eapol::{Ctx, Dialect, RequestKind, Supplicant};
 use serde::Deserialize;
 
@@ -106,7 +108,8 @@ mod tests {
 
     #[test]
     fn saier_session() {
-        let net = NetInfo { ip: [192, 0, 2, 10], mask: [255, 255, 255, 0], gateway: [192, 0, 2, 1], ..Default::default() };
+        let net =
+            NetInfo { ip: [192, 0, 2, 10], mask: [255, 255, 255, 0], gateway: [192, 0, 2, 1], ..Default::default() };
         let env = Env { interface: "eth0".into(), mac: LOCAL, net };
         let mut d = driver(env, Credentials::new("synthetic", "pw"), Options::default()).unwrap();
         let t = Instant::now();

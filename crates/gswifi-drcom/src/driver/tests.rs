@@ -356,7 +356,8 @@ fn foreign_datagrams_ignored() {
     let mut sim = Sim::new(dhcp_opts());
     one(&sim.start());
     let reply = challenge_reply(SEED);
-    let other = Datagram { local_port: 61440, from: SocketAddrV4::new(Ipv4Addr::new(10, 0, 0, 2), 61440), payload: &reply };
+    let other =
+        Datagram { local_port: 61440, from: SocketAddrV4::new(Ipv4Addr::new(10, 0, 0, 2), 61440), payload: &reply };
     assert!(sim.d.on_datagram(other, sim.now).is_empty());
     let port = Datagram { local_port: 61440, from: SocketAddrV4::new(SERVER, 61441), payload: &reply };
     assert!(sim.d.on_datagram(port, sim.now).is_empty());
@@ -590,7 +591,12 @@ fn unsupported_and_invalid_configurations_are_refused() {
     assert!(DrcomDriver::new(env(), creds(), Options { max_retries: 0, ..dhcp_opts() }).is_err());
     assert!(DrcomDriver::new(env(), Credentials::new("u".repeat(37), "p"), dhcp_opts()).is_err());
     assert!(DrcomDriver::new(env(), Credentials::new("", "p"), dhcp_opts()).is_err());
-    assert!(DrcomDriver::new(env(), Credentials::new("u", "p".repeat(17)), Options { ror_version: true, ..dhcp_opts() }).is_err());
+    assert!(DrcomDriver::new(
+        env(),
+        Credentials::new("u", "p".repeat(17)),
+        Options { ror_version: true, ..dhcp_opts() }
+    )
+    .is_err());
     let mut e = env();
     e.mac = [0; 6];
     assert!(DrcomDriver::new(e.clone(), creds(), dhcp_opts()).is_err());
@@ -628,7 +634,10 @@ fn options_deserialize_with_defaults() {
     use serde::de::IntoDeserializer;
     use serde::Deserialize;
     let map = vec![("mode", "pppoe"), ("variant", "gs-pt"), ("server", "10.0.0.1")];
-    let opts = Options::deserialize(MapDeserializer::<_, DeError>::new(map.into_iter().map(|(k, v)| (k, v.into_deserializer())))).unwrap();
+    let opts = Options::deserialize(MapDeserializer::<_, DeError>::new(
+        map.into_iter().map(|(k, v)| (k, v.into_deserializer())),
+    ))
+    .unwrap();
     assert_eq!(opts.mode, Mode::Pppoe);
     assert_eq!(opts.variant, Variant::GsPt);
     assert_eq!(opts.server, SERVER);

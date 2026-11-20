@@ -251,7 +251,16 @@ impl<D: Dialect> Supplicant<D> {
     // ---- received frames ----
 
     #[allow(clippy::too_many_arguments)]
-    fn on_request(&mut self, src: [u8; 6], id: u8, kind: u8, data: &[u8], whole: &[u8], now: Instant, out: &mut Vec<Action>) {
+    fn on_request(
+        &mut self,
+        src: [u8; 6],
+        id: u8,
+        kind: u8,
+        data: &[u8],
+        whole: &[u8],
+        now: Instant,
+        out: &mut Vec<Action>,
+    ) {
         let class = { self.dialect.classify(&ctx!(self), &src, kind, data) };
         match class {
             RequestKind::Identity => {
@@ -350,7 +359,9 @@ impl<D: Dialect> Supplicant<D> {
                 self.stop(out, Stop::Rejected { stage: RejectStage::Identity, message });
             }
             Stage::Md5 => {
-                error!("报错预测：\n1，账号密码错误，请检查密码是否正确！\n2，MAC地址绑定错误，请解绑已绑定的MAC地址！");
+                error!(
+                    "报错预测：\n1，账号密码错误，请检查密码是否正确！\n2，MAC地址绑定错误，请解绑已绑定的MAC地址！"
+                );
                 self.stop(out, Stop::Rejected { stage: RejectStage::Password, message });
             }
         }
@@ -400,7 +411,9 @@ impl<D: Dialect> Driver for Supplicant<D> {
         match frame::parse(frame) {
             None => {}
             Some(Received::Other { typ }) => debug!("收到 EAPOL 类型 {} 的报文", typ),
-            Some(Received::Request { src, id, kind, data }) => self.on_request(src, id, kind, data, frame, now, &mut out),
+            Some(Received::Request { src, id, kind, data }) => {
+                self.on_request(src, id, kind, data, frame, now, &mut out)
+            }
             Some(Received::Success { .. }) => self.on_success(frame, now, &mut out),
             Some(Received::Failure { .. }) => self.on_failure(frame, now, &mut out),
         }
@@ -600,7 +613,8 @@ mod tests {
     #[test]
     fn answer_keeps_the_session_online() {
         let env = Env { interface: "eth0".into(), mac: LOCAL, net: NetInfo::default() };
-        let mut s = Supplicant::new(Answering(Plain), env, Credentials::new("user", "pass"), Options::default()).unwrap();
+        let mut s =
+            Supplicant::new(Answering(Plain), env, Credentials::new("user", "pass"), Options::default()).unwrap();
         let t = Instant::now();
         s.start(t);
         s.on_frame(&request(1, EAP_TYPE_IDENTITY, &[]), t);
@@ -612,7 +626,13 @@ mod tests {
         assert_eq!(s.state(), AuthState::Online);
         assert_eq!(s.next_deadline(), deadline, "keepalive timer untouched");
         // Before Success the same request is not answered.
-        let mut s = Supplicant::new(Answering(Plain), Env { mac: LOCAL, ..Env::default() }, Credentials::new("u", "p"), Options::default()).unwrap();
+        let mut s = Supplicant::new(
+            Answering(Plain),
+            Env { mac: LOCAL, ..Env::default() },
+            Credentials::new("u", "p"),
+            Options::default(),
+        )
+        .unwrap();
         s.start(t);
         assert!(frames(&s.on_frame(&request(9, 20, &[]), t)).is_empty());
     }
@@ -808,7 +828,11 @@ mod tests {
 
     #[test]
     fn overrides_apply_to_new_addresses() {
-        let opts = Options { gateway: Some(Ipv4Addr::new(10, 0, 0, 1)), dns: Some(Ipv4Addr::new(10, 0, 0, 53)), ..Options::default() };
+        let opts = Options {
+            gateway: Some(Ipv4Addr::new(10, 0, 0, 1)),
+            dns: Some(Ipv4Addr::new(10, 0, 0, 53)),
+            ..Options::default()
+        };
         let mut s = supplicant(opts);
         s.on_net_change(NetInfo { ip: [10, 0, 0, 2], gateway: [1, 1, 1, 1], ..Default::default() }, Instant::now());
         assert_eq!(s.net.gateway, [10, 0, 0, 1]);

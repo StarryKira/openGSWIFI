@@ -157,7 +157,13 @@ pub fn load_materials(path: &str, config: &mut Config) -> Option<Materials> {
         Ok(m) => {
             info!(
                 "已载入客户端校验材料 {}：代码来自{}，算法版本 {}.{:02}，类型 {}，A {} 字节，B {} 字节",
-                path, m.source, version / 100, version % 100, m.check_type, m.a.len(), m.b.len()
+                path,
+                m.source,
+                version / 100,
+                version % 100,
+                m.check_type,
+                m.a.len(),
+                m.b.len()
             );
             Some(m)
         }
@@ -171,7 +177,8 @@ pub fn load_materials(path: &str, config: &mut Config) -> Option<Materials> {
 /// A Ruijie session. Reads the client files of `data_file`, if any.
 pub fn driver(env: Env, credentials: Credentials, options: Options) -> Result<Supplicant<RuijieDialect>, String> {
     let mut config = Config::from_options(&options)?;
-    let materials = options.data_file.as_deref().filter(|p| !p.trim().is_empty()).and_then(|p| load_materials(p, &mut config));
+    let materials =
+        options.data_file.as_deref().filter(|p| !p.trim().is_empty()).and_then(|p| load_materials(p, &mut config));
     info!(
         "认证参数: 寻找服务器方式 {}，报文发送方式 {}，DHCP 模式 {}，扩展格式 {:?}",
         config.start_mode, config.pkt_type, options.eapol.dhcp_mode, config.ext_format
@@ -214,7 +221,8 @@ mod tests {
         assert_eq!(run(None, Some([6, 42]), &exe(0x0004_000a)), (Some([4, 10]), 642));
         // No file or no version resource: unchanged.
         assert_eq!(run(None, None, &ClientFiles::default()), (None, 410));
-        let no_version = ClientFiles { exe: Some(version_fixture(0x0004_000a, true, false, 0x1200)), ..Default::default() };
+        let no_version =
+            ClientFiles { exe: Some(version_fixture(0x0004_000a, true, false, 0x1200)), ..Default::default() };
         assert_eq!(run(None, None, &no_version), (None, 410));
         // A zero resource value is taken as it is.
         assert_eq!(run(None, None, &exe(0)), (Some([0, 0]), 0));

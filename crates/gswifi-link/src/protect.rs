@@ -70,10 +70,8 @@ fn which(name: &str, usual: &str) -> PathBuf {
 }
 
 fn run(program: &Path, args: &[&str]) -> Result<String, String> {
-    let out = Command::new(program)
-        .args(args)
-        .output()
-        .map_err(|e| format!("无法执行 {}: {}", program.display(), e))?;
+    let out =
+        Command::new(program).args(args).output().map_err(|e| format!("无法执行 {}: {}", program.display(), e))?;
     let stdout = String::from_utf8_lossy(&out.stdout).into_owned();
     if out.status.success() {
         return Ok(stdout);

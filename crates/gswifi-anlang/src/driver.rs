@@ -906,7 +906,10 @@ mod tests {
         let d = driver(Options::default());
         assert_eq!(d.info().name, "anlang");
         assert_eq!(d.info().support, gswifi_core::SupportLevel::OfflineTested);
-        assert_eq!(d.requirements(), Requirements { ethertype: None, udp_ports: vec![0], needs_ipv4: true, udp_ttl: None });
+        assert_eq!(
+            d.requirements(),
+            Requirements { ethertype: None, udp_ports: vec![0], needs_ipv4: true, udp_ttl: None }
+        );
         assert_eq!(d.state(), AuthState::Idle);
         assert_eq!(d.next_deadline(), None);
     }

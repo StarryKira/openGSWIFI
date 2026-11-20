@@ -247,11 +247,8 @@ pub fn dll_version(data: &[u8], cache: [u8; 3]) -> Result<u8, Error> {
     if data.len() < 24 {
         return Err(Error::Invalid("DrAuthSvr.dll shorter than 24 bytes".into()));
     }
-    const MARKERS: [(&[u8], usize); 3] = [
-        (b"%s%s%sBuild(k%d.%s)", 20),
-        (b"%s%s%s(1x)Build(k%d.%s)", 24),
-        (b"%s %s%s Build(k%d.%s)", 23),
-    ];
+    const MARKERS: [(&[u8], usize); 3] =
+        [(b"%s%s%sBuild(k%d.%s)", 20), (b"%s%s%s(1x)Build(k%d.%s)", 24), (b"%s %s%s Build(k%d.%s)", 23)];
     for (marker, skip) in MARKERS {
         let mut found = false;
         let mut result = 0u8;
@@ -301,9 +298,7 @@ fn parse_c_unsigned_low8(s: &[u8]) -> Option<u8> {
     if digits == 0 {
         return None;
     }
-    let v = s[i..i + digits]
-        .iter()
-        .fold(0u8, |acc, d| acc.wrapping_mul(10).wrapping_add(d - b'0'));
+    let v = s[i..i + digits].iter().fold(0u8, |acc, d| acc.wrapping_mul(10).wrapping_add(d - b'0'));
     Some(if negative { v.wrapping_neg() } else { v })
 }
 
@@ -431,8 +426,14 @@ mod tests {
                     frames: vec![],
                 }),
                 "event" => {
-                    let timers = if p[3] == "-" { vec![] } else { p[3].split(',').map(|t| t.parse().unwrap()).collect() };
-                    cases.last_mut().unwrap().events.push((p[1].parse().unwrap(), p[2].parse().unwrap(), timers, unhex(p[4])));
+                    let timers =
+                        if p[3] == "-" { vec![] } else { p[3].split(',').map(|t| t.parse().unwrap()).collect() };
+                    cases.last_mut().unwrap().events.push((
+                        p[1].parse().unwrap(),
+                        p[2].parse().unwrap(),
+                        timers,
+                        unhex(p[4]),
+                    ));
                 }
                 "frame" => cases.last_mut().unwrap().frames.push((p[1].to_string(), unhex(p[2]))),
                 other => panic!("{other}"),
@@ -450,8 +451,10 @@ mod tests {
         for c in &cases {
             for (before, after, timers, body) in &c.events {
                 let actions = receive(body, *before, c.auth, c.mode).unwrap();
-                let states: Vec<u8> = actions.iter().filter_map(|a| if let GsAction::State(s) = a { Some(*s) } else { None }).collect();
-                let armed: Vec<u32> = actions.iter().filter_map(|a| if let GsAction::Timer(t) = a { Some(*t) } else { None }).collect();
+                let states: Vec<u8> =
+                    actions.iter().filter_map(|a| if let GsAction::State(s) = a { Some(*s) } else { None }).collect();
+                let armed: Vec<u32> =
+                    actions.iter().filter_map(|a| if let GsAction::Timer(t) = a { Some(*t) } else { None }).collect();
                 assert_eq!(*after, states.last().copied().unwrap_or(*before));
                 if !armed.is_empty() {
                     assert_eq!(&armed, timers);
@@ -549,7 +552,8 @@ mod tests {
                 let k = keepalive1(&l.md5a, &auth_info, random, KEEPALIVE1_GS_LEN).unwrap();
                 assert_eq!(frame(c, "success"), k.as_slice());
                 assert_eq!(frame(c, "online-tick1"), k.as_slice());
-                let (b, _) = control96(sub2_rx[5] != 0, sub2_rx[8..12].try_into().unwrap(), IP, 1, 0x27, CONTROL96_ADDRESS_HINT);
+                let (b, _) =
+                    control96(sub2_rx[5] != 0, sub2_rx[8..12].try_into().unwrap(), IP, 1, 0x27, CONTROL96_ADDRESS_HINT);
                 assert_eq!(frame(c, "control2"), b);
             }
         }

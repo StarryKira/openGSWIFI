@@ -51,12 +51,19 @@ pub fn lookup(name: &str) -> Result<Env, String> {
             .collect();
         match candidates.as_slice() {
             [one] => (*one).clone(),
-            [] => return Err(format!("没有找到 10.x.x.x 地址的网卡，请指定网卡。当前网卡: {}", interface_names().join(", "))),
+            [] => {
+                return Err(format!(
+                    "没有找到 10.x.x.x 地址的网卡，请指定网卡。当前网卡: {}",
+                    interface_names().join(", ")
+                ))
+            }
             many => many
                 .iter()
                 .find(|i| i.name.starts_with("en") || i.name.starts_with("eth"))
                 .map(|i| (*i).clone())
-                .ok_or_else(|| format!("有多个 10.x.x.x 地址的网卡，请指定网卡。当前网卡: {}", interface_names().join(", ")))?,
+                .ok_or_else(|| {
+                format!("有多个 10.x.x.x 地址的网卡，请指定网卡。当前网卡: {}", interface_names().join(", "))
+            })?,
         }
     } else {
         all.iter()
@@ -64,7 +71,11 @@ pub fn lookup(name: &str) -> Result<Env, String> {
             .cloned()
             .ok_or_else(|| format!("未找到网卡 {}，请检查名称。当前网卡: {}", name, interface_names().join(", ")))?
     };
-    let mac = inet.mac.map(|m| m.octets()).filter(|m| *m != [0; 6]).ok_or_else(|| format!("网卡 {} 没有 MAC 地址", inet.name))?;
+    let mac = inet
+        .mac
+        .map(|m| m.octets())
+        .filter(|m| *m != [0; 6])
+        .ok_or_else(|| format!("网卡 {} 没有 MAC 地址", inet.name))?;
     Ok(Env { net: read_net_info(&inet.name), interface: inet.name, mac })
 }
 

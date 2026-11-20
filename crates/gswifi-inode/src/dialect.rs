@@ -86,9 +86,9 @@ impl InodeDialect {
             3 => MAC_BROADCAST,
             m => {
                 return Err(format!(
-                    "iNode 只支持 StartMode 0(标准组播) 或 3(广播)，不支持 {}：模式 1 附带锐捷扩展，模式 2 会改发赛尔报文",
-                    m
-                ))
+                "iNode 只支持 StartMode 0(标准组播) 或 3(广播)，不支持 {}：模式 1 附带锐捷扩展，模式 2 会改发赛尔报文",
+                m
+            ))
             }
         };
         if options.upload_ver && material.version_cache.is_none() {

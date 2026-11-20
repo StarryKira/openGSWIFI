@@ -85,6 +85,16 @@ export function pid_runs(pid, exe) {
 	return link == exe || link == `${exe} (deleted)`;
 };
 
+// A ubus call that yields null when there is no ubus (a container without
+// init) instead of failing. Written out because ucode before 2025 does not
+// short-circuit `conn?.call(...)` when conn is null.
+export function ubus_call(conn, object, method, args) {
+	if (conn == null)
+		return null;
+
+	return conn.call(object, method, args ?? {});
+};
+
 export function logger(level, message) {
 	system([ '/usr/bin/logger', '-t', 'gswifi', '-p', `daemon.${level}`, '--', `${message}` ]);
 };

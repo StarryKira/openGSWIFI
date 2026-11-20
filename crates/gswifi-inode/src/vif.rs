@@ -34,7 +34,14 @@ fn sp(table: usize, index: u32) -> u32 {
 fn round_fn(r: u32, k1: u32, k2: u32) -> u32 {
     let a = r ^ k1;
     let b = r.rotate_left(28) ^ k2;
-    sp(3, a >> 24) ^ sp(2, a >> 16) ^ sp(1, a >> 8) ^ sp(0, a) ^ sp(7, b >> 24) ^ sp(6, b >> 16) ^ sp(5, b >> 8) ^ sp(4, b)
+    sp(3, a >> 24)
+        ^ sp(2, a >> 16)
+        ^ sp(1, a >> 8)
+        ^ sp(0, a)
+        ^ sp(7, b >> 24)
+        ^ sp(6, b >> 16)
+        ^ sp(5, b >> 8)
+        ^ sp(4, b)
 }
 
 /// One 8-byte block of the VIF cipher; `encrypt` runs the key schedule in

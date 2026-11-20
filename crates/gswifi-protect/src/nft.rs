@@ -46,7 +46,15 @@ enum Chain {
 impl Builder {
     /// Adds a rule. `matches` is the match part, `action` what enforce mode
     /// appends after the counter (empty: the rule only counts anyway).
-    fn rule(&mut self, chain: Chain, id: &'static str, what: impl Into<String>, matches: &str, action: &str, mode: Mode) {
+    fn rule(
+        &mut self,
+        chain: Chain,
+        id: &'static str,
+        what: impl Into<String>,
+        matches: &str,
+        action: &str,
+        mode: Mode,
+    ) {
         self.counters.push(id);
         let mut line = format!("\t\t{} counter name \"{}\"", matches, id);
         if mode == Mode::Enforce && !action.is_empty() {
@@ -150,10 +158,31 @@ pub(crate) fn build(
     }
 
     if config.dscp_ecn && b.gate(caps, Feature::DscpEcn) {
-        b.rule(Chain::Postrouting, "dscp4", "清零出口 IPv4 的 DSCP", &format!("{} meta nfproto ipv4", out), "ip dscp set cs0", mode);
-        b.rule(Chain::Postrouting, "ecn4", "清零出口 IPv4 的 ECN", &format!("{} meta nfproto ipv4", out), "ip ecn set not-ect", mode);
+        b.rule(
+            Chain::Postrouting,
+            "dscp4",
+            "清零出口 IPv4 的 DSCP",
+            &format!("{} meta nfproto ipv4", out),
+            "ip dscp set cs0",
+            mode,
+        );
+        b.rule(
+            Chain::Postrouting,
+            "ecn4",
+            "清零出口 IPv4 的 ECN",
+            &format!("{} meta nfproto ipv4", out),
+            "ip ecn set not-ect",
+            mode,
+        );
         if caps.ipv6 {
-            b.rule(Chain::Postrouting, "dscp6", "清零出口 IPv6 的 DSCP", &format!("{} meta nfproto ipv6", out), "ip6 dscp set cs0", mode);
+            b.rule(
+                Chain::Postrouting,
+                "dscp6",
+                "清零出口 IPv6 的 DSCP",
+                &format!("{} meta nfproto ipv6", out),
+                "ip6 dscp set cs0",
+                mode,
+            );
         }
     }
 
@@ -168,7 +197,14 @@ pub(crate) fn build(
             "drop",
             mode,
         );
-        b.rule(Chain::Postrouting, "icmp_redirect", "不向上行发送 ICMP 重定向", &format!("{} icmp type redirect", out), "drop", mode);
+        b.rule(
+            Chain::Postrouting,
+            "icmp_redirect",
+            "不向上行发送 ICMP 重定向",
+            &format!("{} icmp type redirect", out),
+            "drop",
+            mode,
+        );
     }
 
     // ---- forwarding policy ----

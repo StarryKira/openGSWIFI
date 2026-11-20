@@ -2,16 +2,17 @@
 //! responses with the vendor extension in its three formats, and the
 //! EAPOL heartbeat (research docs 17, 18).
 
-mod rtv;
 pub mod classic;
 pub mod echo;
+mod rtv;
 pub mod v4;
 
 pub use gswifi_core::NetInfo;
-pub use gswifi_eapol::frame::{
-    logoff_dest, md5_digest, response_dest, start_dest, ETH_P_PAE, MAC_BROADCAST, MAC_RUIJIE, MAC_STANDARD, TYPE_EAPOL_LOGOFF, TYPE_EAPOL_START, TYPE_EAP_PACKET,
-};
 use gswifi_eapol::frame::{eapol_header, CODE_RESPONSE, EAP_TYPE_IDENTITY, EAP_TYPE_MD5_CHALLENGE};
+pub use gswifi_eapol::frame::{
+    logoff_dest, md5_digest, response_dest, start_dest, ETH_P_PAE, MAC_BROADCAST, MAC_RUIJIE, MAC_STANDARD,
+    TYPE_EAPOL_LOGOFF, TYPE_EAPOL_START, TYPE_EAP_PACKET,
+};
 
 /// 锐捷心跳
 pub const TYPE_EAPOL_HEARTBEAT: u8 = 0xbf;
@@ -96,7 +97,12 @@ fn finish(mut frame: Vec<u8>, format: ExtFormat, ext: Vec<u8>) -> Vec<u8> {
 }
 
 /// EAPOL-Start or EAPOL-Logoff, optionally followed by the vendor extension.
-pub fn build_control_packet(typ: u8, dest_mac: &[u8; 6], ext: Option<(&ExtParams, Checks)>, local_mac: &[u8; 6]) -> Vec<u8> {
+pub fn build_control_packet(
+    typ: u8,
+    dest_mac: &[u8; 6],
+    ext: Option<(&ExtParams, Checks)>,
+    local_mac: &[u8; 6],
+) -> Vec<u8> {
     let frame = eapol_header(dest_mac, local_mac, typ, 0);
     match ext {
         Some((p, checks)) => finish(frame, p.format, p.build(checks)),
@@ -157,8 +163,8 @@ pub fn build_password_packet(
 /// carries no echo key.
 pub fn build_legacy_heartbeat_packet(dest_mac: &[u8; 6], local_mac: &[u8; 6]) -> Vec<u8> {
     const ECHO_DATA: [u8; 30] = [
-        0xFF, 0xFF, 0x37, 0x77, 0x7F, 0x9F, 0xF7, 0xFF, 0x00, 0x00, 0xFF, 0xFF, 0x37, 0x77, 0x7F,
-        0x9F, 0xF7, 0xFF, 0x00, 0x00, 0xFF, 0xFF, 0x37, 0x77, 0x7F, 0x3F, 0xFF, 0x00, 0x00, 0x00,
+        0xFF, 0xFF, 0x37, 0x77, 0x7F, 0x9F, 0xF7, 0xFF, 0x00, 0x00, 0xFF, 0xFF, 0x37, 0x77, 0x7F, 0x9F, 0xF7, 0xFF,
+        0x00, 0x00, 0xFF, 0xFF, 0x37, 0x77, 0x7F, 0x3F, 0xFF, 0x00, 0x00, 0x00,
     ];
     let mut frame = eapol_header(dest_mac, local_mac, TYPE_EAPOL_HEARTBEAT, 0x1e);
     frame.extend_from_slice(&ECHO_DATA);
@@ -191,13 +197,7 @@ mod tests {
             dns: if start_mode == 2 { [0; 4] } else { [198, 51, 100, 53] },
             ipv6: [0; 16],
         };
-        let p = ExtParams {
-            format: ExtFormat::Classic,
-            mac: LOCAL,
-            net: &net,
-            dhcp_mode,
-            version: Some(version),
-        };
+        let p = ExtParams { format: ExtFormat::Classic, mac: LOCAL, net: &net, dhcp_mode, version: Some(version) };
         let placeholder = classic::placeholder([0x10203; 5]);
         let resp = response_dest(start_mode, pkt_type, &SERVER);
         let checks = Checks { field17: Some(&placeholder), ..Default::default() };
@@ -205,7 +205,9 @@ mod tests {
         match (start_mode, tag) {
             (2, "start") => (MAC_STANDARD, saier::build_control_packet(TYPE_EAPOL_START, &LOCAL)),
             (2, "logoff") => (MAC_STANDARD, saier::build_control_packet(TYPE_EAPOL_LOGOFF, &LOCAL)),
-            (2, t) if t.starts_with("echo") => (MAC_STANDARD, saier::build_control_packet(saier::TYPE_KEEPALIVE, &LOCAL)),
+            (2, t) if t.starts_with("echo") => {
+                (MAC_STANDARD, saier::build_control_packet(saier::TYPE_KEEPALIVE, &LOCAL))
+            }
             (2, "identity") => (resp, saier::build_identity_packet(&LOCAL, &net, USER, 7)),
             (2, "md5") => {
                 let digest = md5_digest(7, USER, saier::SALT, &challenge());
@@ -303,17 +305,29 @@ mod tests {
                     let checks = Checks { field17: None, field4d: mixed.as_ref(), field2f: password.as_ref() };
                     (MAC_STANDARD, build_password_packet(&MAC_STANDARD, &p, checks, USER, &digest, 7))
                 }
-                "logoff" => (MAC_STANDARD, build_control_packet(TYPE_EAPOL_LOGOFF, &MAC_STANDARD, Some((&p, control)), &LOCAL)),
+                "logoff" => {
+                    (MAC_STANDARD, build_control_packet(TYPE_EAPOL_LOGOFF, &MAC_STANDARD, Some((&p, control)), &LOCAL))
+                }
                 s => panic!("stage {}", s),
             };
             let eapol = u16::from_be_bytes([frame[16], frame[17]]);
-            assert_eq!([mac_str(&dest).replace(':', ""), frame.len().to_string(), eapol.to_string()], [f[5], f[3], f[4]], "{}", line);
+            assert_eq!(
+                [mac_str(&dest).replace(':', ""), frame.len().to_string(), eapol.to_string()],
+                [f[5], f[3], f[4]],
+                "{}",
+                line
+            );
             if f[6] != "-" {
                 let md5 = stage == "md5";
                 let area = if md5 { &frame[40..] } else { &frame[18..18 + v4::AREA_LEN] };
                 let template = v4::build(&p, Checks::default());
                 assert_eq!(hex::encode(&area[..57]), f[6], "{}", line);
-                assert_eq!((&area[59..65], format!("{:02x}", area[67]), area[438]), (&LOCAL[..], f[7].to_string(), 0x20), "{}", line);
+                assert_eq!(
+                    (&area[59..65], format!("{:02x}", area[67]), area[438]),
+                    (&LOCAL[..], f[7].to_string(), 0x20),
+                    "{}",
+                    line
+                );
                 assert_eq!(area[161..289], area[291..419], "{}", line);
                 assert_eq!(area[161..289] != template[161..289], f[8] == "1", "{}", line);
                 assert_eq!(area[143..159], password.unwrap(), "{}", line);
@@ -350,10 +364,7 @@ mod tests {
     #[test]
     fn md5_digest_with_and_without_saier_salt() {
         let challenge: Vec<u8> = (0..16).collect();
-        assert_eq!(
-            hex::encode(md5_digest(7, b"synthetic", b"", &challenge)),
-            "aa38fa828d4775e47e0c2a14b275189f"
-        );
+        assert_eq!(hex::encode(md5_digest(7, b"synthetic", b"", &challenge)), "aa38fa828d4775e47e0c2a14b275189f");
         assert_eq!(
             hex::encode(md5_digest(7, b"synthetic", saier::SALT, &challenge)),
             "488e4bf09a8d375e78a63267374a2ef7"

@@ -339,7 +339,14 @@ impl Dialect for RuijieDialect {
         let Some(challenge) = self.challenge else { return Vec::new() };
         let interval = params.interval;
         let server: SocketAddrV4 = params.server;
-        let udp = UdpHeartbeat::new(params, ctx.credentials.username.as_bytes(), ctx.net.ip, ctx.mac, self.config.algo_version(), challenge);
+        let udp = UdpHeartbeat::new(
+            params,
+            ctx.credentials.username.as_bytes(),
+            ctx.net.ip,
+            ctx.mac,
+            self.config.algo_version(),
+            challenge,
+        );
         info!("开始发送 UDP 心跳到 {}，间隔 {}s（实验性）", server, interval);
         self.udp = Some(udp);
         self.udp_deadline = Some(now + Duration::from_secs(interval as u64));
@@ -395,7 +402,8 @@ mod tests {
     }
 
     fn env() -> Env {
-        let net = NetInfo { ip: [192, 0, 2, 10], mask: [255, 255, 255, 0], gateway: [192, 0, 2, 1], ..Default::default() };
+        let net =
+            NetInfo { ip: [192, 0, 2, 10], mask: [255, 255, 255, 0], gateway: [192, 0, 2, 1], ..Default::default() };
         Env { interface: "eth0".into(), mac: LOCAL, net }
     }
 

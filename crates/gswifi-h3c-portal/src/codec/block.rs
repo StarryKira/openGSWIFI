@@ -45,7 +45,9 @@ pub fn block_transform(data: &[u8], key: &[u32; 4], rounds: u32, swap_words: boo
         for _ in 0..rounds {
             x = x.wrapping_add((sum ^ y).wrapping_add(((y << 4) ^ ashr5(y)).wrapping_add(key[(sum & 3) as usize])));
             sum = sum.wrapping_add(DELTA);
-            y = y.wrapping_add((sum ^ x).wrapping_add(((x << 4) ^ ashr5(x)).wrapping_add(key[((sum >> 11) & 3) as usize])));
+            y = y.wrapping_add(
+                (sum ^ x).wrapping_add(((x << 4) ^ ashr5(x)).wrapping_add(key[((sum >> 11) & 3) as usize])),
+            );
         }
         for w in [x, y] {
             out.extend_from_slice(&if swap_words { w.to_be_bytes() } else { w.to_le_bytes() });

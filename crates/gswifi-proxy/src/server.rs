@@ -11,7 +11,7 @@ use std::mem;
 use std::net::{Ipv4Addr, Ipv6Addr, Shutdown, SocketAddr, SocketAddrV4, SocketAddrV6, TcpListener, TcpStream};
 use std::os::fd::{AsRawFd, FromRawFd};
 use std::process::exit;
-use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::thread;
 use std::time::{Duration, Instant};
@@ -33,11 +33,14 @@ const STACK_SIZE: usize = 128 * 1024;
 const STATS_INTERVAL: Duration = Duration::from_secs(5);
 
 static ACTIVE: AtomicUsize = AtomicUsize::new(0);
-static TOTAL: AtomicU64 = AtomicU64::new(0);
-static REQUESTS: AtomicU64 = AtomicU64::new(0);
-static REWRITTEN: AtomicU64 = AtomicU64::new(0);
-static FAILED: AtomicU64 = AtomicU64::new(0);
-static REFUSED: AtomicU64 = AtomicU64::new(0);
+// Statistics counters are `usize`: 32-bit MIPS (MT7621, the original
+// GSWIFI hardware) has no 64-bit atomics. On 32-bit targets they wrap after
+// 4 billion, which only affects the numbers in the stats file.
+static TOTAL: AtomicUsize = AtomicUsize::new(0);
+static REQUESTS: AtomicUsize = AtomicUsize::new(0);
+static REWRITTEN: AtomicUsize = AtomicUsize::new(0);
+static FAILED: AtomicUsize = AtomicUsize::new(0);
+static REFUSED: AtomicUsize = AtomicUsize::new(0);
 
 struct Shared {
     ua: String,
@@ -83,15 +86,12 @@ pub fn run(opts: ProxyOptions) {
     }
     if let Some(cmd) = opts.ready_cmd {
         let pid = std::process::id().to_string();
-        thread::spawn(move || match std::process::Command::new("/bin/sh")
-            .arg("-c")
-            .arg(&cmd)
-            .env("GSWIFI_PROXY_PID", pid)
-            .status()
-        {
-            Ok(st) if st.success() => {}
-            Ok(st) => warn!("启动后命令 `{}` 退出码 {:?}", cmd, st.code()),
-            Err(e) => warn!("无法执行启动后命令 `{}`: {}", cmd, e),
+        thread::spawn(move || {
+            match std::process::Command::new("/bin/sh").arg("-c").arg(&cmd).env("GSWIFI_PROXY_PID", pid).status() {
+                Ok(st) if st.success() => {}
+                Ok(st) => warn!("启动后命令 `{}` 退出码 {:?}", cmd, st.code()),
+                Err(e) => warn!("无法执行启动后命令 `{}`: {}", cmd, e),
+            }
         });
     }
 
@@ -147,7 +147,13 @@ fn listen(addr: SocketAddr) -> io::Result<TcpListener> {
 
 fn setsockopt_int(fd: libc::c_int, level: libc::c_int, name: libc::c_int, value: libc::c_int) -> io::Result<()> {
     let rc = unsafe {
-        libc::setsockopt(fd, level, name, &value as *const _ as *const libc::c_void, mem::size_of_val(&value) as libc::socklen_t)
+        libc::setsockopt(
+            fd,
+            level,
+            name,
+            &value as *const _ as *const libc::c_void,
+            mem::size_of_val(&value) as libc::socklen_t,
+        )
     };
     if rc != 0 {
         return Err(io::Error::last_os_error());
@@ -176,17 +182,29 @@ fn original_dst(s: &TcpStream, v6: bool) -> io::Result<SocketAddr> {
         if v6 {
             let mut sa: libc::sockaddr_in6 = mem::zeroed();
             let mut len = mem::size_of_val(&sa) as libc::socklen_t;
-            if libc::getsockopt(fd, libc::SOL_IPV6, SO_ORIGINAL_DST, &mut sa as *mut _ as *mut libc::c_void, &mut len) != 0 {
+            if libc::getsockopt(fd, libc::SOL_IPV6, SO_ORIGINAL_DST, &mut sa as *mut _ as *mut libc::c_void, &mut len)
+                != 0
+            {
                 return Err(io::Error::last_os_error());
             }
-            Ok(SocketAddr::V6(SocketAddrV6::new(Ipv6Addr::from(sa.sin6_addr.s6_addr), u16::from_be(sa.sin6_port), 0, 0)))
+            Ok(SocketAddr::V6(SocketAddrV6::new(
+                Ipv6Addr::from(sa.sin6_addr.s6_addr),
+                u16::from_be(sa.sin6_port),
+                0,
+                0,
+            )))
         } else {
             let mut sa: libc::sockaddr_in = mem::zeroed();
             let mut len = mem::size_of_val(&sa) as libc::socklen_t;
-            if libc::getsockopt(fd, libc::SOL_IP, SO_ORIGINAL_DST, &mut sa as *mut _ as *mut libc::c_void, &mut len) != 0 {
+            if libc::getsockopt(fd, libc::SOL_IP, SO_ORIGINAL_DST, &mut sa as *mut _ as *mut libc::c_void, &mut len)
+                != 0
+            {
                 return Err(io::Error::last_os_error());
             }
-            Ok(SocketAddr::V4(SocketAddrV4::new(Ipv4Addr::from(u32::from_be(sa.sin_addr.s_addr)), u16::from_be(sa.sin_port))))
+            Ok(SocketAddr::V4(SocketAddrV4::new(
+                Ipv4Addr::from(u32::from_be(sa.sin_addr.s_addr)),
+                u16::from_be(sa.sin_port),
+            )))
         }
     }
 }
@@ -413,8 +431,8 @@ fn relay(client: &TcpStream, server: &TcpStream, rw: &mut Rewriter, idle: Durati
                 Some(n) => {
                     let (r0, w0) = (rw.requests, rw.rewritten);
                     rw.feed(&tmp[..n], &mut up.buf);
-                    REQUESTS.fetch_add(rw.requests - r0, Ordering::Relaxed);
-                    REWRITTEN.fetch_add(rw.rewritten - w0, Ordering::Relaxed);
+                    REQUESTS.fetch_add((rw.requests - r0) as usize, Ordering::Relaxed);
+                    REWRITTEN.fetch_add((rw.rewritten - w0) as usize, Ordering::Relaxed);
                 }
                 None => {}
             }

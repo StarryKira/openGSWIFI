@@ -3,11 +3,11 @@
 //! long-term scheduling has not been seen on a real network, so the feature
 //! is off unless asked for.
 
+use super::check::udp;
+use gswifi_eapol::frame::{CODE_REQUEST, CODE_SUCCESS, EAP_TYPE_MD5_CHALLENGE};
+use log::{debug, warn};
 use std::collections::BTreeMap;
 use std::net::{Ipv4Addr, SocketAddrV4};
-use log::{debug, warn};
-use gswifi_eapol::frame::{CODE_REQUEST, CODE_SUCCESS, EAP_TYPE_MD5_CHALLENGE};
-use super::check::udp;
 
 const ATTR_INTERVAL: u8 = 0x59;
 const ATTR_DST_PORT: u8 = 0x5a;
@@ -144,7 +144,14 @@ pub struct UdpHeartbeat {
 }
 
 impl UdpHeartbeat {
-    pub fn new(params: UdpParams, username: &[u8], ip: [u8; 4], mac: [u8; 6], version: u32, challenge: [u8; 16]) -> Self {
+    pub fn new(
+        params: UdpParams,
+        username: &[u8],
+        ip: [u8; 4],
+        mac: [u8; 6],
+        version: u32,
+        challenge: [u8; 16],
+    ) -> Self {
         Self { params, seq: udp::INITIAL_SEQ, username: username.to_vec(), ip, mac, version, challenge }
     }
 
@@ -165,7 +172,15 @@ impl UdpHeartbeat {
     pub fn next_payload(&mut self) -> Option<Vec<u8>> {
         let p = &self.params;
         let Some(payload) = udp::udp_payload(
-            &self.username, self.ip, self.mac, self.version, self.seq, p.counter, &self.challenge, &p.key, &p.iv,
+            &self.username,
+            self.ip,
+            self.mac,
+            self.version,
+            self.seq,
+            p.counter,
+            &self.challenge,
+            &p.key,
+            &p.iv,
         ) else {
             warn!("用户名过长，无法构造 UDP 心跳");
             return None;
@@ -215,7 +230,13 @@ mod tests {
         let mut n = 0;
         for (source, frame, expected) in vectors() {
             let got = parse_frame(&frame, source).unwrap();
-            assert_eq!(got.as_ref().map(show).as_deref().unwrap_or("-"), expected, "{:?} {}", source, hex::encode(&frame));
+            assert_eq!(
+                got.as_ref().map(show).as_deref().unwrap_or("-"),
+                expected,
+                "{:?} {}",
+                source,
+                hex::encode(&frame)
+            );
             n += 1;
         }
         assert_eq!(n, 48);

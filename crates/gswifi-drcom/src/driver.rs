@@ -14,7 +14,9 @@
 use std::net::SocketAddrV4;
 use std::time::{Duration, Instant};
 
-use gswifi_core::{Action, AuthState, Credentials, Datagram, Driver, DriverInfo, Env, NetInfo, RejectStage, Requirements, Stop};
+use gswifi_core::{
+    Action, AuthState, Credentials, Datagram, Driver, DriverInfo, Env, NetInfo, RejectStage, Requirements, Stop,
+};
 use log::{debug, error, info, warn};
 
 use crate::gs::error_text;
@@ -189,7 +191,9 @@ impl DrcomDriver {
             Mode::Dhcp => {
                 let user = credentials.username.as_bytes();
                 if user.is_empty() || user.len() > MAX_USERNAME {
-                    return Err(format!("用户名必须为 1..={MAX_USERNAME} 字节（第03.2节：用户名区域在 offset 56 之前结束）"));
+                    return Err(format!(
+                        "用户名必须为 1..={MAX_USERNAME} 字节（第03.2节：用户名区域在 offset 56 之前结束）"
+                    ));
                 }
                 let pw = credentials.password.as_bytes().len();
                 if pw > MAX_PASSWORD || (options.ror_version && pw > 16) {
@@ -198,8 +202,10 @@ impl DrcomDriver {
                 if mac == [0; 6] {
                     return Err("未知接口 MAC，无法构造登录包；请设置 mac".into());
                 }
-                let a = auth_version.ok_or("DHCP 模式必须设置 auth_version（学校 profile 的 AUTH_VERSION，第03.2节）")?;
-                let k = keep_alive_version.ok_or("DHCP 模式必须设置 keep_alive_version（学校 profile 的 KEEP_ALIVE_VERSION，第03.4节）")?;
+                let a =
+                    auth_version.ok_or("DHCP 模式必须设置 auth_version（学校 profile 的 AUTH_VERSION，第03.2节）")?;
+                let k = keep_alive_version
+                    .ok_or("DHCP 模式必须设置 keep_alive_version（学校 profile 的 KEEP_ALIVE_VERSION，第03.4节）")?;
                 (a, k, options.pppoe_flag.unwrap_or(0))
             }
             Mode::Pppoe => {
@@ -628,7 +634,11 @@ impl Driver for DrcomDriver {
     }
 
     fn start(&mut self, now: Instant) -> Vec<Action> {
-        info!("Dr.com 认证开始（{}，服务器 {}）", if self.p.mode == Mode::Dhcp { "DHCP 模式" } else { "PPPoE 模式" }, self.p.server);
+        info!(
+            "Dr.com 认证开始（{}，服务器 {}）",
+            if self.p.mode == Mode::Dhcp { "DHCP 模式" } else { "PPPoE 模式" },
+            self.p.server
+        );
         self.start_auth(now)
     }
 

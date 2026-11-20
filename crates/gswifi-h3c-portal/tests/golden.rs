@@ -89,7 +89,12 @@ fn original_builder_functions() {
                 let key = [0x01234567, 0x89abcdef, 0x10213243, 0x54657687];
                 let rounds = c["rounds"].as_u64().unwrap() as u32;
                 let swap = c["swap_words"].as_bool().unwrap();
-                assert_eq!(hex::encode(block_transform(&input, &key, rounds, swap).unwrap()), s(&c, "qemu_hex"), "{}", c);
+                assert_eq!(
+                    hex::encode(block_transform(&input, &key, rounds, swap).unwrap()),
+                    s(&c, "qemu_hex"),
+                    "{}",
+                    c
+                );
             }
             "h3c-login" => {
                 let plain = c["plain_password"].as_bool().unwrap();
@@ -189,8 +194,12 @@ fn session_payloads_codec_level() {
             110 => codec::discovery(IP, SERIAL).unwrap(),
             100 => login(b"synthetic", false),
             122 => codec::challenge_response(IP, SERIAL, Some(&check)).unwrap(),
-            104 => codec::online(IP, SERIAL, &Online { session: Some(&session), stamp: 30, check: Some(&check), ..Online::default() })
-                .unwrap(),
+            104 => codec::online(
+                IP,
+                SERIAL,
+                &Online { session: Some(&session), stamp: 30, check: Some(&check), ..Online::default() },
+            )
+            .unwrap(),
             102 => codec::logoff(IP, SERIAL, Some(&codec::logoff_session_value(&session, true))).unwrap(),
             other => panic!("{}", other),
         };
@@ -212,7 +221,12 @@ fn auth_blob_echo() {
         let want = codec::online(
             IP,
             SERIAL,
-            &Online { auth_blob: Some(&blob), session: Some(&[0x10, 0x20, 0x30, 0x40]), stamp: 30, check: Some(&check) },
+            &Online {
+                auth_blob: Some(&blob),
+                session: Some(&[0x10, 0x20, 0x30, 0x40]),
+                stamp: 30,
+                check: Some(&check),
+            },
         )
         .unwrap();
         assert_eq!(hex::encode(body), hex::encode(want));

@@ -66,17 +66,13 @@ pub fn check16(data: &[u8]) -> Result<[u8; 2], Error> {
     if data.len() % 2 != 0 {
         return Err(Error::Invalid(format!("check16 needs an even length, got {}", data.len())));
     }
-    let acc = data
-        .chunks_exact(2)
-        .fold(0u16, |acc, w| acc ^ u16::from_le_bytes([w[0], w[1]]));
+    let acc = data.chunks_exact(2).fold(0u16, |acc, w| acc ^ u16::from_le_bytes([w[0], w[1]]));
     Ok(acc.wrapping_mul(711).to_le_bytes())
 }
 
 /// XOR of all LE16 words (helper of [`check16`] and GS control3, doc 30.4).
 pub(crate) fn xor16(data: &[u8]) -> u16 {
-    data.chunks(2).fold(0u16, |acc, w| {
-        acc ^ u16::from_le_bytes([w[0], *w.get(1).unwrap_or(&0)])
-    })
+    data.chunks(2).fold(0u16, |acc, w| acc ^ u16::from_le_bytes([w[0], *w.get(1).unwrap_or(&0)]))
 }
 
 /// 32-bit Dr.com checksum: XOR of all LE32 words, times 19680126
@@ -84,17 +80,13 @@ pub(crate) fn xor16(data: &[u8]) -> u16 {
 /// 1968 multiplier of the Dogcom login checksum2 (see [`checksum1968`]).
 pub fn check32(data: &[u8]) -> Result<[u8; 4], Error> {
     if data.len() % 4 != 0 {
-        return Err(Error::Invalid(format!(
-            "check32 needs a multiple of 4 bytes, got {}",
-            data.len()
-        )));
+        return Err(Error::Invalid(format!("check32 needs a multiple of 4 bytes, got {}", data.len())));
     }
     Ok(xor32(data, 0).wrapping_mul(19_680_126).to_le_bytes())
 }
 
 fn xor32(data: &[u8], init: u32) -> u32 {
-    data.chunks_exact(4)
-        .fold(init, |acc, w| acc ^ u32::from_le_bytes([w[0], w[1], w[2], w[3]]))
+    data.chunks_exact(4).fold(init, |acc, w| acc ^ u32::from_le_bytes([w[0], w[1], w[2], w[3]]))
 }
 
 /// Dogcom login checksum2 (doc 03 §3.2): start from 1234, XOR every LE32
@@ -103,10 +95,7 @@ fn xor32(data: &[u8], init: u32) -> u32 {
 /// instead of relying on uninitialised memory).
 pub fn checksum1968(data: &[u8]) -> Result<[u8; 4], Error> {
     if data.len() % 4 != 0 {
-        return Err(Error::Invalid(format!(
-            "checksum2 needs a multiple of 4 bytes, got {}",
-            data.len()
-        )));
+        return Err(Error::Invalid(format!("checksum2 needs a multiple of 4 bytes, got {}", data.len())));
     }
     Ok(xor32(data, 1234).wrapping_mul(1968).to_le_bytes())
 }
@@ -140,20 +129,12 @@ pub fn md4(data: &[u8]) -> [u8; 16] {
         for i in 0..16 {
             let k = (i % 4) * 4 + i / 4;
             let g = (b & c) | (b & d) | (c & d);
-            let t = a
-                .wrapping_add(g)
-                .wrapping_add(x[k])
-                .wrapping_add(0x5a82_7999)
-                .rotate_left(R2[i % 4]);
+            let t = a.wrapping_add(g).wrapping_add(x[k]).wrapping_add(0x5a82_7999).rotate_left(R2[i % 4]);
             (a, b, c, d) = (d, t, b, c);
         }
         for (i, &k) in O3.iter().enumerate() {
             let h = b ^ c ^ d;
-            let t = a
-                .wrapping_add(h)
-                .wrapping_add(x[k])
-                .wrapping_add(0x6ed9_eba1)
-                .rotate_left(R3[i % 4]);
+            let t = a.wrapping_add(h).wrapping_add(x[k]).wrapping_add(0x6ed9_eba1).rotate_left(R3[i % 4]);
             (a, b, c, d) = (d, t, b, c);
         }
         state[0] = state[0].wrapping_add(a);
@@ -171,9 +152,9 @@ pub fn md4(data: &[u8]) -> [u8; 16] {
 /// Digest byte indices per selector (doc 14.3, identical in doc 03 §3.5 and
 /// doc 23.2).
 const PICK: [[usize; 8]; 3] = [
-    [2, 3, 8, 9, 5, 6, 13, 14],   // 1: MD5
-    [1, 2, 8, 9, 4, 5, 11, 12],   // 2: MD4
-    [2, 3, 9, 10, 5, 6, 15, 16],  // 3: SHA1
+    [2, 3, 8, 9, 5, 6, 13, 14],  // 1: MD5
+    [1, 2, 8, 9, 4, 5, 11, 12],  // 2: MD4
+    [2, 3, 9, 10, 5, 6, 15, 16], // 3: SHA1
 ];
 
 fn picked(selector: u8, input: &[u8]) -> [u8; 8] {
@@ -251,11 +232,7 @@ mod tests {
                 "dr-md5a" | "dr-md5b" => {
                     let n: usize = p[1].parse().unwrap();
                     let pw: Vec<u8> = (0..n).map(|j| 97 + (j % 26) as u8).collect();
-                    let out = if p[0] == "dr-md5a" {
-                        md5a([0, 1, 2, 3], &pw)
-                    } else {
-                        md5b([0, 1, 2, 3], &pw)
-                    };
+                    let out = if p[0] == "dr-md5a" { md5a([0, 1, 2, 3], &pw) } else { md5b([0, 1, 2, 3], &pw) };
                     assert_eq!(hex(&out), p[2], "{line}");
                 }
                 "dr-check16" | "dr-check32" => {
@@ -341,10 +318,7 @@ mod tests {
             s[0] = (s[0] & !3) | t;
             assert_eq!(Some(gen_crc(t, s)), seedhash(true, s));
         }
-        assert_eq!(
-            FALLBACK_CRC.to_vec(),
-            include_bytes!("../testdata/dr-control-fallback.bin").to_vec()
-        );
+        assert_eq!(FALLBACK_CRC.to_vec(), include_bytes!("../testdata/dr-control-fallback.bin").to_vec());
     }
 
     #[test]

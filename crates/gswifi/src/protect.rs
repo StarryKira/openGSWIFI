@@ -66,8 +66,8 @@ pub struct Args {
 
 impl Args {
     fn load(&self) -> Result<Config, String> {
-        let text = std::fs::read_to_string(&self.config)
-            .map_err(|e| format!("无法读取配置文件 {}: {}", self.config, e))?;
+        let text =
+            std::fs::read_to_string(&self.config).map_err(|e| format!("无法读取配置文件 {}: {}", self.config, e))?;
         let mut config = crate::config::parse_protect(&text)?;
         if let Some(mode) = &self.mode {
             config.mode = match mode.as_str() {
@@ -237,7 +237,12 @@ pub fn run(action: Action) -> i32 {
                     }
                     match protect::apply(&plan, &config.paths(), false) {
                         Ok(applied) => {
-                            info!("已安装：规则 {}，系统参数 {} 项，DNS {}", applied.ruleset, applied.sysctl.len(), applied.dns);
+                            info!(
+                                "已安装：规则 {}，系统参数 {} 项，DNS {}",
+                                applied.ruleset,
+                                applied.sysctl.len(),
+                                applied.dns
+                            );
                             if json {
                                 println!("{}", plan_json(&plan, &caps, Some(&applied)));
                             }
@@ -336,14 +341,20 @@ mod tests {
 
         let applied = Applied { ruleset: true, sysctl: vec!["net.ipv4.ip_default_ttl".into()], dns: false };
         let text = plan_json(&p, &caps, Some(&applied));
-        assert!(text.ends_with(r#","applied":{"ruleset":true,"sysctl":["net.ipv4.ip_default_ttl"],"dns":false}}"#), "{}", text);
+        assert!(
+            text.ends_with(r#","applied":{"ruleset":true,"sysctl":["net.ipv4.ip_default_ttl"],"dns":false}}"#),
+            "{}",
+            text
+        );
     }
 
     #[test]
     fn observe_and_disabled_plans() {
         let (p, caps) = plan(Mode::Observe, (6, 6));
         let text = plan_json(&p, &caps, None);
-        assert!(text.contains(r#""mode":"observe""#) && text.contains(r#""sysctl":[]"#) && text.contains(r#""skipped":[]"#));
+        assert!(
+            text.contains(r#""mode":"observe""#) && text.contains(r#""sysctl":[]"#) && text.contains(r#""skipped":[]"#)
+        );
         let (p, caps) = plan(Mode::Disabled, (6, 6));
         let text = plan_json(&p, &caps, None);
         assert!(text.contains(r#""mode":"disabled""#) && text.contains(r#""rules":[]"#), "{}", text);

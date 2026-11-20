@@ -84,12 +84,7 @@ pub fn table_family(algo_version: u32) -> usize {
 /// Material row index: `(sum of bytes of BE32(seq) || challenge16) * 727 % 53`
 /// (doc 20.5). `challenge` is the cached EAP MD5 challenge.
 pub fn row_index(seq: u32, challenge: &[u8; 16]) -> usize {
-    let sum: u32 = seq
-        .to_be_bytes()
-        .iter()
-        .chain(challenge)
-        .map(|&b| u32::from(b))
-        .sum();
+    let sum: u32 = seq.to_be_bytes().iter().chain(challenge).map(|&b| u32::from(b)).sum();
     (sum * 727 % MATERIAL_ROWS as u32) as usize
 }
 
@@ -118,11 +113,7 @@ pub fn udp_material(family: usize, row: usize) -> [u8; 128] {
     assert!(family < 4 && row < MATERIAL_ROWS, "UDP material family 0..3, row 0..52");
     let line = &MATERIAL_TABLES[family][row * 128..(row + 1) * 128];
     let (a, b) = line.split_at(64);
-    let seed: [u8; 16] = if family == 0 {
-        *UDP_SEED16
-    } else {
-        b[..16].try_into().expect("16 bytes")
-    };
+    let seed: [u8; 16] = if family == 0 { *UDP_SEED16 } else { b[..16].try_into().expect("16 bytes") };
     let selector = row % 5;
     if family == 0 && selector == 0 {
         // Firmware 0x4087c4: like 40a2d4 but unsigned `%02x` -> exactly 96 bytes.

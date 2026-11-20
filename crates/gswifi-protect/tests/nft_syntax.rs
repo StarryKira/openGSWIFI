@@ -17,12 +17,7 @@ use gswifi_protect::*;
 
 /// Every variant worth parsing, as (name, config).
 fn variants() -> Vec<(&'static str, Config)> {
-    let base = Config {
-        mode: Mode::Enforce,
-        wan: vec!["wan".into()],
-        lan: vec!["br-lan".into()],
-        ..Config::default()
-    };
+    let base = Config { mode: Mode::Enforce, wan: vec!["wan".into()], lan: vec!["br-lan".into()], ..Config::default() };
     let full_dns = DnsConfig {
         take_over: true,
         blocked_domains: vec!["telemetry.example".into()],
@@ -73,7 +68,7 @@ fn every_variant_is_valid_nftables() {
     if let Some(dir) = &dump {
         std::fs::create_dir_all(dir).expect("create dump directory");
     }
-    let nft = nft_binary();
+    let mut nft_bin = nft_binary();
     let mut checked = 0;
 
     for (name, config) in variants() {
@@ -93,26 +88,38 @@ fn every_variant_is_valid_nftables() {
             if let Some(dir) = &dump {
                 std::fs::write(dir.join(&file), &plan.ruleset).expect("write variant");
             }
-            if let Some(nft) = &nft {
+            if let Some(nft) = nft_bin.clone() {
                 let mut tmp = std::env::temp_dir();
                 tmp.push(format!("gswifi-{}", file));
                 std::fs::write(&tmp, &plan.ruleset).expect("write temp ruleset");
-                let out = Command::new(nft).arg("-c").arg("-f").arg(&tmp).output().expect("run nft");
+                let out = Command::new(&nft).arg("-c").arg("-f").arg(&tmp).output().expect("run nft");
                 let _ = std::fs::remove_file(&tmp);
+                // `nft -c` still talks to the kernel; without CAP_NET_ADMIN it
+                // cannot check anything. That is "not validated", not "invalid".
+                let stderr = String::from_utf8_lossy(&out.stderr);
+                if !out.status.success() && stderr.contains("Operation not permitted") {
+                    eprintln!("note: nft needs CAP_NET_ADMIN to check rulesets; validation skipped (run as root, or see ci/nft-check.sh)");
+                    nft_bin = None;
+                    continue;
+                }
                 assert!(
                     out.status.success(),
                     "{} rejected by nft:\n{}\n--- ruleset ---\n{}",
                     file,
-                    String::from_utf8_lossy(&out.stderr),
+                    stderr,
                     plan.ruleset
                 );
                 checked += 1;
             }
         }
     }
-    if nft.is_none() {
-        eprintln!("note: no nft binary here, only generated the variants (set GSWIFI_NFT_DUMP to keep them)");
-    } else {
-        assert!(checked >= 14);
+    match nft_bin {
+        // Every variant went through nft.
+        Some(_) => assert!(checked >= 14, "only {} variants were validated", checked),
+        None if checked == 0 => {
+            eprintln!("note: no usable nft here, only generated the variants (set GSWIFI_NFT_DUMP to keep them)")
+        }
+        // Permission was lost halfway; the ones checked so far passed.
+        None => eprintln!("note: validated {} variants before nft lost permission", checked),
     }
 }

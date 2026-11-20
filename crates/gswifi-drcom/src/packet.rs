@@ -593,7 +593,8 @@ mod tests {
         assert_eq!(&k[16..20], &[1, 2, 3, 4]);
         assert_eq!(&k[28..32], &[10, 0, 0, 1]);
         assert_eq!(&k[32..40], &[0; 8]);
-        let f = Keepalive2 { counter: 0, ka_type: 1, file_handshake: true, tail: [9; 4], ..Keepalive2::from_type3(k) }.build();
+        let f = Keepalive2 { counter: 0, ka_type: 1, file_handshake: true, tail: [9; 4], ..Keepalive2::from_type3(k) }
+            .build();
         assert_eq!(&f[5..8], &[1, 0x0f, 0x27]);
         assert_eq!(&f[16..20], &[0; 4], "type 1 keeps the tail zero");
         let pp = Keepalive2 { host_ip: None, pppoe_crc_type: Some(2), ..Keepalive2::from_type3(k) }.build();

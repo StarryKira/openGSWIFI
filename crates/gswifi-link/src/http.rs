@@ -83,11 +83,10 @@ pub(crate) fn parse_response(raw: &[u8]) -> Result<HttpResponse, String> {
     if !version.starts_with("HTTP/1.") {
         return Err(format!("不是 HTTP/1.x 响应: {:?}", status_line));
     }
-    let status: u16 = parts.next().and_then(|s| s.parse().ok()).ok_or_else(|| format!("状态行错误: {:?}", status_line))?;
-    let headers: Vec<(String, String)> = lines
-        .filter_map(|l| l.split_once(':'))
-        .map(|(k, v)| (k.trim().to_string(), v.trim().to_string()))
-        .collect();
+    let status: u16 =
+        parts.next().and_then(|s| s.parse().ok()).ok_or_else(|| format!("状态行错误: {:?}", status_line))?;
+    let headers: Vec<(String, String)> =
+        lines.filter_map(|l| l.split_once(':')).map(|(k, v)| (k.trim().to_string(), v.trim().to_string())).collect();
     let mut body = raw[end + 4..].to_vec();
     let header = |name: &str| headers.iter().find(|(k, _)| k.eq_ignore_ascii_case(name)).map(|(_, v)| v.as_str());
     if header("Transfer-Encoding").is_some_and(|v| v.to_ascii_lowercase().contains("chunked")) {
@@ -185,9 +184,13 @@ mod tests {
 
     #[test]
     fn responses() {
-        let r = parse_response(b"HTTP/1.1 302 Found\r\nLocation: http://x/?a=1\r\nContent-Length: 2\r\n\r\nokEXTRA").unwrap();
+        let r = parse_response(b"HTTP/1.1 302 Found\r\nLocation: http://x/?a=1\r\nContent-Length: 2\r\n\r\nokEXTRA")
+            .unwrap();
         assert_eq!((r.status, r.header("location"), &r.body[..]), (302, Some("http://x/?a=1"), &b"ok"[..]));
-        let r = parse_response(b"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n3\r\nabc\r\n2;x=y\r\nde\r\n0\r\n\r\n").unwrap();
+        let r = parse_response(
+            b"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n3\r\nabc\r\n2;x=y\r\nde\r\n0\r\n\r\n",
+        )
+        .unwrap();
         assert_eq!(r.body, b"abcde");
         assert!(parse_response(b"HTTP/1.1 200 OK\r\n").is_err());
         assert!(parse_response(b"SSH-2.0\r\n\r\n").is_err());
@@ -207,7 +210,12 @@ mod tests {
             s.write_all(b"HTTP/1.1 200 OK\r\nContent-Length: 5\r\n\r\nhello").unwrap();
             req
         });
-        let req = HttpRequest { method: "GET".into(), url: format!("http://127.0.0.1:{}/x?y=1", port), headers: vec![], body: vec![] };
+        let req = HttpRequest {
+            method: "GET".into(),
+            url: format!("http://127.0.0.1:{}/x?y=1", port),
+            headers: vec![],
+            body: vec![],
+        };
         let resp = fetch(&req).unwrap();
         assert_eq!((resp.status, &resp.body[..]), (200, &b"hello"[..]));
         assert!(server.join().unwrap().starts_with("GET /x?y=1 HTTP/1.1\r\nHost: 127.0.0.1:"));

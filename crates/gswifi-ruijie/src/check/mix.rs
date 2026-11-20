@@ -120,13 +120,7 @@ pub enum Family {
 // Addresses and lists name the test vectors.
 #[cfg_attr(not(test), allow(dead_code))]
 impl Family {
-    pub const ALL: [Family; 5] = [
-        Family::F40a908,
-        Family::F40aba0,
-        Family::F40a9a4,
-        Family::F40aa40,
-        Family::F40aafc,
-    ];
+    pub const ALL: [Family; 5] = [Family::F40a908, Family::F40aba0, Family::F40a9a4, Family::F40aa40, Family::F40aafc];
 
     /// Family for an algorithm version `major * 100 + minor` (doc 19.2). This
     /// is the algorithm version pair (`RjCheckVersion`), not the header
@@ -170,9 +164,7 @@ impl Family {
     /// C remainder is negative; that branch outputs 128 zero bytes.
     pub fn selector(self, seed: &[u8; 16]) -> Option<usize> {
         match self {
-            Family::F40a908 | Family::F40aba0 | Family::F40a9a4 => {
-                Some(usize::from(seed[0].wrapping_add(seed[3])) % 5)
-            }
+            Family::F40a908 | Family::F40aba0 | Family::F40a9a4 => Some(usize::from(seed[0].wrapping_add(seed[3])) % 5),
             Family::F40aa40 | Family::F40aafc => {
                 let sum = i32::from(seed[1] as i8) + i32::from(seed[4] as i8);
                 // Rust `%` truncates toward zero exactly like C.
