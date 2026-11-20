@@ -173,6 +173,10 @@ docker run --rm --cap-add NET_ADMIN -v /tmp/nft:/w:ro openwrt \
 
 真正链接 OpenWrt 目标需要对应架构的静态 libpcap，可沿用 mentorust 的 `Cross.toml` 和 `ci/build-libpcap.sh`。
 
+## 参与贡献
+
+欢迎提交代码、文档、bug 报告，以及"某种认证方式在你那里能不能用"的兼容性反馈。约定和流程见 [CONTRIBUTING.md](CONTRIBUTING.md)；提问前可以先看看 [`docs/gaps.md`](docs/gaps.md) 里是否已经记录。
+
 ## 许可
 
 MIT。锐捷/赛尔/EAP-MD5/代理代码来自 [fuqiuluo](https://github.com/fuqiuluo) 的 [mentorust](https://github.com/fuqiuluo/mentorust)（MIT），保留原版权声明，见 [LICENSE](LICENSE)。Dr.com 部分没有复制 AGPLv3 的 Dogcom 代码，按研究文档的报文布局独立实现。仓库不包含学校客户端文件、账号或厂商规则；锐捷校验的测试材料是研究包里的合成文件。

@@ -1,0 +1,74 @@
+name: 兼容性反馈
+description: 告诉我们某种认证方式在你那里能不能用
+labels: [compatibility]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        能用、不能用都欢迎反馈。真实网络上的成功反馈是提升验证程度的依据。
+        请先删掉账号、密码、学号、MAC 地址等个人信息，也不要贴 `--trace` 的输出。
+  - type: dropdown
+    id: driver
+    attributes:
+      label: 认证方式
+      options:
+        - ruijie
+        - saier
+        - eap-md5
+        - inode
+        - h3c-portal
+        - anlang
+        - drcom
+        - netkeeper
+        - portal-hubei-old-mac
+        - 其他（在下面说明）
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: 结果
+      options:
+        - 能正常上网，并且能长时间保持在线
+        - 能认证成功，但过一段时间会掉线
+        - 认证被拒绝
+        - 找不到认证服务器 / 没有任何应答
+        - 其他（在下面说明）
+    validations:
+      required: true
+  - type: input
+    id: school
+    attributes:
+      label: 学校或地区（可选）
+      description: 方便其他同校同学参考；不想写可以留空
+  - type: input
+    id: online
+    attributes:
+      label: 保持在线多久
+      description: 结果是"能上网"时填写，例如"连续 3 天没掉线"
+  - type: textarea
+    id: options
+    attributes:
+      label: 用到的配置项（已脱敏）
+      description: 例如 ext_format、start_mode、dhcp_mode 等，不要包含账号密码
+      render: toml
+  - type: input
+    id: environment
+    attributes:
+      label: gswifi 版本与系统
+      placeholder: gswifi 0.1.0, OpenWrt 24.10.8, aarch64
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: 补充说明与日志（已脱敏）
+      description: 不能用时，贴出卡住那一步前后的普通日志（不加 --trace）
+      render: text
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 确认
+      options:
+        - label: 我已删掉账号、密码等个人信息，也没有贴 `--trace` 的输出
+          required: true
