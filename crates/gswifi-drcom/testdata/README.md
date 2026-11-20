@@ -1,7 +1,7 @@
 # gswifi-drcom test vectors
 
 Copied or reformatted (one case per line, no JSON dependency) from the research pack
-`~/Documents/Codex/2026-11-19/x20/outputs/campus-auth-research/`. All inputs (accounts,
+`outputs/campus-auth-research/`. All inputs (accounts,
 IPs, DLL files, server datagrams) are synthetic; outputs are from original GS r1161
 `usr/sbin/mentohust` functions run under QEMU (grade D), see that pack's
 `evidence/session/README.md` and `evidence/deep/README.md`. No Dogcom (AGPLv3) source or

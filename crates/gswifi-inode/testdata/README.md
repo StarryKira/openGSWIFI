@@ -1,7 +1,7 @@
 # gswifi-inode test data
 
 Copied from the research pack
-`~/Documents/Codex/2026-11-19/x20/outputs/campus-auth-research/` (GS r1161
+`outputs/campus-auth-research/` (GS r1161
 `usr/sbin/mentohust`, SHA256 `f638fba1…f606`). All inputs are synthetic
 (account `synthetic`, IP 192.0.2.10, MAC 02:00:00:00:00:01, time 0x12345678,
 rand 0x10203); outputs come from the original functions run under QEMU.

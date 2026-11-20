@@ -1,7 +1,7 @@
 # gswifi-portal test data
 
 All files are verbatim copies from the 2026-11-20 gap-closure work area
-`~/Documents/Codex/2026-11-19/x20/gapclose/` (README of the clean-room pack,
+`gapclose/` (README of the clean-room pack,
 section "2026-11-20 闭环增补"). They were produced by running the firmware's
 own functions of `/usr/sbin/hubei_mac_web_old` under QEMU with
 `gapclose/hubei_harness.c` (FixHBKey `0x407dc8`, password chain `0x40827e`,

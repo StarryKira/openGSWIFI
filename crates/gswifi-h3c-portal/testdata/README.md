@@ -1,7 +1,7 @@
 # gswifi-h3c-portal test data
 
 Copied from the research pack
-`~/Documents/Codex/2026-11-19/x20/outputs/campus-auth-research/` (GS r1161
+`outputs/campus-auth-research/` (GS r1161
 `usr/sbin/mentohust`). Client payloads are outputs of the original GS
 builders/state functions under QEMU; server messages were synthesised by
 the researchers (doc 29: a replayed exchange is not a real server login).
