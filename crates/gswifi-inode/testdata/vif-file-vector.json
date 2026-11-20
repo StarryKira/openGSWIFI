@@ -1,0 +1,9 @@
+{
+  "file": "fixtures/vif/iNode.vif",
+  "cache_hex": "43481256352e32302d30303031",
+  "time": 305419896,
+  "rand": 66051,
+  "key": "Oly5D62FaE94W7",
+  "text_hex": "06075a474d4f54556f484e48386d547877796431563664726d4e3278453d2020",
+  "match": true
+}

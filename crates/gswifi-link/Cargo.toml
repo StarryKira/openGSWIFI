@@ -1,0 +1,15 @@
+[package]
+name = "gswifi-link"
+description = "Open GSWIFI: runtime that drives a gswifi-core Driver over pcap (802.1X) and UDP sockets"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+gswifi-core = { workspace = true }
+gswifi-protect = { workspace = true }
+log = { workspace = true }
+pcap = { workspace = true }
+pnet_datalink = { workspace = true }
+libc = { workspace = true }

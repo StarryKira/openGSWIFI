@@ -1,0 +1,57 @@
+dr-md5a 0 699dc6f5d473f3b3026ee1789fb0b4f0
+dr-md5b 0 6ab5262c33ac95827d262020620c95f5
+dr-md5a 1 516905a64873846d0f15d042401ed42a
+dr-md5b 1 dce652be4789af251f385b3721772fc0
+dr-md5a 9 56b64401eb3cb5a2cd77dc6c5d815cd7
+dr-md5b 9 90dae5ab0776fd17a2f2e5414938034d
+dr-md5a 15 94e639e4e1ab49ab127a5abc1d050c6d
+dr-md5b 15 4d1ea961248a17ba26b5725124e34227
+dr-md5a 16 906758ae9aa8c35dd253a4e925d3ed20
+dr-md5b 16 6ada78e6c9ee016d85b737f2ea125bae
+dr-md5a 17 467260be84c5f46d5475c891f4ebac97
+dr-md5b 17 e03d7e9c7fff5f93a064df58739a6875
+dr-md5a 40 fe24758096a0b639dd228054182cbcd1
+dr-md5b 40 b3ca88458558cb2171cb91cbf7202a3a
+dr-md5a 79 5afb9414898dfe29530c7910a09bf7b7
+dr-md5b 79 064eb96d90edd254f2557bdd512f23f8
+dr-mac-xor 00387048e098
+dr-check16 0 0 0000
+dr-check32 0 0 00000000
+dr-check16 1 -1 cccc
+dr-check32 1 -1 cccccccc
+dr-check16 2 0 719f
+dr-check32 2 -1 cccccccc
+dr-check16 3 -1 cccc
+dr-check32 3 -1 cccccccc
+dr-check16 4 0 8a7f
+dr-check32 4 0 72e859dd
+dr-check16 6 0 8bee
+dr-check32 6 -1 cccccccc
+dr-check16 8 0 f837
+dr-check32 8 0 88f99ace
+dr-check16 12 0 4239
+dr-check32 12 0 da3952d2
+dr-check16 32 0 e0d8
+dr-check32 32 0 400f4bbf
+dr-check16 40 0 d890
+dr-check32 40 0 c8494018
+dr-check16 96 0 206e
+dr-check32 96 0 c06e3d9d
+dr-check16 128 0 8063
+dr-check32 128 0 00bfe4bb
+dr-seedhash 0 0 cccccccccccccccc
+dr-seedhash 0 1 cccccccccccccccc
+dr-seedhash 0 2 cccccccccccccccc
+dr-seedhash 0 3 cccccccccccccccc
+dr-seedhash 1 0 cccccccccccccccc
+dr-seedhash 1 1 249982861512a4ca
+dr-seedhash 1 2 c313a6d64919aa66
+dr-seedhash 1 3 95163b19233f9e7d
+dr-mixed 0 0 1 cccccccccccccccc
+dr-mixed 0 1 1 cccccccccccccccc
+dr-mixed 0 2 1 cccccccccccccccc
+dr-mixed 0 3 1 cccccccccccccccc
+dr-mixed 1 0 1 cccccccccccccccc
+dr-mixed 1 1 0 7c4417f992e26ced
+dr-mixed 1 2 0 0c921b8e9594ae4f
+dr-mixed 1 3 0 d1c099225b1998f5

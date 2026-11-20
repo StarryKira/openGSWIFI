@@ -1,0 +1,13 @@
+[package]
+name = "gswifi-proxy"
+description = "Open GSWIFI: transparent TCP proxy that unifies the HTTP User-Agent (traffic protection, from mentorust)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+log = { workspace = true }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+libc = { workspace = true }

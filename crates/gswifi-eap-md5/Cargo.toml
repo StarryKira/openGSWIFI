@@ -1,0 +1,13 @@
+[package]
+name = "gswifi-eap-md5"
+description = "Open GSWIFI: standard IEEE 802.1X EAP-MD5 without vendor extensions"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+gswifi-core = { workspace = true }
+gswifi-eapol = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }

@@ -1,0 +1,88 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/gswifi-core",
+    "crates/gswifi-eapol",
+    "crates/gswifi-eap-md5",
+    "crates/gswifi-ruijie",
+    "crates/gswifi-saier",
+    "crates/gswifi-inode",
+    "crates/gswifi-h3c-portal",
+    "crates/gswifi-drcom",
+    "crates/gswifi-anlang",
+    "crates/gswifi-netkeeper",
+    "crates/gswifi-portal",
+    "crates/gswifi-protect",
+    "crates/gswifi-proxy",
+    "crates/gswifi-link",
+    "crates/gswifi",
+]
+default-members = [
+    "crates/gswifi-core",
+    "crates/gswifi-eapol",
+    "crates/gswifi-eap-md5",
+    "crates/gswifi-ruijie",
+    "crates/gswifi-saier",
+    "crates/gswifi-inode",
+    "crates/gswifi-h3c-portal",
+    "crates/gswifi-drcom",
+    "crates/gswifi-anlang",
+    "crates/gswifi-netkeeper",
+    "crates/gswifi-portal",
+    "crates/gswifi-protect",
+    "crates/gswifi-proxy",
+    "crates/gswifi-link",
+    "crates/gswifi",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/StarryKira/openGSWIFI"
+rust-version = "1.80"
+
+[workspace.dependencies]
+gswifi-core = { path = "crates/gswifi-core" }
+gswifi-eapol = { path = "crates/gswifi-eapol" }
+gswifi-eap-md5 = { path = "crates/gswifi-eap-md5" }
+gswifi-ruijie = { path = "crates/gswifi-ruijie" }
+gswifi-saier = { path = "crates/gswifi-saier" }
+gswifi-inode = { path = "crates/gswifi-inode" }
+gswifi-h3c-portal = { path = "crates/gswifi-h3c-portal" }
+gswifi-drcom = { path = "crates/gswifi-drcom" }
+gswifi-anlang = { path = "crates/gswifi-anlang" }
+gswifi-netkeeper = { path = "crates/gswifi-netkeeper" }
+gswifi-portal = { path = "crates/gswifi-portal" }
+gswifi-protect = { path = "crates/gswifi-protect" }
+gswifi-proxy = { path = "crates/gswifi-proxy" }
+gswifi-link = { path = "crates/gswifi-link" }
+
+log = "0.4.22"
+env_logger = "0.11.5"
+clap = { version = "4.5.17", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+hex = "0.4.3"
+md5 = "0.7"
+md4 = "0.10"
+sha1 = "0.10"
+des = "0.8"
+encoding_rs = "0.8.34"
+base64 = "0.22"
+libc = "0.2.158"
+pcap = "2.2.0"
+pnet_datalink = "0.35.0"
+
+[patch.crates-io]
+# mentorust's libpcap binding fork: pcap_pkthdr laid out like the C library
+# on 32-bit musl (armv7 OpenWrt).
+pcap = { path = "vendor/pcap" }
+
+[profile.release]
+debug = false
+lto = true
+panic = "abort"
+opt-level = "z"
+strip = true
+codegen-units = 1

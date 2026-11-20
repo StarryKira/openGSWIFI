@@ -1,0 +1,145 @@
+[     129ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://127.0.0.1:18080/cgi-bin/luci/:1
+[     891ms] RPCError: RPC call to uci/get failed with error -32002: Access denied
+  at ClassConstructor.handleCallReply (http://127.0.0.1:18080/luci-static/resources/rpc.js?v=26.205.85413~cac97ed-1784877710:11:3)
+    at ClassConstructor.raise (http://127.0.0.1:18080/luci-static/resources/luci.js?v=26.205.85413~cac97ed-1784877710:147:3)
+    at ClassConstructor.handleCallReply (http://127.0.0.1:18080/luci-static/resources/rpc.js?v=26.205.85413~cac97ed-1784877710:11:3)
+[   98508ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  510938ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  510938ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  510938ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  525727ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  525727ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  525727ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  655242ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  655242ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  655242ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  670353ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  670353ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  670353ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  730004ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  730004ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  730004ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  745037ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  745037ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  745037ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  802611ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  802611ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  802611ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  817203ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  817203ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  817203ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  886149ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/:1
+[  886267ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/overview:1
+[  889282ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  889799ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  889799ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  889799ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  892307ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/protect:1
+[  895271ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/log:1
+[  898292ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/tools:1
+[  902325ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/:1
+[  902495ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/overview:1
+[  905433ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  905909ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  905909ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  905909ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[  908313ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/protect:1
+[  911094ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/log:1
+[  913857ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/tools:1
+[  964716ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/overview:1
+[ 1112953ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/:1
+[ 1113047ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/overview:1
+[ 1116340ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1116694ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1116694ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1116694ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1119621ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/protect:1
+[ 1122918ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/log:1
+[ 1126177ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/tools:1
+[ 1130291ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/:1
+[ 1130358ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/overview:1
+[ 1133547ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1133944ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1133944ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1133944ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1136895ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/protect:1
+[ 1140202ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/log:1
+[ 1143452ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/tools:1
+[ 1370363ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/:1
+[ 1370454ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/overview:1
+[ 1373714ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1374253ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1374253ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1374253ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1377225ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/protect:1
+[ 1380568ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/log:1
+[ 1384266ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/tools:1
+[ 1388448ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/:1
+[ 1388540ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/overview:1
+[ 1391871ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1392284ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1392284ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1392284ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1395225ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/protect:1
+[ 1398593ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/log:1
+[ 1401828ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/tools:1
+[ 1564332ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1564332ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1564332ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1580025ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1580025ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1580025ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1595458ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1595458ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1595458ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1610801ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1610801ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1610801ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1708421ms] Transition was aborted because of invalid state. Viewport size changed
+[ 1708850ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1708850ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1708850ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1770103ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1770103ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1770103ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1772850ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1772850ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1772850ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1772850ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1774171ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1774171ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1774171ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1774171ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1780187ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1780187ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1780187ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 1780187ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2027960ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/:1
+[ 2028089ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2028458ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2028458ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2028458ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2031183ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2031183ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2031183ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2031183ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2032466ms] TypeError: 网络 test1：所选的认证方式尚未在真实校园网验证。要启用这个网络，必须先勾选“允许使用实验性认证方式”；否则请先取消“启用”。
+    at option.parse (http://127.0.0.1:18080/luci-static/resources/view/gswifi/settings.js?v=26.205.85413~cac97ed:76:29)
+    at ClassConstructor.parse (http://127.0.0.1:18080/luci-static/resources/form.js?v=26.205.85413~cac97ed:73:29)
+    at ClassConstructor.parse (http://127.0.0.1:18080/luci-static/resources/form.js?v=26.205.85413~cac97ed:49:29)
+    at ClassConstructor.save (http://127.0.0.1:18080/luci-static/resources/form.js?v=26.205.85413~cac97ed:49:114)
+    at ClassConstructor.callClassMethod (http://127.0.0.1:18080/luci-static/resources/luci.js?v=26.205.85413~cac97ed-1795180276:129:33)
+    at http://127.0.0.1:18080/luci-static/resources/luci.js?v=26.205.85413~cac97ed-1795180276:139:739
+    at NodeList.forEach (<anonymous>)
+    at ClassConstructor.handleSave (http://127.0.0.1:18080/luci-static/resources/luci.js?v=26.205.85413~cac97ed-1795180276:139:710)
+    at ClassConstructor.handleSaveApply (http://127.0.0.1:18080/luci-static/resources/luci.js?v=26.205.85413~cac97ed-1795180276:139:836)
+    at ClassConstructor.eval (http://127.0.0.1:18080/luci-static/resources/ui.js?v=26.205.85413~cac97ed:373:29)
+[ 2035130ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2035130ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2035130ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2035130ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2040767ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2041195ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2041195ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2041195ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1
+[ 2041195ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) @ http://127.0.0.1:18080/cgi-bin/luci/admin/services/gswifi/settings:1

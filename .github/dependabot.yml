@@ -1,0 +1,27 @@
+# Keeps the pinned versions moving: the commit SHAs of the GitHub Actions in
+# .github/workflows and the crates in Cargo.lock.
+#
+# Not covered, bump by hand (ci/README.md): the Rust toolchains in the
+# workflow, cross (ci/install-cross.sh), libpcap (ci/build-libpcap.sh and
+# Cross.toml) and the OpenWrt releases the packages are tested on.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']
+
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      cargo:
+        patterns: ['*']
+        update-types: [minor, patch]
+    ignore:
+      # Vendored in vendor/pcap and patched in from there.
+      - dependency-name: pcap

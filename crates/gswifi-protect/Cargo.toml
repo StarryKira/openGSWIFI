@@ -1,0 +1,12 @@
+[package]
+name = "gswifi-protect"
+description = "Open GSWIFI: traffic normalisation plan (nftables/sysctl/DNS) against campus sharing detection"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+gswifi-core = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }

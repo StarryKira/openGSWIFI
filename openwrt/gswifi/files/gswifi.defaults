@@ -1,0 +1,28 @@
+#!/bin/sh
+# SPDX-License-Identifier: MIT
+#
+# First boot after installing: the configuration holds a password, and
+# settings of an existing mentorust installation are offered as the first
+# network (left switched off: two clients must not fight over one port).
+
+chmod 0600 /etc/config/gswifi 2>/dev/null
+
+[ -f /etc/config/mentorust ] || exit 0
+[ -z "$(uci -q get gswifi.campus.username)" ] || exit 0
+[ "$(uci -q get gswifi.campus)" = network ] || exit 0
+
+user=$(uci -q get mentorust.main.username)
+[ -n "$user" ] || exit 0
+
+uci -q batch <<-EOT
+	set gswifi.campus.driver='ruijie'
+	set gswifi.campus.enabled='0'
+EOT
+for opt in username password interface dhcp_mode eapol_dhcp service hdd_ser max_retries; do
+	val=$(uci -q get "mentorust.main.$opt") || continue
+	[ -n "$val" ] && uci -q set "gswifi.campus.$opt=$val"
+done
+val=$(uci -q get mentorust.main.ifname) && [ -n "$val" ] && uci -q set "gswifi.campus.device=$val"
+uci -q commit gswifi
+
+exit 0

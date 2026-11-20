@@ -1,0 +1,37 @@
+[Unit]
+Description=Open GSWIFI campus network authentication
+Documentation=https://github.com/StarryKira/openGSWIFI
+After=network.target
+ConditionPathExists=/etc/gswifi/config.toml
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/gswifi run --config /etc/gswifi/config.toml
+# gswifi keeps a session alive itself: after a rejection it waits for the
+# interface to get a new address and tries again, without exiting. What does
+# make it exit is retried here after a pause: an interface that is not there
+# yet or an unreadable configuration (1), retries used up (4), no
+# authentication server found (255). 2 and 3 only happen with
+# exit_on_reject = true and mean that the server refused the user name, the
+# password or the MAC binding: starting again cannot help and is a good way
+# to get the account locked. 0 is a clean logoff (systemctl stop).
+Restart=on-failure
+RestartSec=30
+RestartPreventExitStatus=2 3
+
+# It only needs raw packets on the interfaces it authenticates. A dhcp_script
+# runs inside the same sandbox: nmcli and networkctl work, a client that
+# writes leases or resolv.conf itself (dhclient, udhcpc) needs a drop-in
+# (systemctl edit gswifi) with ReadWritePaths= for those files.
+CapabilityBoundingSet=CAP_NET_RAW CAP_NET_ADMIN
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK AF_PACKET
+
+[Install]
+WantedBy=multi-user.target

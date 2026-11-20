@@ -1,0 +1,16 @@
+[package]
+name = "gswifi-anlang"
+description = "Open GSWIFI: 安朗 (Anlang) UDP authentication client (clean-room atclient), plus the 安朗 802.1X username format"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+gswifi-core = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }
+md5 = { workspace = true }
+
+[dev-dependencies]
+hex = { workspace = true }

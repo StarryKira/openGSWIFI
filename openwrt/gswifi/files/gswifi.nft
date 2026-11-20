@@ -1,0 +1,12 @@
+# Open GSWIFI: includes the generated traffic normalisation ruleset.
+#
+# The file below defines its own table (`table inet gswifi`), so it has to
+# be included at the top level of the ruleset, which is where fw4 puts the
+# files of /usr/share/nftables.d/ruleset-post/. /etc/nftables.d would be
+# wrong: fw4 includes that directory inside `table inet fw4 { }`, and a
+# nested table statement breaks the whole firewall.
+#
+# The service writes the file when the protect mode is observe or enforce
+# and removes it otherwise. The bracket makes the path a pattern, and nft
+# does not treat a pattern without a match as an error.
+include "/var/run/gswifi/protect.nf[t]"

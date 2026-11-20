@@ -1,0 +1,142 @@
+#!/usr/bin/ucode
+// SPDX-License-Identifier: MIT
+//
+// rpcd plugin: ubus object "luci.gswifi", the backend of luci-app-gswifi.
+// Everything is delegated to /usr/libexec/gswifi/ctl (package gswifi);
+// arguments are validated there and are never interpreted by a shell.
+
+'use strict';
+
+import * as fs from 'fs';
+
+const CTL = '/usr/libexec/gswifi/ctl';
+const PROTECT = '/usr/libexec/gswifi/protect';
+
+const METHODS = {
+	status: {},
+	drivers: {},
+	protect: {},
+	log: { lines: 0 },
+	control: { action: 'str', id: 'str' },
+	pppoe: { version: 0, username: 'str', offset: 0 },
+	protect_check: {},
+	protect_show: {},
+	protect_apply: {},
+	diag: {}
+};
+
+function shellquote(s) {
+	return "'" + replace(`${s}`, /'/g, "'\\''") + "'";
+}
+
+// Runs a command given as an argument vector; returns { code, out }.
+function run(argv) {
+	let p = fs.popen(join(' ', map(argv, shellquote)) + ' 2>&1', 'r');
+
+	if (!p)
+		return { code: 127, out: '' };
+
+	let out = p.read('all') ?? '';
+
+	return { code: p.close() ?? 127, out };
+}
+
+function parse(text) {
+	try {
+		return json(text);
+	}
+	catch (e) {
+		return null;
+	}
+}
+
+function reply(value) {
+	print(sprintf('%J', value), '\n');
+}
+
+// A ctl command that prints one JSON document.
+function reply_json(argv, fallback) {
+	let r = run(argv);
+	let value = parse(r.out);
+
+	reply(type(value) == 'object' ? value : fallback);
+}
+
+// A ctl command that prints text.
+function reply_text(argv) {
+	let r = run(argv);
+
+	reply({ code: r.code, output: r.out });
+}
+
+function call(method, args) {
+	switch (method) {
+	case 'status':
+		return reply_json([ CTL, 'status' ], {});
+
+	case 'drivers': {
+		let list = parse(run([ CTL, 'drivers' ]).out);
+
+		return reply({ drivers: (type(list) == 'array') ? list : [] });
+	}
+
+	case 'protect':
+		return reply_json([ CTL, 'protect' ], {});
+
+	case 'log': {
+		let n = (type(args.lines) == 'int' && args.lines > 0) ? args.lines : 300;
+		let r = run([ CTL, 'log', `${n}` ]);
+
+		return reply({ log: r.out });
+	}
+
+	case 'control': {
+		let id = (type(args.id) == 'string' && args.id != '') ? args.id : null;
+
+		// ctl refuses ids that are not plain section names.
+		switch (args.action) {
+		case 'restart':
+			return reply_text(id ? [ CTL, 'restart', id ] : [ CTL, 'restart' ]);
+
+		case 'enable':
+		case 'disable':
+			if (!id)
+				return reply({ code: 1, output: '缺少网络名称' });
+
+			return reply_text([ CTL, 'enable', id, (args.action == 'enable') ? '1' : '0' ]);
+		}
+
+		return reply({ code: 1, output: 'unknown action' });
+	}
+
+	case 'pppoe':
+		return reply_json([
+			CTL, 'pppoe', `${args.version ?? ''}`, `${args.username ?? ''}`,
+			(type(args.offset) == 'int') ? `${args.offset}` : '0'
+		], { error: '计算失败' });
+
+	case 'protect_check':
+		return reply_text([ CTL, 'protect-check' ]);
+
+	case 'protect_show':
+		return reply_text([ CTL, 'protect-show' ]);
+
+	case 'protect_apply':
+		// Reinstall from the saved configuration; this resets the counters.
+		return reply_text([ PROTECT, 'apply', 'force' ]);
+
+	case 'diag':
+		return reply_text([ CTL, 'diag' ]);
+	}
+
+	return reply({});
+}
+
+if (ARGV[0] == 'list') {
+	reply(METHODS);
+}
+else if (ARGV[0] == 'call') {
+	let args = parse(fs.stdin.read('all') ?? '');
+
+	call(ARGV[1], (type(args) == 'object') ? args : {});
+}

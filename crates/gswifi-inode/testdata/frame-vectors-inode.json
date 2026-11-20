@@ -1,0 +1,421 @@
+{
+ "synthetic": true,
+ "account": "synthetic",
+ "password": "synthetic",
+ "ip": "192.0.2.10",
+ "mask": "255.255.255.0",
+ "gateway": "192.0.2.1",
+ "dns": "198.51.100.53",
+ "challenge": "000102030405060708090a0b0c0d0e0f",
+ "rand": 66051,
+ "time": 305419896,
+ "absent_all_client_material": true,
+ "cases": [
+  {
+   "id": "auth-1-0",
+   "log": "frames/auth-1-0.log",
+   "frames": [
+    {
+     "origin": "GS-original-builder",
+     "tag": "start",
+     "length": 18,
+     "dst": "01:80:c2:00:00:03",
+     "hex": "0180c2000003020000000001888e01010000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "identity",
+     "length": 70,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100003402070034011504c000020a06075a474d3854556f484e48386d547877796431563664726d4e3278453d202073796e746865746963"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "md5",
+     "length": 49,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100001f0207001f0410aa38fa828d4775e47e0c2a14b275189f73796e746865746963"
+    },
+    {
+     "origin": "synthetic-server-input",
+     "tag": "success",
+     "length": 174,
+     "dst": "02:00:00:00:00:01",
+     "hex": "020000000001020000000002888e0100009c030700040000000000044f4b0d0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001f7fbf3fdffffff870000000000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo1",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3fdffff37777f9fffffffffffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo2",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf37dffff37777f9fffffff7fffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo3",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3bdffff37777f9fffffffbfffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "logoff",
+     "length": 18,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01020000"
+    }
+   ],
+   "scope": "original state builder invoked directly; offline synthetic environment, no end-to-end receive loop"
+  },
+  {
+   "id": "inode-flags-0-0",
+   "log": "frames/inode-flags-0-0.log",
+   "frames": [
+    {
+     "origin": "GS-original-builder",
+     "tag": "start",
+     "length": 18,
+     "dst": "01:80:c2:00:00:03",
+     "hex": "0180c2000003020000000001888e01010000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "identity",
+     "length": 32,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100000e0207000e0173796e746865746963"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "md5",
+     "length": 49,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100001f0207001f0410aa38fa828d4775e47e0c2a14b275189f73796e746865746963"
+    },
+    {
+     "origin": "synthetic-server-input",
+     "tag": "success",
+     "length": 174,
+     "dst": "02:00:00:00:00:01",
+     "hex": "020000000001020000000002888e0100009c030700040000000000044f4b0d0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001f7fbf3fdffffff870000000000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo1",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3fdffff37777f9fffffffffffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo2",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf37dffff37777f9fffffff7fffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo3",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3bdffff37777f9fffffffbfffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "logoff",
+     "length": 18,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01020000"
+    }
+   ],
+   "scope": "original state builder invoked directly; offline synthetic environment, no end-to-end receive loop"
+  },
+  {
+   "id": "inode-flags-0-1",
+   "log": "frames/inode-flags-0-1.log",
+   "frames": [
+    {
+     "origin": "GS-original-builder",
+     "tag": "start",
+     "length": 18,
+     "dst": "01:80:c2:00:00:03",
+     "hex": "0180c2000003020000000001888e01010000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "identity",
+     "length": 64,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100002e0207002e0106075a474d3854556f484e48386d547877796431563664726d4e3278453d202073796e746865746963"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "md5",
+     "length": 49,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100001f0207001f0410aa38fa828d4775e47e0c2a14b275189f73796e746865746963"
+    },
+    {
+     "origin": "synthetic-server-input",
+     "tag": "success",
+     "length": 174,
+     "dst": "02:00:00:00:00:01",
+     "hex": "020000000001020000000002888e0100009c030700040000000000044f4b0d0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001f7fbf3fdffffff870000000000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo1",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3fdffff37777f9fffffffffffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo2",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf37dffff37777f9fffffff7fffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo3",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3bdffff37777f9fffffffbfffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "logoff",
+     "length": 18,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01020000"
+    }
+   ],
+   "scope": "original state builder invoked directly; offline synthetic environment, no end-to-end receive loop"
+  },
+  {
+   "id": "inode-flags-1-0",
+   "log": "frames/inode-flags-1-0.log",
+   "frames": [
+    {
+     "origin": "GS-original-builder",
+     "tag": "start",
+     "length": 18,
+     "dst": "01:80:c2:00:00:03",
+     "hex": "0180c2000003020000000001888e01010000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "identity",
+     "length": 38,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100001402070014011504c000020a73796e746865746963"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "md5",
+     "length": 49,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100001f0207001f0410aa38fa828d4775e47e0c2a14b275189f73796e746865746963"
+    },
+    {
+     "origin": "synthetic-server-input",
+     "tag": "success",
+     "length": 174,
+     "dst": "02:00:00:00:00:01",
+     "hex": "020000000001020000000002888e0100009c030700040000000000044f4b0d0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001f7fbf3fdffffff870000000000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo1",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3fdffff37777f9fffffffffffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo2",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf37dffff37777f9fffffff7fffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo3",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3bdffff37777f9fffffffbfffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "logoff",
+     "length": 18,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01020000"
+    }
+   ],
+   "scope": "original state builder invoked directly; offline synthetic environment, no end-to-end receive loop"
+  },
+  {
+   "id": "inode-flags-1-1",
+   "log": "frames/inode-flags-1-1.log",
+   "frames": [
+    {
+     "origin": "GS-original-builder",
+     "tag": "start",
+     "length": 18,
+     "dst": "01:80:c2:00:00:03",
+     "hex": "0180c2000003020000000001888e01010000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "identity",
+     "length": 70,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100003402070034011504c000020a06075a474d3854556f484e48386d547877796431563664726d4e3278453d202073796e746865746963"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "md5",
+     "length": 49,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100001f0207001f0410aa38fa828d4775e47e0c2a14b275189f73796e746865746963"
+    },
+    {
+     "origin": "synthetic-server-input",
+     "tag": "success",
+     "length": 174,
+     "dst": "02:00:00:00:00:01",
+     "hex": "020000000001020000000002888e0100009c030700040000000000044f4b0d0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001f7fbf3fdffffff870000000000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo1",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3fdffff37777f9fffffffffffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo2",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf37dffff37777f9fffffff7fffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo3",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3bdffff37777f9fffffffbfffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "logoff",
+     "length": 18,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01020000"
+    }
+   ],
+   "scope": "original state builder invoked directly; offline synthetic environment, no end-to-end receive loop"
+  },
+  {
+   "id": "inode-no-vif",
+   "log": "frames/inode-no-vif.log",
+   "frames": [
+    {
+     "origin": "GS-original-builder",
+     "tag": "start",
+     "length": 18,
+     "dst": "01:80:c2:00:00:03",
+     "hex": "0180c2000003020000000001888e01010000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "identity",
+     "length": 38,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100001402070014011504c000020a73796e746865746963"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "md5",
+     "length": 49,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100001f0207001f0410aa38fa828d4775e47e0c2a14b275189f73796e746865746963"
+    },
+    {
+     "origin": "synthetic-server-input",
+     "tag": "success",
+     "length": 174,
+     "dst": "02:00:00:00:00:01",
+     "hex": "020000000001020000000002888e0100009c030700040000000000044f4b0d0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001f7fbf3fdffffff870000000000"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo1",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3fdffff37777f9fffffffffffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo2",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf37dffff37777f9fffffff7fffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "echo3",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01bf001effff37777f9ff7fbf3bdffff37777f9fffffffbfffff37777f3fff"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "logoff",
+     "length": 18,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e01020000"
+    }
+   ],
+   "scope": "original state builder invoked directly; offline synthetic environment, no end-to-end receive loop"
+  },
+  {
+   "id": "inode-online",
+   "log": "frames/inode-online.log",
+   "frames": [
+    {
+     "origin": "GS-original-builder",
+     "tag": "online-id1",
+     "length": 61,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100002b0207002b011504c000020a06075a474d3854556f484e48386d547877796431563664726d4e3278453d2020"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "online-id20",
+     "length": 62,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100002c0207002c14001504c000020a06075a474d3854556f484e48386d547877796431563664726d4e3278453d2020"
+    },
+    {
+     "origin": "GS-original-builder",
+     "tag": "type2-version",
+     "length": 45,
+     "dst": "02:00:00:00:00:02",
+     "hex": "020000000002020000000001888e0100001b0207001b02011664633c4d4a07347f264f1c3277557a76b98ddb11"
+    }
+   ],
+   "scope": "original state builder invoked directly; offline synthetic environment, no end-to-end receive loop"
+  }
+ ]
+}

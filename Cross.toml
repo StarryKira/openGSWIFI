@@ -1,0 +1,23 @@
+# cross-rs settings for the release builds (.github/workflows/ci.yml, ci/README.md).
+#
+# Each target image gets a static libpcap built from source, so the binaries
+# are fully static and do not depend on the libpcap/musl of the router.
+
+[build]
+pre-build = "./ci/build-libpcap.sh"
+
+[build.env]
+# Read by vendor/pcap/build.rs. LIBPCAP_VER is the version ci/build-libpcap.sh
+# builds; change both together.
+passthrough = ["LIBPCAP_LIBDIR=/opt/libpcap/lib", "LIBPCAP_VER=1.10.7"]
+
+# Experimental (the mipsel job of the workflow, ci/README.md): tier 3, no
+# prebuilt std, so cargo builds it from source with a nightly toolchain.
+[target.mipsel-unknown-linux-musl]
+build-std = true
+
+# Unlike the other musl targets this one links dynamically unless told
+# otherwise, and without a prebuilt std rustc has no C runtime objects of its
+# own to link in: the ones of the cross toolchain are used.
+[target.mipsel-unknown-linux-musl.env]
+passthrough = ["CARGO_TARGET_MIPSEL_UNKNOWN_LINUX_MUSL_RUSTFLAGS=-C target-feature=+crt-static -C link-self-contained=no"]

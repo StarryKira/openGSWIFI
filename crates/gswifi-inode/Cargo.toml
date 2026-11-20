@@ -1,0 +1,19 @@
+[package]
+name = "gswifi-inode"
+description = "Open GSWIFI: H3C iNode 802.1X extensions (MentoHUST GS AuthType 1): version mixing, VIF decoding, inode-gs.dat and the iNode EAP dialect"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+gswifi-core = { workspace = true }
+gswifi-eapol = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }
+md5 = { workspace = true }
+base64 = { workspace = true }
+
+[dev-dependencies]
+hex = { workspace = true }
+serde_json = "1"

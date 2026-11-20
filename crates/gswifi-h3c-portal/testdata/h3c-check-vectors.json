@@ -1,0 +1,362 @@
+[
+  {
+    "log": "holdout-challenge-49-0.log",
+    "file": "fixtures/holdout-challenge-49-0.bin",
+    "family": 1,
+    "challenge_hex": "31072c51769bc0e50a2f54799ec3e80d32577ca1c6eb10355a7fa4c9ee13385d82",
+    "result_hex": "2629b6dd2111472629bb49bfdedac92fc700584f6bc7837d10c027fb11780d6a",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-49-1.log",
+    "file": "fixtures/holdout-challenge-49-1.bin",
+    "family": 1,
+    "challenge_hex": "3144698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b50759abf",
+    "result_hex": "1cf7de7815722894c3f3bd54408cf3fe8dd7dc23abc7825078036721768d7462",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-49-2.log",
+    "file": "fixtures/holdout-challenge-49-2.bin",
+    "family": 1,
+    "challenge_hex": "3181a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc",
+    "result_hex": "0fe0ed07459887bbfe1c42c424fefc241aa8946f9d8914ffbb1c460309a87878",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-49-3.log",
+    "file": "fixtures/holdout-challenge-49-3.bin",
+    "family": 1,
+    "challenge_hex": "31bee3082d52779cc1e60b30557a9fc4e90e33587da2c7ec11365b80a5caef1439",
+    "result_hex": "4a0fa3e28d7d8b7ad29b80a3292bc708e205b351ae1457a4e48ccb63cb763081",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-49-4.log",
+    "file": "fixtures/holdout-challenge-49-4.bin",
+    "family": 1,
+    "challenge_hex": "31fb20456a8fb4d9fe23486d92b7dc01264b7095badf04294e7398bde2072c5176",
+    "result_hex": "60ad5989f2ad937eb8053965f9a06c889dfdde96b623a95588ab4ee1831b53d2",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-49-5.log",
+    "file": "fixtures/holdout-challenge-49-5.bin",
+    "family": 1,
+    "challenge_hex": "31385d82a7ccf1163b6085aacff4193e6388add2f71c41668bb0d5fa1f44698eb3",
+    "result_hex": "0727e4fa678f62831d8ea9072c68c9f97097d21c131dfb7ee60b68bb4b576828",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-49-6.log",
+    "file": "fixtures/holdout-challenge-49-6.bin",
+    "family": 1,
+    "challenge_hex": "31759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0",
+    "result_hex": "34a5318aee455aa5068bda7aa60d9719b30976620cb88a548e7900761c01b474",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-49-7.log",
+    "file": "fixtures/holdout-challenge-49-7.bin",
+    "family": 1,
+    "challenge_hex": "31b2d7fc21466b90b5daff24496e93b8dd02274c7196bbe0052a4f7499bee3082d",
+    "result_hex": "f66d0c008ab9703c1ba2feb5d2d0f4a49da2a4e90589152b9416fe978e2a8587",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-50-0.log",
+    "file": "fixtures/holdout-challenge-50-0.bin",
+    "family": 2,
+    "challenge_hex": "32ed374893a5f788352e135a90988bf255bd7a5486615513ff25fe941126d2014fd516d3037d4d190a",
+    "result_hex": "94a8cd12d1d2d1d212b98c66167dbf7b3d41b939c2024929e8f724b8543e1cc6",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-50-1.log",
+    "file": "fixtures/holdout-challenge-50-1.bin",
+    "family": 2,
+    "challenge_hex": "329a0e41b98b401e5152e85b01a0659b739ab62c5a2552c798713e94d63b19ca8ed516d3037d4d190a",
+    "result_hex": "b47afab472253182b43f12909069bd780584a9e9f2a57853a046100a5c4f87d5",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-50-2.log",
+    "file": "fixtures/holdout-challenge-50-2.bin",
+    "family": 2,
+    "challenge_hex": "328ab6850b32762e839af64cd4493cc4266f4c1524e6a57b3f3ea54abbfbc0d2ced516d3037d4d190a",
+    "result_hex": "c589b78340a1130e4a9d87250751a7facc37991f4d5762fb4a711e9c493ea35a",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-50-3.log",
+    "file": "fixtures/holdout-challenge-50-3.bin",
+    "family": 2,
+    "challenge_hex": "32466e911fae5f31a59be91f7597892ceb4c919750e93bdeafba3044b139717960d516d3037d4d190a",
+    "result_hex": "0778eb0017b4d486a31d00533f7a06dbd308de2632b18e9f95a69321439ad934",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-50-4.log",
+    "file": "fixtures/holdout-challenge-50-4.bin",
+    "family": 2,
+    "challenge_hex": "320c64655efc5b5683336576988e6654c1dfc4e079442cd639c8f6c9a8a0928af1d516d3037d4d190a",
+    "result_hex": "5ad329b69c9f33a4ccf1a67ec8717bd05a6ca4defaad934f4c78f75724ca4363",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-50-5.log",
+    "file": "fixtures/holdout-challenge-50-5.bin",
+    "family": 2,
+    "challenge_hex": "325f191e8c4cc0d6fad99c261a65b43d07ef372c9a56e2f82495fee950520a96cad516d3037d4d190a",
+    "result_hex": "07daa4597cba80c4b48a933761ca796cd2ffbf7650bfb5975605607c26af470c",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-50-6.log",
+    "file": "fixtures/holdout-challenge-50-6.bin",
+    "family": 2,
+    "challenge_hex": "320d5a1446e875b6978494569b370ebea272cce12ed7c40667374c72dbd068e495d516d3037d4d190a",
+    "result_hex": "6a187f66c96d79b612a84111b6486c3c95a1444b7cda5fe24835f66bd001f714",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-50-7.log",
+    "file": "fixtures/holdout-challenge-50-7.bin",
+    "family": 2,
+    "challenge_hex": "32d7002586de833846b9696776357facd8fb23482f17e89ce5f92c9119753417c2d516d3037d4d190a",
+    "result_hex": "39d16e88f27f2947bdf2aaadca98ecc9319e9e7e29e863350347cdcfacb6283f",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-51-0.log",
+    "file": "fixtures/holdout-challenge-51-0.bin",
+    "family": 3,
+    "challenge_hex": "332b6448ae004ad9f8d82fb820707bc10681779b7701b47ff8780fa7f0d1d53179",
+    "result_hex": "94a8cd12d1d2d1d212b98c66167dbf7b3d41b939c2024929e8f724b8543e1cc6",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-51-1.log",
+    "file": "fixtures/holdout-challenge-51-1.bin",
+    "family": 3,
+    "challenge_hex": "33cf0f41f090eb8add560e84ed0fd9e7cfa5948d169aa8a09eb2f2cf8425a3336a",
+    "result_hex": "b47afab472253182b43f12909069bd780584a9e9f2a57853a046100a5c4f87d5",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-51-2.log",
+    "file": "fixtures/holdout-challenge-51-2.bin",
+    "family": 3,
+    "challenge_hex": "33264aea5d43973faeac5a1015ddcb99c61d6b4e46b268680c6c45d35ce63b18fe",
+    "result_hex": "c589b78340a1130e4a9d87250751a7facc37991f4d5762fb4a711e9c493ea35a",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-51-3.log",
+    "file": "fixtures/holdout-challenge-51-3.bin",
+    "family": 3,
+    "challenge_hex": "33b71755ad5ee8d30159aeeb6d4063720c1246202c2d8950b3284cf48f6187c60f",
+    "result_hex": "0778eb0017b4d486a31d00533f7a06dbd308de2632b18e9f95a69321439ad934",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-51-4.log",
+    "file": "fixtures/holdout-challenge-51-4.bin",
+    "family": 3,
+    "challenge_hex": "33dd4c73568f6d81645d41ab4c4fd32ee80352bf570f752814ae1c3e4325e9734a",
+    "result_hex": "5ad329b69c9f33a4ccf1a67ec8717bd05a6ca4defaad934f4c78f75724ca4363",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-51-5.log",
+    "file": "fixtures/holdout-challenge-51-5.bin",
+    "family": 3,
+    "challenge_hex": "33e13561239884fc077535cbc0616f28f1f60b304721331d3348b499d46e3dbd18",
+    "result_hex": "07daa4597cba80c4b48a933761ca796cd2ffbf7650bfb5975605607c26af470c",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-51-6.log",
+    "file": "fixtures/holdout-challenge-51-6.bin",
+    "family": 3,
+    "challenge_hex": "3360a1d9641b5e80afe7073e3e09253b9bc7db5c990bcd0d85d7fc337b530db79e",
+    "result_hex": "6a187f66c96d79b612a84111b6486c3c95a1444b7cda5fe24835f66bd001f714",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-51-7.log",
+    "file": "fixtures/holdout-challenge-51-7.bin",
+    "family": 3,
+    "challenge_hex": "33bdb56ebabdb27ef891ce00d35b9ec7385300cd6842309bd5fd4d5ca0f4c7a2d4",
+    "result_hex": "39d16e88f27f2947bdf2aaadca98ecc9319e9e7e29e863350347cdcfacb6283f",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-52-0.log",
+    "file": "fixtures/holdout-challenge-52-0.bin",
+    "family": 4,
+    "challenge_hex": "341c0458ba7f0d226a709e603cb4cb227a0c34ff3f10d96b4ca4ecc67eae332ec1",
+    "result_hex": "d82ef9ad4ea6a4a8d4a5071aa04ff3da29c510cfbbcda2d0e7381713060d3587",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-52-1.log",
+    "file": "fixtures/holdout-challenge-52-1.bin",
+    "family": 4,
+    "challenge_hex": "34a1a5ba2283779afc37496fd4bbac2eec8a5f0ff4a31ae73b727d404d5c469261",
+    "result_hex": "9ba96c7ce8ec0ba42e85d94cce025d3f953027a335b5a78b796a0839064ad97f",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-52-2.log",
+    "file": "fixtures/holdout-challenge-52-2.bin",
+    "family": 4,
+    "challenge_hex": "344430cb3008f1e5c7f3b91bf8b192f1b89e334e62a5af213b8fbbc4d45020f375",
+    "result_hex": "cc6766835c8c950949f5d29dbb36b304f32236422502d6f9ee763488ea560532",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-52-3.log",
+    "file": "fixtures/holdout-challenge-52-3.bin",
+    "family": 4,
+    "challenge_hex": "34629e8ff32d7c4db0c8f2feba6ca5cf03c7a95f2027048c2db02244c82a73af1f",
+    "result_hex": "a02a59bebf8de1747e80b90325778478657cceb5db7bd3ee0af0e4340139fc52",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-52-4.log",
+    "file": "fixtures/holdout-challenge-52-4.bin",
+    "family": 4,
+    "challenge_hex": "34707a8ba9280c68eb3439ad64815c74e6cbf0ed5be957e453e1f96a63f7a9beb7",
+    "result_hex": "662c9de6a9b8cfa8d44ed27de3afb7056d7f052d285fba99f6e0900cbbfd901f",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-52-5.log",
+    "file": "fixtures/holdout-challenge-52-5.bin",
+    "family": 4,
+    "challenge_hex": "341c788e19490e5cf50093f26774b6d40dcb580ffa6d2b84c0ae9f0d7efdfa9a07",
+    "result_hex": "da688e9ab04669ee8d0c05717687e52e638f6fca4f9740e9213158f4e9e51ee1",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-52-6.log",
+    "file": "fixtures/holdout-challenge-52-6.bin",
+    "family": 4,
+    "challenge_hex": "34cdeac9b0d3211d31d8ed68ba78508571e096ab3596b34810123425d762dddd61",
+    "result_hex": "1e777be974a17c4ceee9fe9db86cef887518314d6c36cf0147141cb1d393bfba",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-52-7.log",
+    "file": "fixtures/holdout-challenge-52-7.bin",
+    "family": 4,
+    "challenge_hex": "34059b83dedcc7f78f8444e8338d617e1e885abd01f32e4ede1d0cb07587bdca4e",
+    "result_hex": "105f99e644a25afd1ca4509300401a989a7ea230296e78ca161334ab7f73e2d8",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-53-0.log",
+    "file": "fixtures/holdout-challenge-53-0.bin",
+    "family": 5,
+    "challenge_hex": "356c2b88a945d1034e7fa41e4ed73381c92b398643cefc6fced504e7e7a43e5967",
+    "result_hex": "abd6f95fe451df8ca86d9c385722c5e898a8b1d9c94c2b22eb7d33aef0b55963",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-53-1.log",
+    "file": "fixtures/holdout-challenge-53-1.bin",
+    "family": 5,
+    "challenge_hex": "350f88cd3547becefa3f9f398d5a35e33637806b15b5ed57590188abb6f9a33c66",
+    "result_hex": "6229b4e537891822b85d3c4962732c5991614d5dd3d1eb2e2c198445ec9b8937",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-53-2.log",
+    "file": "fixtures/holdout-challenge-53-2.bin",
+    "family": 5,
+    "challenge_hex": "35cbd270821436f917492cc70c604b9e509c937ce517bfba445f9e74cd5db1d9cc",
+    "result_hex": "a118361ff8cddf503cfd76ab1c05eeda2132158214fc3661b7994fa5d16ca591",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-53-3.log",
+    "file": "fixtures/holdout-challenge-53-3.bin",
+    "family": 5,
+    "challenge_hex": "35b421afb4c5a2346470fe7e25f57504c6ab7cd0fd2d6cd1d4d197761a5f1769d7",
+    "result_hex": "2ff4283c8fcfe78d7f3cc9723f45da02bb39b95becd17324328312bd3eb41b1d",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-53-4.log",
+    "file": "fixtures/holdout-challenge-53-4.bin",
+    "family": 5,
+    "challenge_hex": "35e2a44de799614b6faa36ff499ed1fa88d7d5d069ff7a987c9467e676128a38e0",
+    "result_hex": "65b0af9be07da0f338cb69c9a85aa4b9c150b731396899691d5756ef977200db",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-53-5.log",
+    "file": "fixtures/holdout-challenge-53-5.bin",
+    "family": 5,
+    "challenge_hex": "35da8a2e268b077e77205e44a56df7e5dbb59e1aeb5fb550f429a546bdee820d90",
+    "result_hex": "2c9e66f4b82c6431b67def88fad8720ed8429ab44d338de49ddbffea9c6c6cd1",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-53-6.log",
+    "file": "fixtures/holdout-challenge-53-6.bin",
+    "family": 5,
+    "challenge_hex": "35d61ae6e733f6a44cca35ba2335c1bcff159783e7eb0a37fdd00500927e298362",
+    "result_hex": "c91fa86c6d8c4224568fd3260d601522b63adcb9cf5ca9dfd365e48947bb3662",
+    "match": true
+  },
+  {
+    "log": "holdout-challenge-53-7.log",
+    "file": "fixtures/holdout-challenge-53-7.bin",
+    "family": 5,
+    "challenge_hex": "351386b23d2b6b4356582bbcdc66e032207d064633e55bb013dd0652b7f585ddfd",
+    "result_hex": "eb489ce1a22e4000150d5684180c32a37a3a113811cc4fd058edd1c020e5a100",
+    "match": true
+  },
+  {
+    "log": "valid-challenge-49.log",
+    "file": "fixtures/valid-challenge-49.bin",
+    "family": 1,
+    "challenge_hex": "31000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "result_hex": "bdb922e0003595d6a3c1b5f4f08b4f6bc7458cc96cbf20fc40ca37cfdc4c6737",
+    "match": true
+  },
+  {
+    "log": "valid-challenge-50.log",
+    "file": "fixtures/valid-challenge-50.bin",
+    "family": 2,
+    "challenge_hex": "32618d238afa69306dc879b3cb12fcba852b88269645404d9669f3aff196285577d516d3037d4d190a",
+    "result_hex": "b4ffcb23737cec315a4a4d1aa2a620ce7301dc2d356b741b2e1c8185830a1e11",
+    "match": true
+  },
+  {
+    "log": "valid-challenge-51.log",
+    "file": "fixtures/valid-challenge-51.bin",
+    "family": 3,
+    "challenge_hex": "33e5ab406db517dcfbb186cc3d9e47be8818c4ffc8b31d3e77871165b2e25dc65c",
+    "result_hex": "b4ffcb23737cec315a4a4d1aa2a620ce7301dc2d356b741b2e1c8185830a1e11",
+    "match": true
+  },
+  {
+    "log": "valid-challenge-52.log",
+    "file": "fixtures/valid-challenge-52.bin",
+    "family": 4,
+    "challenge_hex": "34eb87a2a4f64465d21edb04c4dd9ccb0a14420bd2d7efe3a5c0c53c745a683435",
+    "result_hex": "a4e562b4084e62a18a39dda0e822b5aca9c3b4101a02ffde483dd776bbbcfee1",
+    "match": true
+  },
+  {
+    "log": "valid-challenge-53.log",
+    "file": "fixtures/valid-challenge-53.bin",
+    "family": 5,
+    "challenge_hex": "356de5d836f1fa0cd652a588ee07a02935b3ac2bbd88a396375eae2f6825d7ee49",
+    "result_hex": "9d01e03da423e93d5b0347efe60af572e4f344171c3dfea7df31f50a0381535c",
+    "match": true
+  }
+]

@@ -1,0 +1,202 @@
+#!/bin/sh /etc/rc.common
+# SPDX-License-Identifier: MIT
+#
+# Open GSWIFI: one procd instance per enabled `config network` section,
+# an optional `proxy` instance, and the protect rules.
+#
+# /etc/config/gswifi is the source of truth. On every start and reload the
+# TOML each instance reads is regenerated under /var/etc/gswifi (0600, by
+# ucode with typed values); procd restarts exactly the instances whose file
+# changed, so editing one network or the protect page does not log the
+# other networks off.
+#
+# Retry policy. `gswifi run` stays alive after a session ends: when the
+# server *rejected* the login it waits for the interface to get another
+# address before it tries again, so a wrong password is sent once, not once
+# per respawn. procd therefore only sees the process exit on a configuration
+# error or a crash, and brings it back at most 5 times, 30 s apart.
+# `exit_on_reject` is never set here (and cannot be set through the advanced
+# options): it would turn a rejection into exactly that respawn loop.
+
+START=25
+STOP=10
+USE_PROCD=1
+
+PROG=/usr/bin/gswifi
+LIBEXEC=/usr/libexec/gswifi
+RUN_DIR=/var/run/gswifi
+TAB="$(printf '\t')"
+
+say() {
+	logger -t gswifi -p "daemon.$1" -- "$2"
+}
+
+append_strip_header() {
+	[ -n "$1" ] && procd_append_param command --strip-header "$1"
+}
+
+# <id> <device> <toml> <log level>
+start_network() {
+	local id="$1" dev="$2" file="$3" level="$4"
+	local driver service hdd_ser eapol_dhcp
+
+	procd_open_instance "$id"
+	# gswifi-auth holds the session back until the device exists and has
+	# a link, then becomes the program. The password is in the 0600 file,
+	# never on a command line.
+	procd_set_param command "$LIBEXEC/gswifi-auth" "$dev" \
+		"$PROG" run -c "$file" --status-dir "$RUN_DIR/status"
+	procd_set_param file "$file"
+	procd_set_param env "RUST_LOG=$level"
+
+	# The modern Ruijie format takes three of its fields from the
+	# environment, as mentorust did.
+	config_get driver "$id" driver ruijie
+	if [ "$driver" = ruijie ]; then
+		config_get service "$id" service
+		config_get hdd_ser "$id" hdd_ser
+		config_get_bool eapol_dhcp "$id" eapol_dhcp 1
+		procd_append_param env "EAPOL_ENABLE_DHCP=$eapol_dhcp"
+		[ -n "$service" ] && procd_append_param env "EAPOL_SERVICE=$service"
+		[ -n "$hdd_ser" ] && procd_append_param env "EAPOL_HDD_SER=$hdd_ser"
+	fi
+
+	procd_set_param respawn 3600 30 5
+	procd_set_param term_timeout 15
+	procd_set_param stdout 1
+	procd_set_param stderr 1
+	procd_close_instance
+}
+
+start_proxy() {
+	local level="$1" mode proxy port ua
+
+	config_get mode protect mode disabled
+	config_get_bool proxy protect proxy 0
+	[ "$proxy" = 1 ] || return 0
+	case "$mode" in
+	observe|enforce) ;;
+	*) return 0 ;;
+	esac
+
+	config_get port protect proxy_port 1080
+	case "$port" in
+	''|*[!0-9]*) port=1080 ;;
+	esac
+	config_get ua protect proxy_ua
+
+	procd_open_instance proxy
+	procd_set_param command "$LIBEXEC/gswifi-proxy" --port "$port" --ua "$ua"
+	config_list_foreach protect proxy_strip_header append_strip_header
+	procd_set_param env "RUST_LOG=$level"
+	# The proxy talks to no authentication server; keep it coming back.
+	procd_set_param respawn 3600 5 0
+	procd_set_param term_timeout 5
+	procd_set_param stdout 1
+	procd_set_param stderr 1
+	procd_close_instance
+}
+
+start_service() {
+	local level list id dev file
+
+	if [ ! -x "$PROG" ]; then
+		say err "找不到 $PROG，服务未启动"
+		return 1
+	fi
+
+	mkdir -p "$RUN_DIR"
+	chmod 0700 "$RUN_DIR"
+
+	config_load gswifi
+	config_get level main log_level info
+	case "$level" in
+	error|warn|info|debug|trace) ;;
+	*) level=info ;;
+	esac
+
+	list="$RUN_DIR/networks.list"
+	"$LIBEXEC/ctl" networks > "$list.$$" 2> "$RUN_DIR/networks.err.$$"
+	[ -s "$RUN_DIR/networks.err.$$" ] && logger -t gswifi -p daemon.warn < "$RUN_DIR/networks.err.$$"
+	rm -f "$RUN_DIR/networks.err.$$"
+	mv -f "$list.$$" "$list"
+
+	while IFS="$TAB" read -r id dev file; do
+		[ -n "$id" ] && [ -n "$dev" ] && [ -f "$file" ] || continue
+		start_network "$id" "$dev" "$file" "$level"
+	done < "$list"
+
+	start_proxy "$level"
+
+	# Rules follow the configuration on every start and reload. Nothing
+	# is reinstalled (and no counter reset) when nothing changed.
+	"$LIBEXEC/protect" apply 2>&1 | logger -t gswifi -p daemon.warn
+}
+
+# Serialised by procd_lock; the default reload has no lock.
+reload_service() {
+	start "$@"
+}
+
+service_triggers() {
+	local iface
+
+	procd_add_reload_trigger gswifi network
+	# The device behind an interface can change when it comes up (PPPoE).
+	for iface in $("$LIBEXEC/ctl" interfaces 2>/dev/null); do
+		procd_add_reload_interface_trigger "$iface"
+	done
+}
+
+# Pids of the instances about to be stopped: all of them, or one.
+instance_pids() {
+	local path='@.gswifi.instances[*].pid'
+
+	case "$1" in
+	'') ;;
+	*[!A-Za-z0-9_]*) return 0 ;;
+	*) path="@.gswifi.instances.$1.pid" ;;
+	esac
+	ubus call service list '{"name":"gswifi"}' 2>/dev/null | jsonfilter -e "$path" 2>/dev/null
+}
+
+stop_service() {
+	GSWIFI_STOP_INSTANCE="$1"
+	GSWIFI_STOP_PIDS="$(instance_pids "$1")"
+}
+
+service_stopped() {
+	local pid n=0 alive=1
+
+	# A session sends its logoff when it gets SIGTERM. Wait until it is
+	# gone, so that a start right after this does not race the logoff.
+	while [ "$alive" = 1 ] && [ "$n" -lt 20 ]; do
+		alive=0
+		for pid in $GSWIFI_STOP_PIDS; do
+			[ -d "/proc/$pid" ] && alive=1
+		done
+		# busybox sleep on OpenWrt takes whole seconds only.
+		[ "$alive" = 1 ] && sleep 1
+		n=$((n + 1))
+	done
+
+	[ -n "$GSWIFI_STOP_INSTANCE" ] && return 0
+	rm -rf "$RUN_DIR/status" "$RUN_DIR"/networks.list /var/etc/gswifi/net.*.toml
+	[ -n "$GSWIFI_KEEP_PROTECT" ] && return 0
+	"$LIBEXEC/protect" remove 2>&1 | logger -t gswifi -p daemon.warn
+}
+
+# stop + start, without taking the protect rules out in between.
+restart() {
+	trap '' TERM
+	GSWIFI_KEEP_PROTECT=1
+	stop "$@"
+	GSWIFI_KEEP_PROTECT=
+	start "$@"
+}
+
+# Reboot or power-off: log off, leave the firewall alone.
+shutdown() {
+	GSWIFI_KEEP_PROTECT=1
+	stop
+}

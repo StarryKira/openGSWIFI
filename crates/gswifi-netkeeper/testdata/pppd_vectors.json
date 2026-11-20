@@ -1,0 +1,69 @@
+[
+ {
+  "user": "synthetic",
+  "material": "singlenet01",
+  "t": 305419896,
+  "pin": "0d0a4d4939284220656573796e746865746963"
+ },
+ {
+  "user": "student@zj",
+  "material": "singlenet01",
+  "t": 305419896,
+  "pin": "0d0a4d4939284220613773747564656e74407a6a"
+ },
+ {
+  "user": "a@b@c",
+  "material": "xianxinli1radius",
+  "t": 305419896,
+  "pin": "0d0a4d493928422066656140624063"
+ },
+ {
+  "user": "longuser1234567890@xx",
+  "material": "singlenet01",
+  "t": 305419896,
+  "pin": "0d0a4d493928422038386c6f6e677573657231323334353637383930407878"
+ },
+ {
+  "user": "@noLocal",
+  "material": "xianxinli1radius",
+  "t": 305419896,
+  "pin": "0d0a4d49392842206338406e6f4c6f63616c"
+ },
+ {
+  "user": "student@gx",
+  "material": "shandongmobile13",
+  "t": 1000,
+  "pin": "0d0a202021205120333673747564656e74406778"
+ },
+ {
+  "user": "user@x",
+  "material": "n_x@xiaoyuanwang",
+  "t": 0,
+  "pin": "0d0a2020202020206462757365724078"
+ },
+ {
+  "user": "synthetic",
+  "t": 305419896,
+  "hainan": "7e4c4c5f63694a6f763a6b7a466c6d345f73796e746865746963"
+ },
+ {
+  "user": "abc@def.gh",
+  "t": 4294967295,
+  "hainan": "7e4c4c5f36365f686f6636365f6b72785f616263406465662e6768"
+ },
+ {
+  "user": "student@hn",
+  "t": 305419896,
+  "hainan": "7e4c4c5f63694a31744b6b7a463377415f73747564656e7440686e"
+ },
+ {
+  "user": "synthetic",
+  "t": 0,
+  "hainan": "7e4c4c5f61616136365f6161613267735f73796e746865746963"
+ },
+ {
+  "user": "synthetic",
+  "t": 1,
+  "hainan": "7e4c4c5f61616136365f6161623267735f73796e746865746963"
+ }
+]

@@ -1,0 +1,808 @@
+[
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 1,
+   "key": 0
+  },
+  "qemu_hex": "07",
+  "independent_hex": "07",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 1,
+   "key": 1
+  },
+  "qemu_hex": "07",
+  "independent_hex": "07",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 2,
+   "key": 0
+  },
+  "qemu_hex": "2437",
+  "independent_hex": "2437",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 2,
+   "key": 1
+  },
+  "qemu_hex": "3a29",
+  "independent_hex": "3a29",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 3,
+   "key": 0
+  },
+  "qemu_hex": "311417",
+  "independent_hex": "311417",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 3,
+   "key": 1
+  },
+  "qemu_hex": "2e1408",
+  "independent_hex": "2e1408",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 4,
+   "key": 0
+  },
+  "qemu_hex": "7d013454",
+  "independent_hex": "7d013454",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 4,
+   "key": 1
+  },
+  "qemu_hex": "18003531",
+  "independent_hex": "18003531",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 5,
+   "key": 0
+  },
+  "qemu_hex": "0c4d217730",
+  "independent_hex": "0c4d217730",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 5,
+   "key": 1
+  },
+  "qemu_hex": "2a36210c16",
+  "independent_hex": "2a36210c16",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 6,
+   "key": 0
+  },
+  "qemu_hex": "7e3c6d621331",
+  "independent_hex": "7e3c6d621331",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 6,
+   "key": 1
+  },
+  "qemu_hex": "260417182b69",
+  "independent_hex": "260417182b69",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 7,
+   "key": 0
+  },
+  "qemu_hex": "7a4e1c2e061228",
+  "independent_hex": "7a4e1c2e061228",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 7,
+   "key": 1
+  },
+  "qemu_hex": "7c08252e3f542e",
+  "independent_hex": "7c08252e3f542e",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 8,
+   "key": 0
+  },
+  "qemu_hex": "0e4a6e5f4a070b6b",
+  "independent_hex": "0e4a6e5f4a070b6b",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 8,
+   "key": 1
+  },
+  "qemu_hex": "0c52291c09401369",
+  "independent_hex": "0c52291c09401369",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 9,
+   "key": 0
+  },
+  "qemu_hex": "293e6a2d3b4b1e4841",
+  "independent_hex": "293e6a2d3b4b1e4841",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 9,
+   "key": 1
+  },
+  "qemu_hex": "002273103b76075468",
+  "independent_hex": "002273103b76075468",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 10,
+   "key": 0
+  },
+  "qemu_hex": "0d191e29493a525d6276",
+  "independent_hex": "0d191e29493a525d6276",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 10,
+   "key": 1
+  },
+  "qemu_hex": "022e034a374431405579",
+  "independent_hex": "022e034a374431405579",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 11,
+   "key": 0
+  },
+  "qemu_hex": "713d395d4d4823117755ff",
+  "independent_hex": "713d395d4d4823117755ff",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 11,
+   "key": 1
+  },
+  "qemu_hex": "7e2c0f3a6d4803764144f0",
+  "independent_hex": "7e2c0f3a6d4803764144f0",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 12,
+   "key": 0
+  },
+  "qemu_hex": "7c411d7a394c51603b40dced",
+  "independent_hex": "7c411d7a394c51603b40dced",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 12,
+   "key": 1
+  },
+  "qemu_hex": "17500d361d120f447750cd86",
+  "independent_hex": "17500d361d120f447750cd86",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 13,
+   "key": 0
+  },
+  "qemu_hex": "1f4c615e1e3855124a0cc9cebb",
+  "independent_hex": "1f4c615e1e3855124a0cc9cebb",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 13,
+   "key": 1
+  },
+  "qemu_hex": "07397134116255484566d9bba3",
+  "independent_hex": "07397134116255484566d9bba3",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 14,
+   "key": 0
+  },
+  "qemu_hex": "7f2f6c223a1f2116387d85db98c8",
+  "independent_hex": "7f2f6c223a1f2116387d85db98c8",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 14,
+   "key": 1
+  },
+  "qemu_hex": "3a291848136e25124954efaf9e8d",
+  "independent_hex": "3a291848136e25124954efaf9e8d",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 15,
+   "key": 0
+  },
+  "qemu_hex": "074f0f2f463b06623c0ff4978debbd",
+  "independent_hex": "074f0f2f463b06623c0ff4978debbd",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 15,
+   "key": 1
+  },
+  "qemu_hex": "2e1408216f6c29621358dd998ab094",
+  "independent_hex": "2e1408216f6c29621358dd998ab094",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 16,
+   "key": 0
+  },
+  "qemu_hex": "24376f4c4b472245480b86e6c1fe9ee9",
+  "independent_hex": "24376f4c4b472245480b86e6c1fe9ee9",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 16,
+   "key": 1
+  },
+  "qemu_hex": "1800353106102b6e6302d1abbca4a9d5",
+  "independent_hex": "1800353106102b6e6302d1abbca4a9d5",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 17,
+   "key": 0
+  },
+  "qemu_hex": "3114172c284a5e616f7f8294b0b28bcae1",
+  "independent_hex": "3114172c284a5e616f7f8294b0b28bcae1",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 17,
+   "key": 1
+  },
+  "qemu_hex": "2a36210c1679576c6f728ba78e92bde8fa",
+  "independent_hex": "2a36210c1679576c6f728ba78e92bde8fa",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 18,
+   "key": 0
+  },
+  "qemu_hex": "7d0134544829531d4b58f690c2c3c7dfc29e",
+  "independent_hex": "7d0134544829531d4b58f690c2c3c7dfc29e",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 18,
+   "key": 1
+  },
+  "qemu_hex": "260417182b693e106d7efbfd82a08bfcc7c5",
+  "independent_hex": "260417182b693e106d7efbfd82a08bfcc7c5",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 19,
+   "key": 0
+  },
+  "qemu_hex": "0c4d217730493010377cd1e4c6b1b693d7bdfa",
+  "independent_hex": "0c4d217730493010377cd1e4c6b1b693d7bdfa",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 19,
+   "key": 1
+  },
+  "qemu_hex": "7c08252e3f542e79117cf78dd8acb9cad3f88a",
+  "independent_hex": "7c08252e3f542e79117cf78dd8acb9cad3f88a",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 20,
+   "key": 0
+  },
+  "qemu_hex": "7e3c6d62133150733a00f5c3b2b5c4e29ba8d987",
+  "independent_hex": "7e3c6d62133150733a00f5c3b2b5c4e29ba8d987",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 20,
+   "key": 1
+  },
+  "qemu_hex": "0c52291c094013697800f581a8f6b5f8e5ecb7f5",
+  "independent_hex": "0c52291c094013697800f581a8f6b5f8e5ecb7f5",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 21,
+   "key": 0
+  },
+  "qemu_hex": "7a4e1c2e06122813590d89e795c1c090eae4cca476",
+  "independent_hex": "7a4e1c2e06122813590d89e795c1c090eae4cca476",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 21,
+   "key": 1
+  },
+  "qemu_hex": "002273103b76075468698983a486eff4d7daa3c80c",
+  "independent_hex": "002273103b76075468698983a486eff4d7daa3c80c",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 22,
+   "key": 0
+  },
+  "qemu_hex": "0e4a6e5f4a070b6b396e849bb1e6b494989580b15511",
+  "independent_hex": "0e4a6e5f4a070b6b396e849bb1e6b494989580b15511",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 22,
+   "key": 1
+  },
+  "qemu_hex": "022e034a374431405579e0ffa68a9faedbe895dc311d",
+  "independent_hex": "022e034a374431405579e0ffa68a9faedbe895dc311d",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 23,
+   "key": 0
+  },
+  "qemu_hex": "293e6a2d3b4b1e48410ee796cdc293e09ce7f1fd40320b",
+  "independent_hex": "293e6a2d3b4b1e48410ee796cdc293e09ce7f1fd40320b",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 23,
+   "key": 1
+  },
+  "qemu_hex": "7e2c0f3a6d4803764144f096da8893de81e4a7ea25205c",
+  "independent_hex": "7e2c0f3a6d4803764144f096da8893de81e4a7ea25205c",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 24,
+   "key": 0
+  },
+  "qemu_hex": "0d191e29493a525d627687f5c0beb7c7e8e3838c0c272838",
+  "independent_hex": "0d191e29493a525d627687f5c0beb7c7e8e3838c0c272838",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 24,
+   "key": 1
+  },
+  "qemu_hex": "17500d361d120f447750cd86b3f491d2f1beabd813346122",
+  "independent_hex": "17500d361d120f447750cd86b3f491d2f1beabd813346122",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 25,
+   "key": 0
+  },
+  "qemu_hex": "713d395d4d4823117755ff95a3b3cbe3cf9787fe7d6b3d1b49",
+  "independent_hex": "713d395d4d4823117755ff95a3b3cbe3cf9787fe7d6b3d1b49",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 25,
+   "key": 1
+  },
+  "qemu_hex": "07397134116255484566d9bba39dedd0fdcef1d42102751f3f",
+  "independent_hex": "07397134116255484566d9bba39dedd0fdcef1d42102751f3f",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 26,
+   "key": 0
+  },
+  "qemu_hex": "7c411d7a394c51603b40dcedc3d0c69febb0f3fa0f1a710e6a37",
+  "independent_hex": "7c411d7a394c51603b40dcedc3d0c69febb0f3fa0f1a710e6a37",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 26,
+   "key": 1
+  },
+  "qemu_hex": "3a291848136e25124954efaf9e8d84acffc2818e2d30430b0271",
+  "independent_hex": "3a291848136e25124954efaf9e8d84acffc2818e2d30430b0271",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 27,
+   "key": 0
+  },
+  "qemu_hex": "1f4c615e1e3855124a0cc9cebbb0a5929794d48e0b6800427f1441",
+  "independent_hex": "1f4c615e1e3855124a0cc9cebbb0a5929794d48e0b6800427f1441",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 27,
+   "key": 1
+  },
+  "qemu_hex": "2e1408216f6c29621358dd998ab094c583c08dfe773c713d164c70",
+  "independent_hex": "2e1408216f6c29621358dd998ab094c583c08dfe773c713d164c70",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 28,
+   "key": 0
+  },
+  "qemu_hex": "7f2f6c223a1f2116387d85db98c8c5f19ae8f0a97f6c72333301621e",
+  "independent_hex": "7f2f6c223a1f2116387d85db98c8c5f19ae8f0a97f6c72333301621e",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 28,
+   "key": 1
+  },
+  "qemu_hex": "1800353106102b6e6302d1abbca4a9d5eabc8ff207667d0f20584d79",
+  "independent_hex": "1800353106102b6e6302d1abbca4a9d5eabc8ff207667d0f20584d79",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 29,
+   "key": 0
+  },
+  "qemu_hex": "074f0f2f463b06623c0ff4978debbd91f9e58c8d58187641424d773d73",
+  "independent_hex": "074f0f2f463b06623c0ff4978debbd91f9e58c8d58187641424d773d73",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 29,
+   "key": 1
+  },
+  "qemu_hex": "2a36210c1679576c6f728ba78e92bde8fad5f3f00b162703126e59445e",
+  "independent_hex": "2a36210c1679576c6f728ba78e92bde8fad5f3f00b162703126e59445e",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 30,
+   "key": 0
+  },
+  "qemu_hex": "24376f4c4b472245480b86e6c1fe9ee9998681f17c3f0245303c3b2850a3",
+  "independent_hex": "24376f4c4b472245480b86e6c1fe9ee9998681f17c3f0245303c3b2850a3",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 30,
+   "key": 1
+  },
+  "qemu_hex": "260417182b693e106d7efbfd82a08bfcc7c59a8c091a57591e5c6f5063a1",
+  "independent_hex": "260417182b693e106d7efbfd82a08bfcc7c59a8c091a57591e5c6f5063a1",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 31,
+   "key": 0
+  },
+  "qemu_hex": "3114172c284a5e616f7f8294b0b28bcae1e6e2fc001b2531344e4a644580bb",
+  "independent_hex": "3114172c284a5e616f7f8294b0b28bcae1e6e2fc001b2531344e4a644580bb",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 31,
+   "key": 1
+  },
+  "qemu_hex": "7c08252e3f542e79117cf78dd8acb9cad3f88ae575185b2944505d66779cf6",
+  "independent_hex": "7c08252e3f542e79117cf78dd8acb9cad3f88ae575185b2944505d66779cf6",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 32,
+   "key": 0
+  },
+  "qemu_hex": "7d0134544829531d4b58f690c2c3c7dfc29e829f0d670116404a3815099598e0",
+  "independent_hex": "7d0134544829531d4b58f690c2c3c7dfc29e829f0d670116404a3815099598e0",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-xor",
+  "input": {
+   "length": 32,
+   "key": 1
+  },
+  "qemu_hex": "0c52291c094013697800f581a8f6b5f8e5ecb7f51c645925340a51544188cb91",
+  "independent_hex": "0c52291c094013697800f581a8f6b5f8e5ecb7f51c645925340a51544188cb91",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-mixed",
+  "input": {
+   "cached_version": "CH V5.20-0001",
+   "time": 305419896,
+   "rand": 66051,
+   "key": "Oly5D62FaE94W7"
+  },
+  "qemu_hex": "64633c4d4a07347f264f1c3277557a76b98ddb11",
+  "independent_hex": "64633c4d4a07347f264f1c3277557a76b98ddb11",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-text",
+  "input": {
+   "cached_version": "CH V5.20-0001",
+   "time": 305419896,
+   "rand": 66051,
+   "key": "Oly5D62FaE94W7"
+  },
+  "qemu_hex": "06075a474d3854556f484e48386d547877796431563664726d4e3278453d2020",
+  "independent_hex": "06075a474d3854556f484e48386d547877796431563664726d4e3278453d2020",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-raw",
+  "input": {
+   "cached_version": "CH V5.20-0001",
+   "time": 305419896,
+   "rand": 66051,
+   "key": "Oly5D62FaE94W7"
+  },
+  "qemu_hex": "011664633c4d4a07347f264f1c3277557a76b98ddb11",
+  "independent_hex": "011664633c4d4a07347f264f1c3277557a76b98ddb11",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-mixed",
+  "input": {
+   "cached_version": "CH V2.40-0001",
+   "time": 305419896,
+   "rand": 66051,
+   "key": "HuaWei3COM1X"
+  },
+  "qemu_hex": "160d783357767165644f1c706d160b6cc7c9b563",
+  "independent_hex": "160d783357767165644f1c706d160b6cc7c9b563",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-text",
+  "input": {
+   "cached_version": "CH V2.40-0001",
+   "time": 305419896,
+   "rand": 66051,
+   "key": "HuaWei3COM1X"
+  },
+  "qemu_hex": "0607466731344d3164326357566b547878776252594c624d664a74574d3d2020",
+  "independent_hex": "0607466731344d3164326357566b547878776252594c624d664a74574d3d2020",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-raw",
+  "input": {
+   "cached_version": "CH V2.40-0001",
+   "time": 305419896,
+   "rand": 66051,
+   "key": "HuaWei3COM1X"
+  },
+  "qemu_hex": "0116160d783357767165644f1c706d160b6cc7c9b563",
+  "independent_hex": "0116160d783357767165644f1c706d160b6cc7c9b563",
+  "passed": true
+ },
+ {
+  "algorithm": "password",
+  "mode": 0,
+  "qemu_hex": "aa38fa828d4775e47e0c2a14b275189f",
+  "independent_hex": "aa38fa828d4775e47e0c2a14b275189f",
+  "passed": true
+ },
+ {
+  "algorithm": "password",
+  "mode": 1,
+  "qemu_hex": "aa38fa828d4775e47e0c2a14b275189f",
+  "independent_hex": "aa38fa828d4775e47e0c2a14b275189f",
+  "passed": true
+ },
+ {
+  "algorithm": "password",
+  "mode": 2,
+  "qemu_hex": "488e4bf09a8d375e78a63267374a2ef7",
+  "independent_hex": "488e4bf09a8d375e78a63267374a2ef7",
+  "passed": true
+ },
+ {
+  "algorithm": "password",
+  "mode": 3,
+  "qemu_hex": "aa38fa828d4775e47e0c2a14b275189f",
+  "independent_hex": "aa38fa828d4775e47e0c2a14b275189f",
+  "passed": true
+ },
+ {
+  "algorithm": "xorpass",
+  "mode": null,
+  "qemu_hex": "69b881758109db7283d329331a4fc2a8",
+  "independent_hex": "69b881758109db7283d329331a4fc2a8",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-pass-xor",
+  "password_length": 0,
+  "qemu_hex": "000102030405060708090a0b0c0d0e0f",
+  "independent_hex": "000102030405060708090a0b0c0d0e0f",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-pass-xor",
+  "password_length": 1,
+  "qemu_hex": "610102030405060708090a0b0c0d0e0f",
+  "independent_hex": "610102030405060708090a0b0c0d0e0f",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-pass-xor",
+  "password_length": 9,
+  "qemu_hex": "616361676163616f61090a0b0c0d0e0f",
+  "independent_hex": "616361676163616f61090a0b0c0d0e0f",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-pass-xor",
+  "password_length": 15,
+  "qemu_hex": "616361676163616f616361676163610f",
+  "independent_hex": "616361676163616f616361676163610f",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-pass-xor",
+  "password_length": 16,
+  "qemu_hex": "616361676163616f616361676163617f",
+  "independent_hex": "616361676163616f616361676163617f",
+  "passed": true
+ },
+ {
+  "algorithm": "inode-pass-xor",
+  "password_length": 17,
+  "returned_length": 17,
+  "initialized_prefix_hex": "616361676163616f616361676163617f",
+  "uninitialized_tail_length": 1,
+  "passed_prefix_only": true
+ },
+ {
+  "algorithm": "inode-pass-xor",
+  "password_length": 40,
+  "returned_length": 40,
+  "initialized_prefix_hex": "616361676163616f616361676163617f",
+  "uninitialized_tail_length": 24,
+  "passed_prefix_only": true
+ },
+ {
+  "algorithm": "inode-pass-xor",
+  "password_length": 79,
+  "returned_length": 79,
+  "initialized_prefix_hex": "616361676163616f616361676163617f",
+  "uninitialized_tail_length": 63,
+  "passed_prefix_only": true
+ }
+]

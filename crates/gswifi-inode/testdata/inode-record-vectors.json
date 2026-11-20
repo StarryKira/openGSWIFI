@@ -1,0 +1,164 @@
+[
+  {
+    "file": "inode-gs-encrypted.dat",
+    "identifier": 287454020,
+    "offset": 0,
+    "length": 32,
+    "ret": 0,
+    "output_hex": "031425364758697a8b9cadbecfe0f102132435465768798a9bacbdcedff00112",
+    "match": true
+  },
+  {
+    "file": "inode-gs-encrypted.dat",
+    "identifier": 287454020,
+    "offset": 17,
+    "length": 16,
+    "ret": 0,
+    "output_hex": "2435465768798a9bacbdcedff0011223",
+    "match": true
+  },
+  {
+    "file": "inode-gs-encrypted.dat",
+    "identifier": 287454020,
+    "offset": 200,
+    "length": 100,
+    "ret": 0,
+    "output_hex": "4b5c6d7e8fa0b1c2d3e4f5061728394a5b6c7d8e9fb0c1d2e3f405162738495a6b7c8d9eafc0d1e2f30415263748596a7b8c9daebfd0e1f2031425364758697a8b9cadbecfe0f102132435465768798a9bacbdcedff00112233445566778899aabbccdde",
+    "match": true
+  },
+  {
+    "file": "inode-gs-encrypted.dat",
+    "identifier": 1432778632,
+    "offset": 0,
+    "length": 32,
+    "ret": 0,
+    "output_hex": "071a2d405366798c9fb2c5d8ebfe1124374a5d708396a9bccfe2f5081b2e4154",
+    "match": true
+  },
+  {
+    "file": "inode-gs-encrypted.dat",
+    "identifier": 1432778632,
+    "offset": 17,
+    "length": 16,
+    "ret": 0,
+    "output_hex": "4a5d708396a9bccfe2f5081b2e415467",
+    "match": true
+  },
+  {
+    "file": "inode-gs-encrypted.dat",
+    "identifier": 1432778632,
+    "offset": 200,
+    "length": 100,
+    "ret": 0,
+    "output_hex": "dff205182b3e5164778a9db0c3d6e9fc0f2235485b6e8194a7bacde0f306192c3f5265788b9eb1c4d7eafd102336495c6f8295a8bbcee1f4071a2d405366798c9fb2c5d8ebfe1124374a5d708396a9bccfe2f5081b2e4154677a8da0b3c6d9ecff122538",
+    "match": true
+  },
+  {
+    "file": "inode-gs-encrypted.dat",
+    "identifier": 16909060,
+    "offset": 0,
+    "length": 32,
+    "ret": -1,
+    "output_hex": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "match": true
+  },
+  {
+    "file": "inode-gs-encrypted.dat",
+    "identifier": 16909060,
+    "offset": 17,
+    "length": 16,
+    "ret": -1,
+    "output_hex": "cccccccccccccccccccccccccccccccc",
+    "match": true
+  },
+  {
+    "file": "inode-gs-encrypted.dat",
+    "identifier": 16909060,
+    "offset": 200,
+    "length": 100,
+    "ret": -1,
+    "output_hex": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "match": true
+  },
+  {
+    "file": "inode-gs.dat",
+    "identifier": 287454020,
+    "offset": 0,
+    "length": 32,
+    "ret": 0,
+    "output_hex": "031425364758697a8b9cadbecfe0f102132435465768798a9bacbdcedff00112",
+    "match": true
+  },
+  {
+    "file": "inode-gs.dat",
+    "identifier": 287454020,
+    "offset": 17,
+    "length": 16,
+    "ret": 0,
+    "output_hex": "2435465768798a9bacbdcedff0011223",
+    "match": true
+  },
+  {
+    "file": "inode-gs.dat",
+    "identifier": 287454020,
+    "offset": 200,
+    "length": 100,
+    "ret": 0,
+    "output_hex": "4b5c6d7e8fa0b1c2d3e4f5061728394a5b6c7d8e9fb0c1d2e3f405162738495a6b7c8d9eafc0d1e2f30415263748596a7b8c9daebfd0e1f2031425364758697a8b9cadbecfe0f102132435465768798a9bacbdcedff00112233445566778899aabbccdde",
+    "match": true
+  },
+  {
+    "file": "inode-gs.dat",
+    "identifier": 1432778632,
+    "offset": 0,
+    "length": 32,
+    "ret": 0,
+    "output_hex": "071a2d405366798c9fb2c5d8ebfe1124374a5d708396a9bccfe2f5081b2e4154",
+    "match": true
+  },
+  {
+    "file": "inode-gs.dat",
+    "identifier": 1432778632,
+    "offset": 17,
+    "length": 16,
+    "ret": 0,
+    "output_hex": "4a5d708396a9bccfe2f5081b2e415467",
+    "match": true
+  },
+  {
+    "file": "inode-gs.dat",
+    "identifier": 1432778632,
+    "offset": 200,
+    "length": 100,
+    "ret": 0,
+    "output_hex": "dff205182b3e5164778a9db0c3d6e9fc0f2235485b6e8194a7bacde0f306192c3f5265788b9eb1c4d7eafd102336495c6f8295a8bbcee1f4071a2d405366798c9fb2c5d8ebfe1124374a5d708396a9bccfe2f5081b2e4154677a8da0b3c6d9ecff122538",
+    "match": true
+  },
+  {
+    "file": "inode-gs.dat",
+    "identifier": 16909060,
+    "offset": 0,
+    "length": 32,
+    "ret": -1,
+    "output_hex": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "match": true
+  },
+  {
+    "file": "inode-gs.dat",
+    "identifier": 16909060,
+    "offset": 17,
+    "length": 16,
+    "ret": -1,
+    "output_hex": "cccccccccccccccccccccccccccccccc",
+    "match": true
+  },
+  {
+    "file": "inode-gs.dat",
+    "identifier": 16909060,
+    "offset": 200,
+    "length": 100,
+    "ret": -1,
+    "output_hex": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "match": true
+  }
+]

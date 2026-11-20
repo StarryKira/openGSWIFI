@@ -1,0 +1,20 @@
+[package]
+name = "gswifi-h3c-portal"
+description = "Open GSWIFI: GS H3C Portal over UDP (MentoHUST GS AuthType 2) codec and sans-IO driver"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+gswifi-core = { workspace = true }
+gswifi-inode = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }
+md5 = { workspace = true }
+des = { workspace = true }
+aes = "0.8.4"
+
+[dev-dependencies]
+hex = { workspace = true }
+serde_json = "1"

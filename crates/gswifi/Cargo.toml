@@ -1,0 +1,32 @@
+[package]
+name = "gswifi"
+description = "Open GSWIFI: multi-protocol campus network authentication client"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "gswifi"
+path = "src/main.rs"
+
+[dependencies]
+gswifi-core = { workspace = true }
+gswifi-eapol = { workspace = true }
+gswifi-eap-md5 = { workspace = true }
+gswifi-ruijie = { workspace = true }
+gswifi-saier = { workspace = true }
+gswifi-anlang = { workspace = true }
+gswifi-drcom = { workspace = true }
+gswifi-inode = { workspace = true }
+gswifi-h3c-portal = { workspace = true }
+gswifi-netkeeper = { workspace = true }
+gswifi-portal = { workspace = true }
+gswifi-link = { workspace = true }
+gswifi-protect = { workspace = true }
+gswifi-proxy = { workspace = true }
+log = { workspace = true }
+env_logger = { workspace = true }
+clap = { workspace = true }
+serde = { workspace = true }
+toml = { workspace = true }

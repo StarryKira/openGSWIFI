@@ -1,0 +1,17 @@
+[package]
+name = "gswifi-portal"
+description = "Open GSWIFI: regional web Portals (湖北 Aidc WISPr, 云南): clean-room derivations and sans-IO HTTP drivers"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+gswifi-core = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }
+md5 = { workspace = true }
+encoding_rs = { workspace = true }
+
+[dev-dependencies]
+hex = { workspace = true }

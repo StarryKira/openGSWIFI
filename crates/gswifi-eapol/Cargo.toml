@@ -1,0 +1,16 @@
+[package]
+name = "gswifi-eapol"
+description = "Open GSWIFI: IEEE 802.1X frames and the supplicant state machine shared by the EAP based drivers"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+gswifi-core = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }
+md5 = { workspace = true }
+
+[dev-dependencies]
+hex = { workspace = true }

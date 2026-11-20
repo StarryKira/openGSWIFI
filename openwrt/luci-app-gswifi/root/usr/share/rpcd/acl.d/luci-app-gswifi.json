@@ -1,0 +1,17 @@
+{
+	"luci-app-gswifi": {
+		"description": "Grant access to Open GSWIFI (campus network authentication and traffic normalisation)",
+		"read": {
+			"ubus": {
+				"luci.gswifi": [ "status", "drivers", "protect", "log" ]
+			},
+			"uci": [ "gswifi" ]
+		},
+		"write": {
+			"ubus": {
+				"luci.gswifi": [ "control", "pppoe", "protect_check", "protect_show", "protect_apply", "diag" ]
+			},
+			"uci": [ "gswifi" ]
+		}
+	}
+}

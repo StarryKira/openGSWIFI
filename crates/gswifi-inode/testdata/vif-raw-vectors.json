@@ -1,0 +1,82 @@
+[
+  {
+    "input": "ByxRdpvA5Qo=",
+    "raw_plaintext_hex": "0c4b2b8dabede4cb",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "RGmOs9j9Ikc=",
+    "raw_plaintext_hex": "66d7b733083e44e8",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "gabL8BU6X4Q=",
+    "raw_plaintext_hex": "4d2fa350e7b16e4c",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "vuMILVJ3nME=",
+    "raw_plaintext_hex": "bae282e78306541b",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "+yBFao+02f4=",
+    "raw_plaintext_hex": "14663fc7d0b7041c",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "OF2Cp8zxFjs=",
+    "raw_plaintext_hex": "636a426b55c51ad8",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "dZq/5AkuU3g=",
+    "raw_plaintext_hex": "0dc6e7874b772739",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "stf8IUZrkLU=",
+    "raw_plaintext_hex": "2e63ca05ce625e6b",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "7xQ5XoOozfIXPGGGq9D1Gj9kia7T+B1C",
+    "raw_plaintext_hex": "923576082a1ebc9d101d7818a9a1ce037ae3f8f9943ff5cd",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "LFF2m8DlCi9UeZ7D6A0yV3yhxusQNVp/",
+    "raw_plaintext_hex": "40a14ec2d3ebf87dcd4564372ee70324a525a3ee69e4c3b1",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "aY6z2P0iR2yRttsAJUpvlLneAyhNcpe8",
+    "raw_plaintext_hex": "dcff4f1c5a5f294ec8deedda4796e01cb9493345e63b0ee1",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "psvwFTpfhKnO8xg9Yoes0fYbQGWKr9T5",
+    "raw_plaintext_hex": "5f1350024cd98989798f5b6d3a87f621d4a9aa694d96f89a",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "4wgtUnecweYLMFV6n8TpDjNYfaLH7BE2",
+    "raw_plaintext_hex": "5b46da495d7398a813d17f6a4067527302d11354dee05fb4",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "IEVqj7TZ/iNIbZK33AEmS3CVut8EKU5z",
+    "raw_plaintext_hex": "1270c01a537555841b8ab19a3289cb3bf4d52c795e472bc3",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "XYKnzPEWO2CFqs/0GT5jiK3S9xxBZouw",
+    "raw_plaintext_hex": "11d8017e2d7a0f3e454e8f0c9de733e9d6afac2094339a9c",
+    "padding_check_bypassed": true
+  },
+  {
+    "input": "mr/kCS5TeJ3C5wwxVnugxeoPNFl+o8jt",
+    "raw_plaintext_hex": "f9c8d9d5940bfd439c67d4c9dc828ba68e50966c10ecd7a3",
+    "padding_check_bypassed": true
+  }
+]

@@ -1,0 +1,11 @@
+[package]
+name = "gswifi-core"
+description = "Open GSWIFI: driver interface shared by every campus network authentication crate"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+encoding_rs = { workspace = true }

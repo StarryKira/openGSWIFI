@@ -1,0 +1,31 @@
+# Open GSWIFI 配置文件，由 systemd 服务 gswifi.service 读取。
+#
+# 去掉下面 [[networks]] 一段开头的 “#”，填好网卡名称、认证方式、用户名和密码，
+# 然后启动服务并设为开机自启：
+#   systemctl enable --now gswifi
+# 查看运行日志：
+#   journalctl -u gswifi -f
+#
+# 掉线或认证服务器无响应时会自动重连。账号、密码或 MAC 绑定被认证服务器拒绝时
+# 不会在同一个地址上反复重试（以免账号被锁定），而是等网卡地址变化后再认证。
+# 改好配置后执行：
+#   systemctl restart gswifi
+#
+# 支持的认证方式见 `gswifi drivers`；完整的示例（各认证方式的配置项、
+# [protect] 防共享检测）见 `gswifi example-config`。
+
+# 每块需要认证的网卡写一段 [[networks]]。网卡名称可以用 `ip link` 查看。
+#[[networks]]
+#interface = "eth0"
+#driver = "ruijie"
+#username = ""
+#password = ""
+#dhcp_mode = 0
+
+# 说明：
+#   password      本文件的权限是 0600，只有 root 能读；也可以改用
+#                 password_file = "/etc/gswifi/campus.pass"
+#   dhcp_mode     0 不重新获取地址，1 二次认证，2 认证后，3 认证前
+#   dhcp_script   dhcp_mode 为 1..3 时用来重新获取地址的命令，例如
+#                 dhcp_script = "networkctl renew eth0"
+#   experimental  验证程度低于 lab-tested 的认证方式要写 experimental = true

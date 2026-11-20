@@ -1,0 +1,22 @@
+[package]
+name = "gswifi-ruijie"
+description = "Open GSWIFI: Ruijie (锐捷) 802.1X with the modern/classic/V4 extensions, client checks and heartbeats (from mentorust)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+gswifi-core = { workspace = true }
+gswifi-eapol = { workspace = true }
+gswifi-saier = { workspace = true }
+log = { workspace = true }
+serde = { workspace = true }
+md5 = { workspace = true }
+des = { workspace = true }
+hex = { workspace = true }
+bytes = "1.7.1"
+encoding_rs = { workspace = true }
+
+[dev-dependencies]
+hex = { workspace = true }
